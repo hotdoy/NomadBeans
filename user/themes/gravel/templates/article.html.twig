@@ -1,0 +1,20 @@
+{% set body_classes_slot = "bg-white font-sans leading-normal tracking-normal page-article" %}
+{% extends 'partials/base.html.twig' %}
+
+{% block body %}
+
+  {% set author_page = null %}
+  {% if page.header.taxonomy.author is not empty %}
+    {% set author_username = page.header.taxonomy.author|first %}
+      {% for child in page.find('/authors').children %}
+        {% if child.header.author_username == author_username %}
+          {% set author_page = child %}
+        {% endif %}
+      {% endfor %}
+  {% endif %}
+
+	<div 
+		class="p-6 sm:p-12 mb-20 bg-gray-200 w-full text-gray-800 leading-normal rounded prose max-w-none">
+    {{ page.content|raw }}
+  </div>
+{% endblock %}

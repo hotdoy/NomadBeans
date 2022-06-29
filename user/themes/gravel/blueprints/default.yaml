@@ -1,0 +1,17 @@
+title: About
+"@extends":
+  type: default
+  context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        content:
+          fields:
+            header.page_media_alt_desc:
+              type: text
+              label: Page Media Alt Description

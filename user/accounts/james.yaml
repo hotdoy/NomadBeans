@@ -1,0 +1,11 @@
+state: enabled
+email: james.auble@gmail.com
+fullname: 'James Auble'
+title: 'Web Developer'
+access:
+  admin:
+    login: true
+    super: true
+  site:
+    login: true
+hashed_password: $2y$10$FNKevNceSmeuqmY0GYREIeL1tDvjt9a7zrTwEAvkYe8HfE4NMIA5u

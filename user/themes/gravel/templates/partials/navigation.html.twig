@@ -1,0 +1,12 @@
+	<ul class="list-reset flex justify-between flex-1 md:flex-none items-center max-w-min">
+		{% for p in pages.children.published %}
+      {% if p.visible %}
+        <li class="mr-2">
+          <a href="{{ p.url|e }}" 
+            class="inline-block py-2 px-2 no-underline hover:underline {% if p.active %}text-white{% else %}text-gray-300 hover:text-gray-200{% endif %}">
+            {{ p.title|e }}
+          </a>
+        </li> 
+      {% endif %}
+		{% endfor %}
+	</ul>

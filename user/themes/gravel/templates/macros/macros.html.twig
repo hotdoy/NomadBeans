@@ -1,0 +1,11 @@
+{% macro avatar(subject, authors) %}
+  {{ page.find('/authors').children|first }}
+	{% if subject.header.taxonomy.author is not empty %}
+		{% set author_username = subject.header.taxonomy.author|first %}
+		{% for child in authors %}
+			{% if child.header.author_username == author_username %}
+				<img class="w-8 h-8 rounded-full mr-4 avatar" data-tippy-content="{{ child.header.title }}" src="{{ child.media.images|first.url }}" alt="Avatar for {{ child.header.author }}" tabindex="0">
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endmacro %}

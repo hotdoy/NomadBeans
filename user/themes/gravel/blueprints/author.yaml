@@ -1,0 +1,26 @@
+title: Author
+"@extends":
+  type: default
+  context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:       
+        content:
+          fields:
+            header.author_email:
+              type: email
+              label: Email
+            header.phone:
+              type: tel
+              label: Phone
+            header.author_twitter:
+              type: text
+              label: Twitter
+            header.author_website:
+              type: url
+              label: Website

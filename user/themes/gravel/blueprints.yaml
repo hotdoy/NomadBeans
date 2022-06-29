@@ -1,0 +1,42 @@
+name: Gravel
+slug: gravel
+type: theme
+version: 0.1.0
+description: Tailwind Grav starter theme
+icon: rebel
+author:
+  name: James Auble
+  email: james.auble@gmail.com
+homepage: https://github.com/james-auble/grav-theme-gravel
+demo: http://demo.yoursite.com
+keywords: grav, theme, etc
+bugs: https://github.com/james-auble/grav-theme-gravel/issues
+readme: https://github.com/james-auble/grav-theme-gravel/blob/develop/README.md
+license: MIT
+
+dependencies:
+  - { name: grav, version: '>=1.6.0' }
+
+form:
+    validation: loose
+    fields:
+        dropdown.enabled:
+            type: toggle
+            label: Dropdown in Menu
+            highlight: 1
+            default: 1
+            options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+            validate:
+                type: bool
+        production:
+            type: toggle
+            label: Production Mode
+            highlight: 1
+            default: 1
+            options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+            validate:
+                type: bool

@@ -1,0 +1,26 @@
+title: Article
+"@extends":
+  type: default
+  context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        content:
+          type: tab
+          title: Content
+
+          fields:
+            header.page_media_alt_desc:
+              type: text
+              label: Page Media Alt Description
+            header.page_title:
+              type: text
+              label: Page Title
+            header.page_subtitle:
+              type: text
+              label: Page Subtitle

@@ -1,0 +1,21 @@
+{
+  "name": "gravel",
+  "repository": "",
+  "private": true,
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i css/site.css -o dist/css/site.css",
+    "watch": "tailwindcss -i css/site.css -o dist/css/site.css --watch",
+    "prod": "tailwindcss -i css/site.css -o dist/css/site.min.css --minify"
+  },
+  "overrides": {
+    "autoprefixer": "10.4.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.2",
+    "@tailwindcss/typography": "^0.5.2",
+    "tailwindcss": "^3.1.4"
+  }
+}
