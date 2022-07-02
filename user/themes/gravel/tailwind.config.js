@@ -11,37 +11,20 @@ module.exports = {
     './gravel.php'
   ],
   darkMode: 'class', //false or 'media' or 'class'
+  daisyui: {
+    themes: ["bumblebee", "coffee"],
+  },
   theme: {
     extend: {
-      screens: {
-        sm: '640px',
-        md: '768px',
-        lg: '1024px',
-        xl: '1280px',
-        '2xl': '1536px'
+      fontFamily: {
+        'shadows-light': ['"Shadows Into Light"', 'cursive'],
+        'poppins': ['"Poppins"', 'sans-serif']
       }
-    },
-    colors: {
-      'primary': {
-        'lighter': colors.yellow[300],
-        DEFAULT: colors.yellow[400],
-        'darker' : colors.yellow[500],
-      },
-      gray: colors.gray,
-      black: colors.black,
-      white: colors.white,
-      red: colors.red,
-      green: colors.green,
-      blue: colors.blue,
-      orange: colors.orange,
-      indigo: colors.indigo,
-      transparent: 'transparent',
-      'inherit': 'inherit',
     }
   },
   plugins: [
     require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
+    require("daisyui")
   ],
   important: false,
 }

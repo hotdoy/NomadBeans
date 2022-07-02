@@ -1,0 +1,17 @@
+<div class="category-grid">
+  <div class="category-grid__inner">
+    <header class="category-grid__header">
+      <h2 class="category-grid__heading">
+
+      </h2>
+      <div class="category-grid__description">
+
+      </div>
+    </header>
+    <div class="category-grid__grid">
+      {% for item in grid_items %}
+        {% include 'partials/grid-card.html.twig' %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
