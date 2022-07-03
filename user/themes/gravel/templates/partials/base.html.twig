@@ -2,7 +2,7 @@
 {% set page_title_bg_image = page.media.images|first %}
 
 <!DOCTYPE html>
-<html lang="{{ (grav.language.getActive ?: grav.config.site.default_lang)|e }}" data-theme="bumblebee">
+<html lang="{{ (grav.language.getActive ?: grav.config.site.default_lang)|e }}" data-theme="bumblebee" class="antialiased">
 	<head>
 		{% block head %}
 			<meta charset="utf-8"/>
@@ -23,7 +23,7 @@
 
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
 
 		{% block stylesheets %}
 			{% do assets.addCss('theme://dist/css/site' ~ extension ~ '.css') %}
