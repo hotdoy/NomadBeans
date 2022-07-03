@@ -1,0 +1,75 @@
+{% set body_classes_slot = "template-location" %}
+{% extends 'partials/base.html.twig' %}
+
+{% block javascripts %}
+	{% do assets.addJs('https://unpkg.com/swiper@8/swiper-bundle.min.js', {'priority': 98}) %}
+	{{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+	{% do assets.addCss('https://unpkg.com/swiper@8/swiper-bundle.min.css') %}
+	{{ parent() }}
+{% endblock %}
+
+{% block hero %}
+	{# Location Carousel #}
+
+  {% set swiper %}
+  const swiper = new Swiper('#location-carousel', {
+    direction: 'horizontal',
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 10,
+    pagination: {
+      el: '.swiper-pagination',
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 3
+      }
+    }
+  });
+  {% endset %}
+  {% do assets.addInlineJs(swiper, {id: 'alpine-dropdown', group: 'bottom'}) %}
+
+	<!-- Slider main container -->
+		<div id="location-carousel" class="swiper h-[64vw] sm:h-[22vw]" style="--swiper-pagination-color: hsl(var(--p));"> <div
+			class="swiper-wrapper">
+			<!-- Slides -->
+			<div class="swiper-slide relative">
+        <img class="absolute top-0 left-0 right-0 bottom-0 object-cover w-full h-full" src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80" alt="">
+      </div>
+			<div class="swiper-slide relative">
+        <img class="absolute top-0 left-0 right-0 bottom-0 object-cover w-full h-full" src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80" alt="">
+      </div>
+			<div class="swiper-slide relative">
+        <img class="absolute top-0 left-0 right-0 bottom-0 object-cover w-full h-full" src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80" alt="">
+      </div>
+			<div class="swiper-slide relative">
+        <img class="absolute top-0 left-0 right-0 bottom-0 object-cover w-full h-full" src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80" alt="">
+      </div>
+			<div class="swiper-slide relative">
+        <img class="absolute top-0 left-0 right-0 bottom-0 object-cover w-full h-full" src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80" alt="">
+      </div>
+		</div>
+
+		<!-- If we need navigation buttons -->
+		<div class="swiper-button-prev btn btn-primary btn-circle after:content-none hidden sm:flex">❮</div>
+		<div class="swiper-button-next btn btn-primary btn-circle after:content-none hidden sm:flex">❯</div>
+
+      <!-- If we need pagination -->
+    <div class="swiper-pagination sm:hidden"></div>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="container mx-auto my-12">
+		<div class="prose px-4 max-w-max">
+			{{ page.content|raw }}
+		</div>
+	</div>
+{% endblock %}
