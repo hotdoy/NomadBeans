@@ -15,11 +15,17 @@ module.exports = {
     themes: ["bumblebee", "coffee"],
   },
   theme: {
+    backgroundSize: {
+      'auto': 'auto',
+      'cover': 'cover',
+      'contain': 'contain',
+      '120%': '120%',
+    },
     extend: {
       fontFamily: {
         'shadows-light': ['"Shadows Into Light"', 'cursive'],
         'poppins': ['"Poppins"', 'sans-serif']
-      }
+      },
     }
   },
   plugins: [
