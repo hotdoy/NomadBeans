@@ -5,7 +5,6 @@ cache/*
 assets/*
 logs/*
 images/*
-user/data/*
 backup
 
 # OS Generated
