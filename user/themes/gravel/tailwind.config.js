@@ -1,4 +1,5 @@
 const colors = require('tailwindcss/colors')
+let plugin = require('tailwindcss/plugin')
 
 module.exports = {
   content: [
@@ -13,6 +14,7 @@ module.exports = {
   darkMode: 'class', //false or 'media' or 'class'
   daisyui: {
     themes: ["bumblebee", "coffee"],
+    base: true
   },
   theme: {
     backgroundSize: {
@@ -26,11 +28,23 @@ module.exports = {
         'shadows-light': ['"Shadows Into Light"', 'cursive'],
         'poppins': ['"Poppins"', 'sans-serif']
       },
+    },
+    container: {
+      screens: {
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1400px',
+      }
     }
   },
   plugins: [
     require('@tailwindcss/typography'),
-    require("daisyui")
+    require("daisyui"),
+    plugin(function ({ addVariant }) {
+      addVariant('scrolled', '.scrolled &')
+    })
   ],
   important: false,
 }

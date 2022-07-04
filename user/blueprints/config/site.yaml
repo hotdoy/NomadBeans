@@ -1,0 +1,30 @@
+'@extends': 
+  '@parent'
+
+form:
+  fields:
+    content:
+      fields:
+        social:
+          type: section
+          title: Social
+
+          fields:
+            twitter_url:
+              type: url
+              label: Twitter URL
+            instagram_url:
+              type: url
+              label: Instagram URL
+            youtube_url:
+              type: url
+              label: YouTube URL
+            facebook_url:
+              type: url
+              label: Facebook URL
+            tiktok_url:
+              type: url
+              label: TikTok URL
+            linkedin_url:
+              type: url
+              label: LinkedIn URL

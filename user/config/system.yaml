@@ -157,7 +157,7 @@ log:
   syslog:
     facility: local6
 debugger:
-  enabled: false
+  enabled: true
   provider: clockwork
   censored: false
   shutdown:
@@ -169,7 +169,7 @@ images:
   cache_perms: '0755'
   debug: false
   auto_fix_orientation: true
-  seofriendly: false
+  seofriendly: true
   cls:
     auto_sizes: false
     aspect_ratio: false

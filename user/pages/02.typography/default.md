@@ -1,5 +1,7 @@
 ---
 title: Typography
+media_order: casey-horner-O0R5XZfKUGQ-unsplash.jpg
+page_media_alt_desc: 'a night sky'
 ---
 
 ! Details on the full capabilities of Spectre.css can be found in the [Official Spectre Documentation](https://picturepan2.github.io/spectre/elements.html)

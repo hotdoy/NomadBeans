@@ -16,3 +16,17 @@
 
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .pin {
+    @apply top-0 right-0 bottom-0 left-0;
+  }
+
+  .pin-y {
+    @apply top-0 bottom-0;
+  }
+
+  .pin-x {
+    @apply left-0 right-0;
+  }
+}
