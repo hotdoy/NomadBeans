@@ -7,7 +7,6 @@ document.addEventListener("alpine:init", () => {
     on: false,
 
     onScrollHandler() {
-      console.log('handler called')
       if (window.scrollY > 0) {
         document.body.classList.add("scrolled")
       } else {

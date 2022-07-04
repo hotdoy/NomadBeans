@@ -1945,6 +1945,14 @@ h3 {
   color: hsl(var(--p) / var(--tw-text-opacity));
 }
 
+.btn-outline.btn-secondary .badge-outline {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--s) / var(--tw-border-opacity));
+  background-color: transparent;
+  --tw-text-opacity: 1;
+  color: hsl(var(--s) / var(--tw-text-opacity));
+}
+
 .btn-outline.btn-accent .badge-outline {
   --tw-border-opacity: 1;
   border-color: hsl(var(--a) / var(--tw-border-opacity));
@@ -2064,6 +2072,27 @@ h3 {
   outline: 2px solid hsl(var(--p));
 }
 
+.btn-secondary {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--s) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--s) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--sc) / var(--tw-text-opacity));
+}
+
+.btn-secondary:hover, 
+    .btn-secondary.btn-active {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--sf, var(--s)) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--sf, var(--s)) / var(--tw-bg-opacity));
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid hsl(var(--s));
+}
+
 .btn-accent {
   --tw-border-opacity: 1;
   border-color: hsl(var(--a) / var(--tw-border-opacity));
@@ -2125,6 +2154,20 @@ h3 {
   background-color: hsl(var(--pf, var(--p)) / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: hsl(var(--pc) / var(--tw-text-opacity));
+}
+
+.btn-outline.btn-secondary {
+  --tw-text-opacity: 1;
+  color: hsl(var(--s) / var(--tw-text-opacity));
+}
+
+.btn-outline.btn-secondary:hover {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--sf, var(--s)) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--sf, var(--s)) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--sc) / var(--tw-text-opacity));
 }
 
 .btn-outline.btn-accent {
@@ -2277,6 +2320,10 @@ h3 {
 
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-primary {
   outline: 2px solid hsl(var(--p));
+}
+
+.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-secondary {
+  outline: 2px solid hsl(var(--s));
 }
 
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-accent {
@@ -3353,6 +3400,11 @@ h3 {
   z-index: 50;
 }
 
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -3378,13 +3430,12 @@ h3 {
   margin-bottom: 1.5rem;
 }
 
-.my-auto {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
 .mb-20 {
   margin-bottom: 5rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
 }
 
 .mb-5 {
@@ -3411,10 +3462,6 @@ h3 {
   margin-right: 1.75rem;
 }
 
-.mt-8 {
-  margin-top: 2rem;
-}
-
 .mb-12 {
   margin-bottom: 3rem;
 }
@@ -3437,10 +3484,6 @@ h3 {
 
 .mr-2 {
   margin-right: 0.5rem;
-}
-
-.mt-12 {
-  margin-top: 3rem;
 }
 
 .block {
@@ -3483,16 +3526,8 @@ h3 {
   height: 1.25rem;
 }
 
-.min-h-\[100vh\] {
-  min-height: 100vh;
-}
-
 .min-h-screen {
   min-height: 100vh;
-}
-
-.min-h-full {
-  min-height: 100%;
 }
 
 .w-full {
@@ -3791,14 +3826,14 @@ h3 {
   padding: 0px;
 }
 
-.py-20 {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-}
-
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .py-2 {
@@ -3814,11 +3849,6 @@ h3 {
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-}
-
-.py-40 {
-  padding-top: 10rem;
-  padding-bottom: 10rem;
 }
 
 .pt-4 {
@@ -4075,11 +4105,6 @@ h3 {
 
 .focus\:outline-offset-0:focus {
   outline-offset: 0px;
-}
-
-.scrolled .scrolled\:py-0 {
-  padding-top: 0px;
-  padding-bottom: 0px;
 }
 
 .scrolled .scrolled\:shadow-lg {

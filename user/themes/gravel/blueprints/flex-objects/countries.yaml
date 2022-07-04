@@ -1,0 +1,72 @@
+title: Countries
+description: Countries directory
+type: flex-objects  # do not change
+
+# Flex Configuration
+config:
+    # Data Settings
+  data:
+    storage: user-data://flex-objects/countries.json
+
+  # Admin Settings
+  admin:
+    # List view
+    list:
+      # List of fields to display
+      fields:
+        last_name:
+          link: edit # Edit link
+        first_name:
+          link: edit # Edit link
+        email:
+        website:
+
+# Flex Directory Forms
+blueprints:
+
+# Flex Object Form
+form:
+  validation: loose
+
+  fields:
+    published:
+      type: toggle
+      label: Published
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool
+        required: true
+
+    last_name:
+      type: text
+      label: Last Name
+      validate:
+        required: true
+
+    first_name:
+      type: text
+      label: First Name
+      validate:
+        required: true
+
+    email:
+      type: email
+      label: Email Address
+      validate:
+        required: true
+
+    website:
+      type: url
+      label: Website URL
+
+    tags:
+      type: selectize
+      size: large
+      label: Tags
+      classes: fancy
+      validate:
+        type: commalist
