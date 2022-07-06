@@ -1,0 +1,426 @@
+title: Cities
+description: MadBeans listings locations.
+type: flex-objects
+
+# Flex Configuration
+config:
+  # Administration Configuration
+  admin:
+    # Admin router (optional)
+    router:
+      path: "/cities"
+
+    # Admin menu (optional)
+    menu:
+      list:
+        route: "/cities"
+        title: Cities
+        icon: fa-building-o
+        # Authorization to collection admin
+        authorize: ["admin.cities.list", "admin.super"]
+        # Priority -10 .. 10 (highest goes up)
+        priority: 2
+
+    # Admin template type / folder
+    template: default
+
+    # Permissions
+    permissions:
+      # Primary permissions
+      admin.countries:
+        type: crudpl
+        label: Cities
+
+    # List view
+    list:
+      title: name
+      fields:
+        published:
+          field:
+            type: toggle
+            label: Published
+          width: 8
+        name:
+          link: edit
+        ascii_name:
+        country:
+          link: edit
+          width: 6
+        admin2_code:
+          link: edit
+          width: 8
+        lat:
+          width: 8
+        lng:
+          width: 8
+        tags:
+
+    # Edit View
+    edit:
+      title:
+        template: "{{ object.name ?? 'Name' }}, {{ object.country ?? 'country' }}"
+
+    # Preview View
+    preview:
+      enabled: false
+      route:
+        #template: '/plugins/flex-objects/directory:cities'
+
+    # Data Export
+    export:
+      enabled: true
+      method: "jsonSerialize"
+      formatter:
+        class: 'Grav\Framework\File\Formatter\YamlFormatter'
+      filename: "cities"
+
+  # Site Configuration
+  site:
+    templates:
+      collection:
+        # Lookup for the template layout files for collections of objects
+        paths:
+          - "flex/{TYPE}/collection/{LAYOUT}{EXT}"
+      object:
+        # Lookup for the template layout files for objects
+        paths:
+          - "flex/{TYPE}/object/{LAYOUT}{EXT}"
+      defaults:
+        # Default template {TYPE}; overridden by filename of this blueprint if template folder exists
+        type: cities
+        # Default template {LAYOUT}; can be overridden in render calls (usually Twig in templates)
+        layout: default
+
+  # Data Configuration
+  data:
+    # Object class to be used, allowing custom methods for the object
+    object: 'Grav\Common\Flex\Types\Generic\GenericObject'
+    # Collection class to be used, allowing custom methods for the collections
+    collection: 'Grav\Common\Flex\Types\Generic\GenericCollection'
+    # Index class to be used, works as a quick database-like lookup index
+    index: 'Grav\Common\Flex\Types\Generic\GenericIndex'
+    storage:
+      # Storage class, use single file storage (does not support images and assets)
+      class: 'Grav\Framework\Flex\Storage\SimpleStorage'
+      options:
+        formatter:
+          # File formatter class, in this case the file is stored in markdown
+          class: 'Grav\Framework\File\Formatter\JsonFormatter'
+        # JSON file where all the objects will be stored
+        folder: user-data://flex-objects/cities.json
+    search:
+      # Search options
+      options:
+        contains: 1
+      # Fields to be searched
+      fields:
+        - published
+        - country
+        - name
+        - ascii_name
+        - lat
+        - lng
+        - tags
+
+form:
+  validation: loose
+
+  fields:
+    published:
+      type: toggle
+      label: Published
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool
+        required: true
+
+    country:
+      type: select
+      label: Country
+      classes: fancy
+      options:
+        AF: "Afghanistan"
+        AL: "Albania"
+        DZ: "Algeria"
+        AS: "American Samoa"
+        AD: "Andorra"
+        AO: "Angola"
+        AI: "Anguilla"
+        AQ: "Antarctica"
+        AG: "Antigua And Barbuda"
+        AR: "Argentina"
+        AM: "Armenia"
+        AW: "Aruba"
+        AU: "Australia"
+        AT: "Austria"
+        AZ: "Azerbaijan"
+        BS: "Bahamas"
+        BH: "Bahrain"
+        BD: "Bangladesh"
+        BB: "Barbados"
+        BY: "Belarus"
+        BE: "Belgium"
+        BZ: "Belize"
+        BJ: "Benin"
+        BM: "Bermuda"
+        BT: "Bhutan"
+        BO: "Bolivia"
+        BA: "Bosnia And Herzegovina"
+        BW: "Botswana"
+        BV: "Bouvet Island"
+        BR: "Brazil"
+        IO: "British Indian Ocean Territory"
+        BN: "Brunei Darussalam"
+        BG: "Bulgaria"
+        BF: "Burkina Faso"
+        BI: "Burundi"
+        KH: "Cambodia"
+        CM: "Cameroon"
+        CA: "Canada"
+        CV: "Cape Verde"
+        KY: "Cayman Islands"
+        CF: "Central African Republic"
+        TD: "Chad"
+        CL: "Chile"
+        CN: "China"
+        CX: "Christmas Island"
+        CC: "Cocos (keeling) Islands"
+        CO: "Colombia"
+        KM: "Comoros"
+        CG: "Congo"
+        CD: "Congo, The Democratic Republic Of The"
+        CK: "Cook Islands"
+        CR: "Costa Rica"
+        CI: "Cote D'ivoire"
+        HR: "Croatia"
+        CU: "Cuba"
+        CY: "Cyprus"
+        CZ: "Czech Republic"
+        DK: "Denmark"
+        DJ: "Djibouti"
+        DM: "Dominica"
+        DO: "Dominican Republic"
+        TP: "East Timor"
+        EC: "Ecuador"
+        EG: "Egypt"
+        SV: "El Salvador"
+        GQ: "Equatorial Guinea"
+        ER: "Eritrea"
+        EE: "Estonia"
+        ET: "Ethiopia"
+        FK: "Falkland Islands (malvinas)"
+        FO: "Faroe Islands"
+        FJ: "Fiji"
+        FI: "Finland"
+        FR: "France"
+        GF: "French Guiana"
+        PF: "French Polynesia"
+        TF: "French Southern Territories"
+        GA: "Gabon"
+        GM: "Gambia"
+        GE: "Georgia"
+        DE: "Germany"
+        GH: "Ghana"
+        GI: "Gibraltar"
+        GR: "Greece"
+        GL: "Greenland"
+        GD: "Grenada"
+        GP: "Guadeloupe"
+        GU: "Guam"
+        GT: "Guatemala"
+        GN: "Guinea"
+        GW: "Guinea-bissau"
+        GY: "Guyana"
+        HT: "Haiti"
+        HM: "Heard Island And Mcdonald Islands"
+        VA: "Holy See (vatican City State)"
+        HN: "Honduras"
+        HK: "Hong Kong"
+        HU: "Hungary"
+        IS: "Iceland"
+        IN: "India"
+        ID: "Indonesia"
+        IR: "Iran, Islamic Republic Of"
+        IQ: "Iraq"
+        IE: "Ireland"
+        IL: "Israel"
+        IT: "Italy"
+        JM: "Jamaica"
+        JP: "Japan"
+        JO: "Jordan"
+        KZ: "Kazakstan"
+        KE: "Kenya"
+        KI: "Kiribati"
+        KP: "Korea, Democratic People's Republic Of"
+        KR: "Korea, Republic Of"
+        KV: "Kosovo"
+        KW: "Kuwait"
+        KG: "Kyrgyzstan"
+        LA: "Lao People's Democratic Republic"
+        LV: "Latvia"
+        LB: "Lebanon"
+        LS: "Lesotho"
+        LR: "Liberia"
+        LY: "Libyan Arab Jamahiriya"
+        LI: "Liechtenstein"
+        LT: "Lithuania"
+        LU: "Luxembourg"
+        MO: "Macau"
+        MK: "Macedonia, The Former Yugoslav Republic Of"
+        MG: "Madagascar"
+        MW: "Malawi"
+        MY: "Malaysia"
+        MV: "Maldives"
+        ML: "Mali"
+        MT: "Malta"
+        MH: "Marshall Islands"
+        MQ: "Martinique"
+        MR: "Mauritania"
+        MU: "Mauritius"
+        YT: "Mayotte"
+        MX: "Mexico"
+        FM: "Micronesia, Federated States Of"
+        MD: "Moldova, Republic Of"
+        MC: "Monaco"
+        MN: "Mongolia"
+        MS: "Montserrat"
+        ME: "Montenegro"
+        MA: "Morocco"
+        MZ: "Mozambique"
+        MM: "Myanmar"
+        NA: "Namibia"
+        NR: "Nauru"
+        NP: "Nepal"
+        NL: "Netherlands"
+        AN: "Netherlands Antilles"
+        NC: "New Caledonia"
+        NZ: "New Zealand"
+        NI: "Nicaragua"
+        NE: "Niger"
+        NG: "Nigeria"
+        NU: "Niue"
+        NF: "Norfolk Island"
+        MP: "Northern Mariana Islands"
+        NO: "Norway"
+        OM: "Oman"
+        PK: "Pakistan"
+        PW: "Palau"
+        PS: "Palestinian Territory, Occupied"
+        PA: "Panama"
+        PG: "Papua New Guinea"
+        PY: "Paraguay"
+        PE: "Peru"
+        PH: "Philippines"
+        PN: "Pitcairn"
+        PL: "Poland"
+        PT: "Portugal"
+        PR: "Puerto Rico"
+        QA: "Qatar"
+        RE: "Reunion"
+        RO: "Romania"
+        RU: "Russian Federation"
+        RW: "Rwanda"
+        SH: "Saint Helena"
+        KN: "Saint Kitts And Nevis"
+        LC: "Saint Lucia"
+        PM: "Saint Pierre And Miquelon"
+        VC: "Saint Vincent And The Grenadines"
+        WS: "Samoa"
+        SM: "San Marino"
+        ST: "Sao Tome And Principe"
+        SA: "Saudi Arabia"
+        SN: "Senegal"
+        RS: "Serbia"
+        SC: "Seychelles"
+        SL: "Sierra Leone"
+        SG: "Singapore"
+        SK: "Slovakia"
+        SI: "Slovenia"
+        SB: "Solomon Islands"
+        SO: "Somalia"
+        ZA: "South Africa"
+        GS: "South Georgia And The South Sandwich Islands"
+        ES: "Spain"
+        LK: "Sri Lanka"
+        SD: "Sudan"
+        SR: "Suriname"
+        SJ: "Svalbard And Jan Mayen"
+        SZ: "Swaziland"
+        SE: "Sweden"
+        CH: "Switzerland"
+        SY: "Syrian Arab Republic"
+        TW: "Taiwan, Province Of China"
+        TJ: "Tajikistan"
+        TZ: "Tanzania, United Republic Of"
+        TH: "Thailand"
+        TG: "Togo"
+        TK: "Tokelau"
+        TO: "Tonga"
+        TT: "Trinidad And Tobago"
+        TN: "Tunisia"
+        TR: "Turkey"
+        TM: "Turkmenistan"
+        TC: "Turks And Caicos Islands"
+        TV: "Tuvalu"
+        UG: "Uganda"
+        UA: "Ukraine"
+        AE: "United Arab Emirates"
+        GB: "United Kingdom"
+        US: "United States"
+        UM: "United States Minor Outlying Islands"
+        UY: "Uruguay"
+        UZ: "Uzbekistan"
+        VU: "Vanuatu"
+        VE: "Venezuela"
+        VN: "Viet Nam"
+        VG: "Virgin Islands, British"
+        VI: "Virgin Islands, U.s."
+        WF: "Wallis And Futuna"
+        EH: "Western Sahara"
+        YE: "Yemen"
+        ZM: "Zambia"
+        ZW: "Zimbabwe"
+
+    admin1_code:
+      type: number
+      label: Admin1 Code
+
+    admin2_code:
+      type: number
+      label: Admin2 Code
+
+    name:
+      type: text
+      label: Name
+      validate:
+        required: true
+
+    ascii_name:
+      type: text
+      label: ASCII Name
+      validate:
+        required: true
+
+    lat:
+      type: text
+      label: Latitude
+      validate:
+        required: true
+
+    lng:
+      type: text
+      label: Longitude
+      validate:
+        required: true
+
+    tags:
+      type: selectize
+      size: long
+      label: Tags
+      classes: fancy
+      validate:
+        type: commalist

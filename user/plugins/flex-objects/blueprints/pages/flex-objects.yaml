@@ -10,7 +10,6 @@ form:
       fields:
         content:
           fields:
-
             header.flex.directory:
               ordering@: 2
               type: select
@@ -18,4 +17,4 @@ form:
               style: vertical
               data-options@: 'Grav\Plugin\FlexObjectsPlugin::directoryOptions'
               options:
-                '': 'Directory List'
+                "": "Directory List"

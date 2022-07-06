@@ -1,0 +1,18 @@
+
+<div class="container mx-auto py-8">
+  <div class="px-4">
+    i'm the cities collection template
+
+    {% set directory = grav.get('flex').directory('cities') %}
+
+    {% set cities = directory.collection() %}
+
+    {# Do something #}
+    <h2>Ten first cities:</h2>
+    <ul>
+      {% for city in cities.filterBy({published: true}).limit(0, 10) %}
+        <li>{{ city.name }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

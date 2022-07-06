@@ -1,0 +1,6 @@
+{% set cities = flex.getDirectory('cities') %}
+{% set city = cities.getObject(value) %}
+
+{% if city %}
+    <a href="{{ admin_route('/cities/' ~ value ) }}">{{ city.name}} ({{ city.country }})</a>
+{% endif %}
