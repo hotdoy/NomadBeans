@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-last_checked: 1657058058
-=======
 last_checked: 1657125195
->>>>>>> aa359b9169c94ede76d52848763ee0039b844772
-=======
-last_checked: 1657152873
->>>>>>> 4473e03cc3be64ba14fd80f0cb098d951a50ae93
 data:
   -
     title: 'macOS 12.0 Monterey Apache Setup: LetsEncrypt SSL'
