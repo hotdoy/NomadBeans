@@ -38,6 +38,7 @@ config:
         published:
           field:
             type: toggle
+<<<<<<< HEAD
             label: Publ
           width: 8
         name:
@@ -50,11 +51,33 @@ config:
         lng:
         num:
           type: text
+=======
+            label: Published
+          width: 8
+        name:
+          link: edit
+        ascii_name:
+        country:
+          link: edit
+          width: 6
+        admin2_code:
+          link: edit
+          width: 8
+        lat:
+          width: 8
+        lng:
+          width: 8
+        tags:
+>>>>>>> aa359b9169c94ede76d52848763ee0039b844772
 
     # Edit View
     edit:
       title:
+<<<<<<< HEAD
         template: "{{ object.name ?? 'Name' }}, {{ object.region ?? 'Region' }}, {{ object.country_code ?? 'country_code' }}"
+=======
+        template: "{{ object.name ?? 'Name' }}, {{ object.country ?? 'country' }}"
+>>>>>>> aa359b9169c94ede76d52848763ee0039b844772
 
     # Preview View
     preview:
@@ -111,9 +134,15 @@ config:
       # Fields to be searched
       fields:
         - published
+<<<<<<< HEAD
         - country_code
         - region
         - name
+=======
+        - country
+        - name
+        - ascii_name
+>>>>>>> aa359b9169c94ede76d52848763ee0039b844772
         - lat
         - lng
         - tags
@@ -134,7 +163,11 @@ form:
         type: bool
         required: true
 
+<<<<<<< HEAD
     country_code:
+=======
+    country:
+>>>>>>> aa359b9169c94ede76d52848763ee0039b844772
       type: select
       label: Country
       classes: fancy
@@ -381,6 +414,7 @@ form:
         ZM: "Zambia"
         ZW: "Zimbabwe"
 
+<<<<<<< HEAD
     region:
       type: text
       label: Region / State / Province
@@ -390,18 +424,45 @@ form:
     name:
       type: text
       label: City
+=======
+    admin1_code:
+      type: number
+      label: Admin1 Code
+
+    admin2_code:
+      type: number
+      label: Admin2 Code
+
+    name:
+      type: text
+      label: Name
+      validate:
+        required: true
+
+    ascii_name:
+      type: text
+      label: ASCII Name
+>>>>>>> aa359b9169c94ede76d52848763ee0039b844772
       validate:
         required: true
 
     lat:
       type: text
+<<<<<<< HEAD
       label: Longitude
+=======
+      label: Latitude
+>>>>>>> aa359b9169c94ede76d52848763ee0039b844772
       validate:
         required: true
 
     lng:
       type: text
+<<<<<<< HEAD
       label: Latitude
+=======
+      label: Longitude
+>>>>>>> aa359b9169c94ede76d52848763ee0039b844772
       validate:
         required: true
 
@@ -412,9 +473,12 @@ form:
       classes: fancy
       validate:
         type: commalist
+<<<<<<< HEAD
     num:
       type: number
       label: Num
       classes: fancy
       attributes:
         x-data: 'something'
+=======
+>>>>>>> aa359b9169c94ede76d52848763ee0039b844772

@@ -2,5 +2,9 @@
 {% set city = cities.getObject(value) %}
 
 {% if city %}
+<<<<<<< HEAD
     <a href="{{ admin_route('/cities/' ~ value ) }}">{{ city.name}}</a>
+=======
+    <a href="{{ admin_route('/cities/' ~ value ) }}">{{ city.name}} ({{ city.country }})</a>
+>>>>>>> aa359b9169c94ede76d52848763ee0039b844772
 {% endif %}
