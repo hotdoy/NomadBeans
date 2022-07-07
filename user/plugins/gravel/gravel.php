@@ -1,4 +1,5 @@
 <?php
+
 namespace Grav\Plugin;
 
 use Composer\Autoload\ClassLoader;
