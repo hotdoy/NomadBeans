@@ -28,11 +28,7 @@ class GravelPlugin extends Plugin {
     $result  = [];
 
     foreach ($objects as $object) {
-<<<<<<< HEAD
-      $result[$object->getStorageKey()] = $object->getProperty('id') . ' - ' . $object->getProperty('name'); //change this line
-=======
       $result[$object->getStorageKey()] = $object->getProperty('id') . ' - ' . $object->getProperty('name') . ' (' . $object->getProperty('country') . ')';
->>>>>>> aa359b9169c94ede76d52848763ee0039b844772
     }
 
     return $result;
