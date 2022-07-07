@@ -12,7 +12,12 @@
 	</div>
 {% endblock %}
 
+
 {% block content %}
+  {% set flex = grav.get('flex') %}
+
+  Flex has {{ flex.count() }} enabled directories.
+
 	{# Category grid #}
 	<section class="container mx-auto my-20" data-section="category-grid">
 		<div class="px-4">

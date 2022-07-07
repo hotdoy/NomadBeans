@@ -1,0 +1,93 @@
+form: flex-pages
+unique_id: 70ed8139a0752cd8d1bfa21ae5c59561
+url: 'https://grav2.local/admin/pages/countries'
+user:
+  username: james
+  email: james.auble@gmail.com
+timestamps:
+  created: 1656981377
+  updated: 1656981377
+data:
+  header:
+    title: Locations
+    flex:
+      directory: location
+    media_order: null
+    page_media_alt_desc: null
+    body_classes: null
+    order_by: null
+    order_manual: null
+    published: null
+    date: null
+    publish_date: null
+    unpublish_date: null
+    metadata: null
+    taxonomy: null
+    dateformat: null
+    menu: null
+    slug: null
+    redirect: null
+    process: null
+    twig_first: null
+    never_cache_twig: null
+    child_type: null
+    routable: null
+    cache_enable: null
+    visible: null
+    debugger: null
+    template: null
+    append_url_extension: null
+    redirect_default_route: null
+    routes:
+      default: null
+      canonical: null
+      aliases: null
+    admin:
+      children_display_order: null
+    login:
+      visibility_requires_access: null
+    access: null
+    permissions:
+      inherit: null
+      authors: null
+      groups: null
+  content: null
+  folder: locations
+  route: null
+  name: flex-objects
+  ordering: true
+  order: 'home,typography,contact-form,locations,flex-objects,locations'
+  blueprint: null
+  lang: null
+  xss_check: null
+  _post_entries_save: null
+files: {  }
+object:
+  type: pages
+  key: countries
+  storage_key: 06.countries
+  timestamp: 1656981355
+  serialized:
+    __META:
+      key: countries
+      storage_key: 06.countries
+      template: flex-objects
+      storage_timestamp: 1656981355
+      markdown:
+        '': { flex-objects: 1656981355 }
+      checksum: 25e90cd99471c05300a071532364fc57
+    storage_key: 06.countries
+    parent_key: ''
+    order: '06.'
+    folder: countries
+    template: flex-objects
+    lang: ''
+    header:
+      title: Locations
+      flex:
+        directory: location
+    root: false
+    frontmatter: "title: Locations\nflex:\n    directory: location"
+    markdown: ''
+    slug: countries
+    name: flex-objects.md
