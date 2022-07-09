@@ -3453,6 +3453,10 @@ h3 {
   flex: none;
 }
 
+.grow {
+  flex-grow: 1;
+}
+
 .table-fixed {
   table-layout: fixed;
 }
@@ -3679,6 +3683,10 @@ h3 {
   padding: 0px;
 }
 
+.p-4 {
+  padding: 1rem;
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -3707,6 +3715,16 @@ h3 {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.py-9 {
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem;
 }
 
 .pt-4 {

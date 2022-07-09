@@ -1,3 +1,7 @@
+{% set flex = grav['flex_objects'] %}
+{% set directory = flex.directory('locations') %}
+{% set object = directory.getObject(header.object) %}
+
 {% set body_classes_slot = "template-location" %}
 {% extends 'partials/base.html.twig' %}
 
@@ -73,7 +77,7 @@
 		<div class="px-4">
 			<header class="flex items-center mb-4 sm:mb-7">
 				<h1 class="text-3xl md:text-5xl">
-					{{ page.title }}
+					{{ object.name }}
 				</h1>
 			</header>
 			<div class="prose mr-7 max-w-max">
@@ -244,3 +248,4 @@
 		</div>
 	</div>
 {% endblock %}
+

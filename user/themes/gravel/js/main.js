@@ -3,9 +3,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 })
 
 document.addEventListener("alpine:init", () => {
-  Alpine.store("darkMode", {
-    on: false,
-
+  Alpine.store("gravel", {
     onScrollHandler() {
       if (window.scrollY > 0) {
         document.body.classList.add("scrolled")
