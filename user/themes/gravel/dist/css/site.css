@@ -3383,6 +3383,12 @@ h3 {
   height: 1.25rem;
 }
 
+.max-h-max {
+  max-height: -webkit-max-content;
+  max-height: -moz-max-content;
+  max-height: max-content;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -3596,6 +3602,16 @@ h3 {
   background-color: hsl(var(--su) / var(--tw-bg-opacity));
 }
 
+.bg-warning {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--wa) / var(--tw-bg-opacity));
+}
+
+.bg-error {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--er) / var(--tw-bg-opacity));
+}
+
 .bg-orange-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(251 146 60 / var(--tw-bg-opacity));
@@ -3717,14 +3733,9 @@ h3 {
   padding-bottom: 2rem;
 }
 
-.py-10 {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
-.py-9 {
-  padding-top: 2.25rem;
-  padding-bottom: 2.25rem;
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .pt-4 {
@@ -3745,6 +3756,14 @@ h3 {
 
 .pl-0 {
   padding-left: 0px;
+}
+
+.pt-\[150\%\] {
+  padding-top: 150%;
+}
+
+.pt-\[75\%\] {
+  padding-top: 75%;
 }
 
 .text-center {
@@ -4038,6 +4057,14 @@ h3 {
     padding-top: 100%;
   }
 
+  .sm\:pt-\[150\%\] {
+    padding-top: 150%;
+  }
+
+  .sm\:pt-\[75\%\] {
+    padding-top: 75%;
+  }
+
   .sm\:text-5xl {
     font-size: 3rem;
     line-height: 1;
@@ -4074,6 +4101,15 @@ h3 {
     gap: 2rem;
   }
 
+  .md\:py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .md\:pt-\[100\%\] {
+    padding-top: 100%;
+  }
+
   .md\:text-5xl {
     font-size: 3rem;
     line-height: 1;
@@ -4107,5 +4143,14 @@ h3 {
 
   .lg\:flex-row {
     flex-direction: row;
+  }
+
+  .lg\:bg-gray-50 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  }
+
+  .lg\:pt-\[100\%\] {
+    padding-top: 100%;
   }
 }
