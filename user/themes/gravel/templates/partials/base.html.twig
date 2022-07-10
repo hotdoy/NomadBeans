@@ -51,27 +51,50 @@
 
   {% block body %}
 
-		{% block header %}
-      {% include 'partials/header.html.twig' %}
-		{% endblock %}
+    <div class="drawer">
+      <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
+      <div id="drawer-content" class="drawer-content flex flex-col">
+        <!-- Navbar -->
 
-    {% block main %}
-
-      <main id="site-main" class="site-main">
-
-        {% block hero %} {% endblock %}
-      
-        {% block content %}
-          {{ content }}
+        {% block header %}
+          {% include 'partials/header.html.twig' %}
         {% endblock %}
 
-      </main>
+      
+        <!-- Page content here -->
+        {% block main %}
 
-    {% endblock %}
+          <main id="site-main" class="site-main">
 
-		{% block footer %}
-      {% include 'partials/footer.html.twig' %}
-		{% endblock %}
+            {% block hero %} {% endblock %}
+          
+            {% block content %}
+              {{ content }}
+            {% endblock %}
+
+          </main>
+
+        {% endblock %}
+
+        {% block footer %}
+          {% include 'partials/footer.html.twig' %}
+        {% endblock %}
+        
+      </div> 
+      <div class="drawer-side">
+        <label for="my-drawer-3" class="drawer-overlay"></label> 
+        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
+          <li>
+            <a href="/" class="btn btn-ghost normal-case text-2xl font-shadows-light hover:bg-transparent justify-start mb-2">MadBeans</a>
+          </li>
+          <!-- Sidebar content here -->
+          <li><a>Sidebar Item 1</a></li>
+          <li><a>Sidebar Item 2</a></li>
+          
+        </ul>
+        
+      </div>
+    </div>
 
   {% endblock %}
 

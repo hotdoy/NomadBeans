@@ -5,7 +5,7 @@
 	<div class="py-20 bg-center relative" style="background-image: url({{ url('theme://images/digi-nomad.jpeg') }});">
 		<div class="hero-overlay absolute pin bg-gradient-to-b from-black/18 to-black/18"></div>
 		<div class="text-center text-base-100 flex flex-col justify-center relative z-10 mx-auto container">
-      <h1 class="mb-5 text-3xl sm:text-5xl font-bold sm:leading-[3.5rem] px-4"><div>Fueling</div> Digital Nomads</h1>
+      <h1 class="mb-5 text-3xl sm:text-5xl font-bold sm:leading-[3.5rem] px-4"><div>Craft Coffee</div>for Digital Nomads</h1>
       <p class="mb-5 font-shadows-light text-lg sm:text-2xl w-2/3 px-4 mx-auto">Spaces & fuel for digital workers on the road.</p>
       {% include 'partials/hero-search.html.twig' %}
 		</div>
@@ -14,21 +14,17 @@
 
 
 {% block content %}
-  {% set flex = grav.get('flex') %}
-
-  Flex has {{ flex.count() }} enabled directories.
-
 	{# Category grid #}
-	<section class="container mx-auto my-20" data-section="category-grid">
+	<section class="container mx-auto my-12 md:my-20" data-section="category-grid">
 		<div class="px-4">
 			<header class="pt-4 relative before:content-[''] before:h-1 before:bg-accent before:w-16 before:absolute before:top-0 before:left-0">
-				<h2 class="mb-1 text-3xl leading-tight sm:text-5xl sm:leading-tight">Most Popular Categories</h2>
+				<h2 class="mb-2 sm:mb-1 text-3xl leading-tight sm:text-5xl sm:leading-tight">Most Popular Categories</h2>
 				<div class="text-gray-400">
 					Find great places to stay, eat, shop, or visit the city
 				</div>
 			</header>
 
-			<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 mt-7 sm:mt-12">
+			<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-7 sm:mt-12">
 				{% set k = 6 %}
 				{% for i in range(1, k) %}
 					<li class="relative bg-cover rounded-md bg-center overflow-hidden pt-[70%] sm:pt-[100%]">
