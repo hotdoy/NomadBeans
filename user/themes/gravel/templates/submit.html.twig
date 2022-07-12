@@ -35,9 +35,33 @@
 
 	{% set alpine %}
 	document.addEventListener('alpine:init', () => {
-	    Alpine.data('textComponent', () => ({
+	    Alpine.data('submitFormComponent', () => ({
+        countrySelect: null,
+        citySelect: null,
         init() {
-          console.log('text component initialized')
+          this.citySelect = this.$el.querySelector('#cafe-city')
+          this.countrySelect = this.$el.querySelector('#cafe-country')
+
+          this.attachListeners()
+        },
+        attachListeners() {
+          this.countrySelect.addEventListener('change', this.countryChangeHandler)
+        },
+        countryChangeHandler(event) {
+          const parser = new DOMParser();
+          const cc = event.target.value
+
+          fetch(`/cities.json/country_code:${cc}/as_options:true`)
+            .then((response) => {
+                return response.text();
+            })
+            .then((responseText) => {
+                const html = new DOMParser().parseFromString(responseText, 'text/html')
+                const srcOptions = html.getElementById('options-source')
+                const citySelect = document.querySelector('#cafe-city')
+
+                if (srcOptions && citySelect) citySelect.innerHTML = srcOptions.innerHTML;
+            });
         }
 	    }))
 	  })

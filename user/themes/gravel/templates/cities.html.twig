@@ -2,7 +2,4 @@
 {% set cities = flex.directory('cities') %}  
 {% set collection = cities.getCollection() %}
 
-
-
-
 {% render collection layout: 'default' with {country_code: country_code } %}

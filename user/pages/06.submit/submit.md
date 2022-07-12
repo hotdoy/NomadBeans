@@ -2,6 +2,8 @@
 title: Submit
 form:
   name: submit-form
+  attributes:
+    x-data: submitFormComponent
   fields:
     your_details:
       type: section
@@ -16,8 +18,6 @@ form:
       label_element_classes: label-text
       outerclasses: "mb-4 form-control w-full"
       classes: "input input-bordered w-full"
-      attributes:
-        x-data: textComponent
       validate:
         required: true
     email:
@@ -69,6 +69,16 @@ form:
       limit: 10
       accept:
         - "image/*"
+    cafe_country:
+      type: select
+      id: cafe-country
+      label: Country
+      label_classes: label
+      label_element_classes: label-text
+      outerclasses: "form-control mb-4"
+      classes: "select select-bordered w-full"
+      size: long
+      data-options@: '\Grav\Plugin\Gravel\Utils::getCountries'
     cafe_city:
       type: select
       id: cafe-city
@@ -78,9 +88,8 @@ form:
       outerclasses: "form-control mb-4"
       classes: "select select-bordered w-full"
       size: long
-      data-options@: '\Grav\Plugin\GravelPlugin::getFlexCities'
-      attributes:
-        x-data: selectComponent
+      options:
+        default: Select a country to view cities.
     cafe_lat:
       type: text
       id: cafe-lat
