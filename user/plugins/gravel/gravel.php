@@ -1,9 +1,13 @@
 <?php
+
 namespace Grav\Plugin;
 
+// use Grav\Plugin\Gravel\Utils;
 use Composer\Autoload\ClassLoader;
 use Grav\Common\Plugin;
 use Grav\Common\Grav;
+use Grav\Common\Uri;
+use Grav\Common\Utils;
 
 /**
  * Class GravelPlugin
@@ -14,6 +18,46 @@ class GravelPlugin extends Plugin {
   public $features = [
     'blueprints' => 1000,
   ];
+
+  public function router() {
+    /** @var Uri $uri */
+    $uri = $this->grav['uri'];
+    $route = Uri::getCurrentRoute()->getRoute();
+
+    if (Utils::startsWith($route, '/locations')) {
+      $this->enable([
+        'onPagesInitialized' => ['addLocationPage', 0]
+      ]);
+    }
+  }
+
+  public function addLocationPage() {
+    $route = Uri::getCurrentRoute()->getRoute();
+    $parts = explode("/", $route);
+    $key = array_shift($parts);
+    $directory = array_shift($parts);
+    $path = array_shift($parts);
+
+    /** @var Pages $pages */
+    $pages = $this->grav['pages'];
+    if ($pages->find($route)) {
+      /** @var Debugger $debugger */
+      $debugger = $this->grav['debugger'];
+      $debugger->addMessage("Page {$route} already exists, page cannot be added", 'error');
+      return;
+    }
+
+    $page = $pages->find('/locations/location');
+    if ($page) {
+      $page->id($page->modified() . md5($route));
+      $page->slug(basename($route));
+      $page->folder(basename($route));
+      $page->route($route);
+      $page->rawRoute($route);
+      $page->modifyHeader('object', $path);
+      $pages->addPage($page, $route);
+    }
+  }
 
   public static function getFlexCities(): array {
     $flex       = Grav::instance()['flex'] ?? null;
@@ -70,14 +114,19 @@ class GravelPlugin extends Plugin {
     if ($this->isAdmin()) {
       $this->enable([
         'onAdminTwigTemplatePaths' => ['onAdminTwigTemplatePaths', 11],
+        'onFlexObjectBeforeSave' => ['onFlexObjectBeforeSave', 0]
       ]);
       return;
     }
 
     // Enable the main events we are interested in
     $this->enable([
-      // Put your main events here
     ]);
+
+    $this->router();
+  }
+
+  public function onFlexObjectBeforeSave($event) {
   }
 
   /**

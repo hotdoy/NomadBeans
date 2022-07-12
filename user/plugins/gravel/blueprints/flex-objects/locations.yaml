@@ -38,18 +38,18 @@ config:
         published:
           field:
             type: toggle
-            label: Publ
+            label: Pub
           width: 8
         name:
           link: edit
+        slug:
         city:
           field:
             type: cities
             label: City
-        latitude:
-          link: edit
-        longitude:
-          link: edit
+        rating_overall:
+          width: 8
+        features:
         tags:
 
     # Edit View
@@ -91,20 +91,20 @@ config:
   # Data Configuration
   data:
     # Object class to be used, allowing custom methods for the object
-    object: 'Grav\Common\Flex\Types\Generic\GenericObject'
+    object: 'Grav\Plugin\Gravel\Flex\Types\Locations\LocationsObject'
     # Collection class to be used, allowing custom methods for the collections
     collection: 'Grav\Common\Flex\Types\Generic\GenericCollection'
     # Index class to be used, works as a quick database-like lookup index
     index: 'Grav\Common\Flex\Types\Generic\GenericIndex'
     storage:
       # Storage class, use single file storage (does not support images and assets)
-      class: 'Grav\Framework\Flex\Storage\SimpleStorage'
+      class: 'Grav\Framework\Flex\Storage\FolderStorage'
       options:
         formatter:
           # File formatter class, in this case the file is stored in markdown
           class: 'Grav\Framework\File\Formatter\JsonFormatter'
         # JSON file where all the objects will be stored
-        folder: user-data://flex-objects/locations.json
+        folder: user-data://locations
     search:
       # Search options
       options:
@@ -113,15 +113,28 @@ config:
       fields:
         - published
         - name
+        - slug
         - country_code
-        - region
         - city
+        - features
         - tags
 
 form:
   validation: loose
 
   fields:
+    images:
+      type: file
+      label: Images
+      multiple: true
+      destination: 'self@'
+      random_name: false
+      avoid_overwriting: true
+      filesize: 3
+      limit: 10
+      accept:
+        - image/*
+
     published:
       type: toggle
       label: Published
@@ -140,11 +153,39 @@ form:
       validate:
         required: true
 
+    address_line_1:
+      type: text
+      label: Address Line 1
+
+    address_line_2:
+      type: text
+      label: Address Line 2
+
     city:
       type: select
       size: long
       label: City
       data-options@: '\Grav\Plugin\GravelPlugin::getFlexCities'
+
+    description:
+      type: textarea
+      label: Description
+      minlength: 0
+      maxlength: 500
+
+    city_state:
+
+    tel:
+      type: tel
+      label: Phone
+    
+    email:
+      type: email
+      label: Email
+
+    website:
+      type: url
+      label: Website
 
     lat:
       type: text
@@ -158,10 +199,76 @@ form:
       validate:
         required: true
 
+    features_description:
+      type: textarea
+      label: Features Description
+
+    features:
+      type: selectize
+      selectize:
+        options:
+          - text: "Vegan Food"
+            value: "Vegan Food"
+          - text: "Wi-Fi"
+            value: "Wi-Fi"
+          - text: "Vegan Food"
+            value: "Vegan Food"
+          - text: "Natural Light"
+            value: "Natural Light"
+          - text: "Public Restrooms"
+            value: "Public Restrooms"
+          - text: "Fast Service"
+            value: "Fast Service"
+          - text: "Outdoor Seating"
+            value: "Outdoor Seating"
+          - text: "Power Outlets"
+            value: "Power Outlets"
+          - text: "Spacious Interior"
+            value: "Spacious Interior"
+          - text: "Art Focused"
+            value: "Art Focused"
+          - text: "Nice Music"
+            value: "Nice Music"
+          - text: "Fair Pricing"
+            value: "Fair Pricing"
+          - text: "Cool Neighborhood"
+            value: "Cool Neighborhood"
+          - text: "Open Late"
+            value: "Open Late"
+      size: long
+      label: Features
+      classes: fancy
+      help: 'Add features separated by commas.'
+      validate:
+        type: commalist
+
     tags:
       type: selectize
       size: long
       label: Tags
       classes: fancy
+      help: 'Tags used for internal use only.'
       validate:
         type: commalist
+
+    test:
+      type: spacer
+      title: Ratings
+      underline: false
+
+    rating_overall:
+      type: select
+      size: long
+      classes: fancy
+      label: Overall Rating
+      options:
+          1: '.5 Stars'
+          2: '1 Star'
+          3: '1.5 Stars'
+          4: '2 Stars'
+          5: '2.5 Stars'
+          6: '3 Stars'
+          7: '3.5 Stars'
+          8: '4 Stars'
+          9: '4.5 Stars'
+          10: '5 Stars'

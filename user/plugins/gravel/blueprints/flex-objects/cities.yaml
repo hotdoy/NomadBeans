@@ -38,11 +38,12 @@ config:
         published:
           field:
             type: toggle
-            label: Published
+            label: Pub
           width: 8
         name:
           link: edit
         ascii_name:
+        slug:
         country:
           link: edit
           width: 6
@@ -94,20 +95,20 @@ config:
   # Data Configuration
   data:
     # Object class to be used, allowing custom methods for the object
-    object: 'Grav\Common\Flex\Types\Generic\GenericObject'
+    object: 'Grav\Plugin\Gravel\Flex\Types\Cities\CitiesObject'
     # Collection class to be used, allowing custom methods for the collections
     collection: 'Grav\Common\Flex\Types\Generic\GenericCollection'
     # Index class to be used, works as a quick database-like lookup index
     index: 'Grav\Common\Flex\Types\Generic\GenericIndex'
     storage:
       # Storage class, use single file storage (does not support images and assets)
-      class: 'Grav\Framework\Flex\Storage\SimpleStorage'
+      class: 'Grav\Framework\Flex\Storage\FolderStorage'
       options:
         formatter:
           # File formatter class, in this case the file is stored in markdown
           class: 'Grav\Framework\File\Formatter\JsonFormatter'
         # JSON file where all the objects will be stored
-        folder: user-data://flex-objects/cities.json
+        folder: user-data://cities
     search:
       # Search options
       options:
@@ -118,6 +119,7 @@ config:
         - country
         - name
         - ascii_name
+        - slug
         - lat
         - lng
         - tags

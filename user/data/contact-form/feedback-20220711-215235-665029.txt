@@ -1,0 +1,9 @@
+Name: James
+Email: james.auble@gmail.com
+Message (Optional): I&#039;m a message.
+I am working for or are affiliated with this cafe.: 1
+Images: {&quot;user\/pages\/06.submit\/nathan-dumlao-6VhPY27jdps-unsplash.jpeg&quot;:{&quot;name&quot;:&quot;nathan-dumlao-6VhPY27jdps-unsplash.jpeg&quot;,&quot;full_path&quot;:&quot;nathan-dumlao-6VhPY27jdps-unsplash.jpeg&quot;,&quot;type&quot;:&quot;image\/jpeg&quot;,&quot;size&quot;:2549469,&quot;path&quot;:&quot;user\/pages\/06.submit\/nathan-dumlao-6VhPY27jdps-unsplash.jpeg&quot;}}
+City: us-san-francisco
+Latitude: 23.2323
+Longitude: 24.23423432
+

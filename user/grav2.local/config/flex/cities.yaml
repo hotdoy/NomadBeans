@@ -1,0 +1,8 @@
+object:
+  cache:
+    index:
+      enabled: false
+    object:
+      enabled: false
+    render:
+      enabled: false

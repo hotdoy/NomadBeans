@@ -1,6 +1,6 @@
 ---
 title: Locations
 flex:
-    directory: location
+    directory: locations
 ---
 

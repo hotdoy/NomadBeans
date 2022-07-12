@@ -16,5 +16,5 @@ files:
 recaptcha:
     version: 2-checkbox
     theme: light
-    site_key:
-    secret_key:
+    site_key: 6Le0090gAAAAAD71HHohhG1R-CGGkB5RJ2wn8UoL
+    secret_key: 6Le0090gAAAAAKKVSWS4dZuiU5cPngSbxzaxMZkX
