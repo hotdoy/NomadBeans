@@ -1,32 +1,46 @@
-{% set body_classes_slot = "bg-white font-sans leading-normal tracking-normal" %}
+{% set body_classes_slot = "template-submit" %}
 {% extends 'partials/base.html.twig' %}
 
 {% block hero %}
 	<div class="flex items-center py-20 px-4 bg-center relative min-h-[16rem] sm:min-h-[20rem] lg:min-h-[24rem] bg-cover" style="background-image: url({{ page.media.images|first.url }});">
 		<div class="hero-overlay absolute pin bg-gradient-to-b from-black/18 to-black/18"></div>
 		<div class="text-center text-base-100 flex flex-col justify-center relative z-10 mx-auto container">
-      <h1 class="text-3xl sm:text-5xl font-bold sm:leading-[3.5rem] px-4">Submit a Cafe</h1>
+			<h1 class="text-3xl sm:text-5xl font-bold sm:leading-[3.5rem] px-4">Submit a Cafe</h1>
 		</div>
 	</div>
 {% endblock %}
 
 {% block content %}
-  <div class="container mx-auto my-8">
-    <div class="px-4">
-      <div class="alert shadow-lg mb-8 sm:mb-12">
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info flex-shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          <span>Submissions are carefully reviewed by humans and often take several days before being published.</span>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="container mx-auto my-8 max-w-xl">
+		<div class="px-4">
+			<div class="alert shadow-lg mb-8 sm:mb-12 pr-8">
+				<div>
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" class="stroke-info flex-shrink-0 w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+					</svg>
+					<span>Submissions are carefully reviewed by humans and often take several days before being published.</span>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="container mx-auto mb-12 sm:mt-12">
-    <div class="px-4">
+	<div class="container mx-auto mb-12 sm:mt-12 max-w-xl">
+		<div class="px-4">
 
-      {{ page.content|raw }}
-      {% include "forms/form.html.twig" %}
-    </div>
-  </div>
+			{{ page.content|raw }}
+			{% include "forms/form.html.twig" %}
+
+		</div>
+	</div>
+
+	{% set alpine %}
+	document.addEventListener('alpine:init', () => {
+	    Alpine.data('textComponent', () => ({
+        init() {
+          console.log('text component initialized')
+        }
+	    }))
+	  })
+	{% endset %}
+	{% do assets.addInlineJs(alpine, {id: 'alpine-text-component', group: 'bottom'}) %}
 {% endblock %}

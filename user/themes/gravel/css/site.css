@@ -12,6 +12,9 @@
   h3 {
     @apply text-2xl font-bold;
   }
+  #submit-form .buttons {
+    @apply flex justify-center;
+  }
 }
 
 @tailwind components;
@@ -30,3 +33,4 @@
     @apply left-0 right-0;
   }
 }
+

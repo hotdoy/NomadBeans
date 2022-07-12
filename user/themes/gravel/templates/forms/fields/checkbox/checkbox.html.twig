@@ -5,7 +5,7 @@
 
 {% block input %}
     {% set id = field.id|default(field.name)|hyphenize %}
-    <div class="{{ form_field_wrapper_classes ?: 'form-input-wrapper' }} {{ field.size }} {{ field.wrapper_classes }} form-control max-w-md flex flex-col justify-center h-12">
+    <div class="{{ form_field_wrapper_classes ?: 'form-input-wrapper' }} {{ field.size }} {{ field.wrapper_classes }} form-control flex flex-col justify-center h-12">
       
         <label class="label cursor-pointer" for="{{ id|e }}">
 

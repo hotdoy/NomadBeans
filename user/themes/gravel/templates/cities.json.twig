@@ -1,0 +1,13 @@
+{% set flex = grav.get('flex_objects') %}
+{% set directory = flex.directory('cities') %}  
+{% set collection = directory.getCollection() %}
+
+{% set country_code = uri.param('country_code') %}
+
+{% if country_code %}
+  {% set collection = collection.filterBy({'country': country_code}) %}
+{% endif %}
+
+{% spaceless %}
+  {{ collection|json_encode|raw }}
+{% endspaceless %}
