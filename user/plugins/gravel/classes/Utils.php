@@ -256,6 +256,19 @@ class Utils {
     'ZW' => 'Zimbabwe'
   );
 
+  public static $amenities_list = array(
+    'vegan-food' => 'Vegan Food',
+    'natural-light' => 'Natural LIght',
+    'public-restrooms' => 'Public Restrooms',
+    'fast-service' => 'Fast Service',
+    'outdoor-seating' => 'Outdoor Seating',
+    'power-outlets' => 'Power Outlets',
+    'spacious-interior' => 'Spacious Interior',
+    'artistic-decorations' => 'Artistic Decorations',
+    'nice-music' => 'Nice Music',
+    'open-late' => 'Open Late' 
+  );
+
   /**
    * This method creates a slug from the id and the name of a property.
    *
@@ -294,7 +307,19 @@ class Utils {
   }
 
   public static function getCountries() {
-
     return Self::$country_list;
+  }
+
+  public static function getAmenitiesForSelectize() {
+    $formatted_list = array();
+
+    foreach(Self::$amenities_list as $key => $value) {
+      array_push($formatted_list, [
+        'text' => $value,
+        'value' => $key
+      ]);
+    }
+
+    return $formatted_list;
   }
 }

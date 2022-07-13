@@ -8,6 +8,7 @@ use Grav\Common\Plugin;
 use Grav\Common\Grav;
 use Grav\Common\Uri;
 use Grav\Common\Utils;
+use Grav\Plugin\Gravel\Utils as GravelUtils;
 
 /**
  * Class GravelPlugin
@@ -93,7 +94,8 @@ class GravelPlugin extends Plugin {
         // Uncomment following line when plugin requires Grav < 1.7
         // ['autoload', 100000],
         ['onPluginsInitialized', 0]
-      ]
+      ],
+      'onTwigSiteVariables' => ['onTwigSiteVariables', 0]
     ];
   }
 
@@ -120,8 +122,7 @@ class GravelPlugin extends Plugin {
     }
 
     // Enable the main events we are interested in
-    $this->enable([
-    ]);
+    $this->enable([]);
 
     $this->router();
   }
@@ -139,5 +140,11 @@ class GravelPlugin extends Plugin {
     $paths          = $event['paths'];
     $paths[]        = __DIR__ . '/admin/templates';
     $event['paths'] = $paths;
+  }
+
+  public function onTwigSiteVariables() {
+    $twig = $this->grav['twig'];
+
+    $twig->twig_vars['gravel_utils'] = new GravelUtils;
   }
 }

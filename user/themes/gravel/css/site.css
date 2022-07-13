@@ -13,7 +13,15 @@
     @apply text-2xl font-bold;
   }
   #submit-form .buttons {
-    @apply flex justify-center;
+    @apply flex justify-between;
+  }
+
+  #submit-form h2 {
+    @apply text-3xl sm:text-4xl;
+  }
+
+  #submit-form .msa-wrapper label {
+    @apply label;
   }
 }
 

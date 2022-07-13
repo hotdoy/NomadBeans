@@ -17,7 +17,7 @@
           <option value="{{ city.slug }}">{{ city.name }}</option>
         {% endfor %}
       {% else %}
-          <option value="" selected>No cities found for this country.</option>
+          <option value="" disabled selected>No cities found for this country.</option>
       {% endif %}
     </div>
   {% endset %}

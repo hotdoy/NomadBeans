@@ -51,6 +51,28 @@ form:
       title: "Cafe Details"
       title_level: h2
       classes: "mb-4 mt-8"
+    cafe_name:
+      type: text
+      id: cafe-name
+      label: Cafe Name
+      label_classes: label
+      label_element_classes: label-text
+      outerclasses: "mb-4 form-control w-full"
+      classes: "input input-bordered w-full"
+      validate:
+        required: true
+    cafe_description:
+      type: textarea
+      id: cafe-description
+      label: "Cafe Description"
+      label_element_classes: label-text
+      placeholder: "Enter a description (Max 500 characters)"
+      classes: "textarea textarea-bordered h-24 w-full"
+      outerclasses: " form-control mb-4"
+      label_classes: label
+      maxlength: 500
+      validate:
+        required: true
     cafe_images:
       type: file
       id: cafe-images
@@ -72,6 +94,7 @@ form:
     cafe_country:
       type: select
       id: cafe-country
+      default: US
       label: Country
       label_classes: label
       label_element_classes: label-text
@@ -93,7 +116,7 @@ form:
     cafe_lat:
       type: text
       id: cafe-lat
-      label: Latitude
+      label: Cafe Latitude
       label_classes: label
       label_element_classes: label-text
       classes: "input input-bordered w-full"
@@ -101,11 +124,92 @@ form:
     cafe_lng:
       type: text
       id: cafe-lng
-      label: Longitude
+      label: Cafe Longitude
       label_classes: label
       label_element_classes: label-text
       classes: "input input-bordered w-full"
       outerclasses: "mb-4 form-control w-full"
+    cafe_rating_coffee:
+      type: range
+      id: 'cafe-rating-coffee'
+      label: 'How is the coffee?'
+      label_classes: label
+      label_element_classes: label-text
+      classes: 'range range-primary'
+      outerclasses: "mb-4 form-control w-full"
+      validate:
+        min: 0
+        max: 10
+    cafe_rating_wifi:
+      type: range
+      id: 'cafe-rating-coffee'
+      label: 'How is the Wi-Fi?'
+      label_classes: label
+      label_element_classes: label-text
+      classes: 'range range-primary'
+      outerclasses: "mb-4 form-control w-full"
+      validate:
+        min: 0
+        max: 10
+    cafe_rating_price:
+      type: range
+      id: 'cafe-rating-coffee'
+      label: 'How is the price?'
+      label_classes: label
+      label_element_classes: label-text
+      classes: 'range range-primary'
+      outerclasses: "mb-4 form-control w-full"
+      validate:
+        min: 0
+        max: 10
+    cafe_rating_seating:
+      type: range
+      id: 'cafe-rating-coffee'
+      label: 'How is the seating?'
+      label_classes: label
+      label_element_classes: label-text
+      classes: 'range range-primary'
+      outerclasses: "mb-4 form-control w-full"
+      validate:
+        min: 0
+        max: 10
+    cafe_rating_food:
+      type: range
+      id: 'cafe-rating-coffee'
+      label: 'How is the food?'
+      label_classes: label
+      label_element_classes: label-text
+      classes: 'range range-primary'
+      outerclasses: "mb-4 form-control w-full"
+      validate:
+        min: 0
+        max: 10
+    cafe_rating_location:
+      type: range
+      id: 'cafe-rating-coffee'
+      label: 'How is the location?'
+      label_classes: label
+      label_element_classes: label-text
+      classes: 'range range-primary'
+      outerclasses: "mb-4 form-control w-full"
+      validate:
+        min: 0
+        max: 10
+
+    cafe_amenities:
+      type: text
+      label: Features
+      id: 'cafe-amenities'
+      label: 'Amenities'
+      display_label: false
+      outerclasses: 'form-control'
+
+      size: large
+      label: PLUGIN_ADMIN.TAXONOMY_TYPES
+      classes: fancy
+      help: PLUGIN_ADMIN.TAXONOMY_TYPES_HELP
+      validate:
+          type: commalist
     g-recaptcha-response:
       label: Captcha
       type: captcha

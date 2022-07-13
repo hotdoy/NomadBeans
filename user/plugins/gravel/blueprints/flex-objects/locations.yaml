@@ -199,44 +199,16 @@ form:
       validate:
         required: true
 
-    features_description:
+    amenities_description:
       type: textarea
-      label: Features Description
+      label: Amenities Description
 
-    features:
+    amenities:
       type: selectize
+      label: Amenities
       selectize:
-        options:
-          - text: "Vegan Food"
-            value: "Vegan Food"
-          - text: "Wi-Fi"
-            value: "Wi-Fi"
-          - text: "Vegan Food"
-            value: "Vegan Food"
-          - text: "Natural Light"
-            value: "Natural Light"
-          - text: "Public Restrooms"
-            value: "Public Restrooms"
-          - text: "Fast Service"
-            value: "Fast Service"
-          - text: "Outdoor Seating"
-            value: "Outdoor Seating"
-          - text: "Power Outlets"
-            value: "Power Outlets"
-          - text: "Spacious Interior"
-            value: "Spacious Interior"
-          - text: "Art Focused"
-            value: "Art Focused"
-          - text: "Nice Music"
-            value: "Nice Music"
-          - text: "Fair Pricing"
-            value: "Fair Pricing"
-          - text: "Cool Neighborhood"
-            value: "Cool Neighborhood"
-          - text: "Open Late"
-            value: "Open Late"
+        data-options@: '\Grav\Plugin\Gravel\Utils::getAmenitiesForSelectize'
       size: long
-      label: Features
       classes: fancy
       help: 'Add features separated by commas.'
       validate:

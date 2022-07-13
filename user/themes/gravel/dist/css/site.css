@@ -551,7 +551,37 @@ h3 {
 
 #submit-form .buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+#submit-form h2 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+@media (min-width: 640px) {
+  #submit-form h2 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+#submit-form .msa-wrapper label {
+  display: flex;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+       user-select: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+#submit-form .msa-wrapper label a:hover {
+  --tw-text-opacity: 1;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
 }
 
 *, ::before, ::after {
@@ -3059,6 +3089,10 @@ body[dir="rtl"] .checkbox:checked,
   box-shadow: 0 0 0 3px hsl(var(--range-shdw)) inset, var(--focus-shadow, 0 0), calc(var(--filler-size) * -1 - var(--filler-offset)) 0 0 var(--filler-size);
 }
 
+.range-primary {
+  --range-shdw: var(--p);
+}
+
 .rating input {
   -moz-appearance: none;
        appearance: none;
@@ -4045,6 +4079,10 @@ body[dir="rtl"] .checkbox:checked,
   table-layout: fixed;
 }
 
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -4067,6 +4105,10 @@ body[dir="rtl"] .checkbox:checked,
 
 .flex-col-reverse {
   flex-direction: column-reverse;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 .items-start {
@@ -4160,6 +4202,10 @@ body[dir="rtl"] .checkbox:checked,
 }
 
 .border-\[1px\] {
+  border-width: 1px;
+}
+
+.border {
   border-width: 1px;
 }
 
@@ -4428,6 +4474,11 @@ body[dir="rtl"] .checkbox:checked,
   line-height: 1.25rem;
 }
 
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -4532,6 +4583,14 @@ body[dir="rtl"] .checkbox:checked,
 
 .transition-transform {
   transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition {
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }

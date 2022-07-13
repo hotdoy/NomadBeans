@@ -1,0 +1,19 @@
+form: submit-form
+unique_id: gm7upfjqsysvbkt268au
+url: 'https://grav2.local/submit'
+user: null
+timestamps:
+  created: 1657675556
+  updated: 1657675556
+data: null
+files:
+  cafe_images:
+    'roman-bozhko-OXXsAafHDeo-unsplash Large.jpeg':
+      name: 'roman-bozhko-OXXsAafHDeo-unsplash Large.jpeg'
+      full_path: 'roman-bozhko-OXXsAafHDeo-unsplash Large.jpeg'
+      type: image/jpeg
+      tmp_name: phpsTT3FT
+      size: 293462
+      path: 'user/pages/06.submit/roman-bozhko-OXXsAafHDeo-unsplash Large.jpeg'
+  cafe_images/original:
+    'roman-bozhko-OXXsAafHDeo-unsplash Large.jpeg': null

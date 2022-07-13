@@ -33,24 +33,78 @@
 		</div>
 	</div>
 
+   <script>
+    console.log('{{ gravel_utils.getAmenitiesForSelectize()|json_encode|raw }}')
+  </script>
+
 	{% set alpine %}
 	document.addEventListener('alpine:init', () => {
+      Alpine.data('multiselectComponent', () => ({
+        listActive: false,
+        selectedString: '',
+        selected: [],
+        unselected: {{ gravel_utils.getAmenitiesForSelectize()|json_encode|raw }},
+        init() {
+          this.$watch('selected', (value) => {
+            const values = []
+
+            value.forEach((selectedObj) => {
+              values.push(selectedObj.value)
+            })
+
+            this.selectedString = values.join(' ')
+          })
+        },
+        addMe(e) {
+          const index = e.target.dataset.index;
+          const extracted = this.unselected.splice(index, 1);
+          this.selected.push(extracted[0]);
+        },
+        removeMe(e) {
+          const index = e.target.dataset.index;
+          const extracted = this.selected.splice(index, 1);
+          this.unselected.push(extracted[0]);
+        }
+      }))
+
 	    Alpine.data('submitFormComponent', () => ({
         countrySelect: null,
         citySelect: null,
+        amenitiesInput: null,
         init() {
           this.citySelect = this.$el.querySelector('#cafe-city')
           this.countrySelect = this.$el.querySelector('#cafe-country')
+          this.amenitiesInput = this.$el.querySelector('#cafe-amenities')
 
           this.attachListeners()
+          this.replaceCityOptions('US')
+          this.appendRangeMarkers()
+          this.swapAmenitiesInput()
         },
         attachListeners() {
-          this.countrySelect.addEventListener('change', this.countryChangeHandler)
+          this.countrySelect.addEventListener('change', this.countryChangeHandler.bind(this))
         },
-        countryChangeHandler(event) {
-          const parser = new DOMParser();
-          const cc = event.target.value
-
+        appendRangeMarkers() {
+          const ranges = document.querySelectorAll('.range')
+          const markup = `<div class="w-full flex justify-between text-xs px-2">
+                            <span>0</span>
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                            <span>6</span>
+                            <span>7</span>
+                            <span>8</span>
+                            <span>9</span>
+                            <span>10</span>
+                          </div>`
+          ranges.forEach((range) => {
+            const parentEl = range.parentElement
+            parentEl.innerHTML = parentEl.innerHTML + markup
+          })
+        },
+        replaceCityOptions(cc) {
           fetch(`/cities.json/country_code:${cc}/as_options:true`)
             .then((response) => {
                 return response.text();
@@ -62,9 +116,168 @@
 
                 if (srcOptions && citySelect) citySelect.innerHTML = srcOptions.innerHTML;
             });
+        },
+        countryChangeHandler(event) {
+          const parser = new DOMParser();
+          const cc = event.target.value
+
+          this.replaceCityOptions(cc)
+        },
+        swapAmenitiesInput() {
+          const amenitiesInputParentEl = this.amenitiesInput.parentElement
+
+          const amenitiesMultiselectMarkup = `<div class="msa-wrapper w-full" x-data="multiselectComponent()">
+                                              <label for="msa-input label">
+                                                <span class="label-text">Choose which amenities apply:</span>
+                                              </label>
+                                              <input 
+                                                    x-model="selectedString" 
+                                                    type="text" id="msa-input" 
+                                                    aria-hidden="true" 
+                                                    x-bind:aria-expanded="listActive.toString()" 
+                                                    aria-haspopup="tag-list"
+                                                    hidden>
+                                              <div class="input-presentation" @click="listActive = !listActive" @click.away="listActive = false" x-bind:class="{'active': listActive}">
+                                                <span class="placeholder" x-show="selected.length == 0">Select Amenities</span>
+                                                <template x-for="(tag, index, collection) in selected">
+                                                  <div class="tag-badge">
+                                                    <span x-bind:value="tag.value" x-text="tag.text"></span>
+                                                    <button role="button" x-bind:data-index="index" @click.prevent.stop="removeMe($event)">x</button>
+                                                  </div>
+                                                </template>
+                                              </div>
+                                              <ul class="tag-list-unselected" id="tag-list" x-show.transition="listActive" role="listbox">
+                                                <template x-for="(tag, index, collection) in unselected">
+                                                  <li x-show="!selected.includes(tag)" 
+                                                      x-bind:value="tag.value" 
+                                                      x-text="tag.text" 
+                                                      aria-role="button" 
+                                                      @click.stop="addMe($event)" 
+                                                      x-bind:data-index="index"
+                                                      role="option"
+                                                  ></li>
+                                                </template>
+                                              </ul>
+                                            </div>`
+
+         amenitiesInputParentEl.innerHTML = amenitiesMultiselectMarkup
         }
 	    }))
 	  })
 	{% endset %}
 	{% do assets.addInlineJs(alpine, {id: 'alpine-text-component', group: 'bottom'}) %}
+  {% set inlineCss %}
+    [hidden] {
+      display: none !important;
+    }
+    .msa-wrapper {
+      position: relative;
+    }
+    .msa-wrapper:focus-within .input-presentation {
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .msa-wrapper > * {
+      display: block;
+      width: 100%;
+    }
+    .msa-wrapper .input-presentation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      min-height: 48px;
+      padding: 6px 40px 6px 12px;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      font-size: 1rem;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+    }
+    .msa-wrapper .input-presentation .placeholder {
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.6);
+    }
+    .msa-wrapper .input-presentation:after {
+      content: "";
+      border-top: 6px solid black;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      right: 14px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      transition: transform .3s;
+    }
+    .msa-wrapper .input-presentation.active:after {
+      transform: translateY(-50%) rotate(180deg);
+      transition: transform .3s;
+    }
+    .msa-wrapper .input-presentation.active {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .msa-wrapper .input-presentation .tag-badge {
+      display: flex;
+      align-items: center;
+      background-color: hsl(var(--p));
+      padding-left: 14px;
+      padding-right: 28px;
+      color: white;
+      border-radius: 14px;
+      position: relative;
+      height: 32px;
+    }
+    .msa-wrapper .input-presentation .tag-badge span {
+      font-size: 16px;
+      line-height: 27px;
+    }
+    .msa-wrapper .input-presentation .tag-badge button {
+      display: inline-block;
+      padding: 0;
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 12px;
+      position: absolute;
+      right: 0px;
+      padding-right: 10px;
+      padding-left: 5px;
+      cursor: pointer;
+      line-height: 32px;
+      height: 32px;
+      font-weight: 600;
+    }
+    .msa-wrapper .input-presentation .tag-badge button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+    .msa-wrapper .tag-list-unselected {
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      font-size: 1rem;
+      margin: 0;
+      padding: 0;
+      border-top: none;
+      list-style: none;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+      position: absolute;
+      z-index: 10;
+      background: white;
+    }
+    .msa-wrapper ul li {
+      padding: 6px 12px;
+      text-transform: capitalize;
+      cursor: pointer;
+    }
+    .msa-wrapper ul li:hover {
+      background: hsl(var(--p));
+      color: white;
+    }
+  {% endset %}
+
+  {% do assets.addInlineCss(inlineCss) %}
 {% endblock %}
