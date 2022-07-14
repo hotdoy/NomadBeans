@@ -1,0 +1,10 @@
+state: enabled
+email: hello@jamesauble.com
+fullname: 'James Auble'
+level: Newbie
+groups:
+  - Reviewer
+access:
+  site:
+    login: 'true'
+hashed_password: $2y$10$NauMzHGglSSjyRkmqgREZ.Cx.HTYGqkbB241AiQuCw1Mif8IDs0Y.
