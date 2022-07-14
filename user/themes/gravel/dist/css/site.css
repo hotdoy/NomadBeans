@@ -3654,6 +3654,16 @@ body[dir="rtl"] .checkbox:checked,
   left: initial;
 }
 
+.rating-md input {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.rating-lg input {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
 .rating-half.rating-xs input:not(.rating-hidden) {
   width: 0.375rem;
 }
@@ -4304,6 +4314,11 @@ body[dir="rtl"] .checkbox:checked,
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: hsl(var(--p) / var(--tw-bg-opacity));
+}
+
+.bg-green-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-b {

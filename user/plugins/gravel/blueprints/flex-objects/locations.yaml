@@ -244,3 +244,51 @@ form:
           8: '4 Stars'
           9: '4.5 Stars'
           10: '5 Stars'
+      
+    rating_coffee:
+      type: range
+      label: How is the coffee?
+      default: 5
+      validate:
+        min: 0
+        max: 10
+
+    rating_wifi:
+      type: range
+      label: How is the Wi-Fi?
+      default: 5
+      validate:
+        min: 0
+        max: 10
+
+    rating_price:
+      type: range
+      label: How is the price?
+      default: 5
+      validate:
+        min: 0
+        max: 10
+
+    rating_seating:
+      type: range
+      label: How is the seating?
+      default: 5
+      validate:
+        min: 0
+        max: 10
+
+    rating_food:
+      type: range
+      label: How is the food?
+      default: 5
+      validate:
+        min: 0
+        max: 10
+
+    rating_location:
+      type: range
+      label: How is the location?
+      default: 5
+      validate:
+        min: 0
+        max: 10
