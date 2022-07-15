@@ -23,8 +23,8 @@ rememberme:
   name: grav-rememberme
 max_pw_resets_count: 2
 max_pw_resets_interval: 60
-max_login_count: 5
-max_login_interval: 10
+max_login_count: 20
+max_login_interval: 5
 ipv6_subnet_size: 64
 user_registration:
   enabled: true

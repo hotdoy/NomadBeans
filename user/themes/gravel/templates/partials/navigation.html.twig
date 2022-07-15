@@ -1,4 +1,4 @@
-	<ul class="list-reset flex justify-between flex-1 md:flex-none items-center max-w-min">
+{# <ul class="list-reset flex justify-between flex-1 md:flex-none items-center max-w-min">
 		{% for p in pages.children.published %}
       {% if p.visible %}
         <li class="mr-2">
@@ -9,4 +9,51 @@
         </li> 
       {% endif %}
 		{% endfor %}
-	</ul>
+	</ul> #}
+
+<ul class="menu menu-horizontal p-0 hidden lg:flex font-medium items-center">
+  <li tabindex="0" class="dropdown dropdown-hover dropdown-end">
+    <label tabindex="0" class="">Listings</label>
+    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-primary text-white rounded-box w-52">
+      <li>
+        <a>Item 1</a>
+      </li>
+      <li>
+        <a>Item 2</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/locations/">Locations</a>
+  </li>
+  <li>
+    <a>Blog</a>
+  </li>
+  {% if config.plugins.login.enabled and grav.user.username %}
+    {% if grav.user.authenticated %}
+      <div class="dropdown dropdown-end">
+        <label tabindex="0" class="btn btn-primary btn-sm text-white font-bold leading-[.5rem] focus-within:bg-primary ml-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+        </svg>
+        <span class="ml-2 relative top-[1px]">
+          {{ grav.user.fullname ?: grav.user.username }}
+        </span>
+        </label>
+        <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-primary text-white mt-2 rounded-box min-w-max">
+          <li>
+            <a href="/submit">Submit a Cafe</a>
+          </li>
+          <li class="w-full">
+            <a class="w-full text-center justify-center" class="logout" href="{{ url(uri.addNonce((uri.path)|trim('/') ~ '/task' ~ config.system.param_sep ~ 'login.logout', 'logout-form', 'logout-nonce'))|e }}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    {% endif %}
+
+  {% else %}
+    <li>
+      <a href="/login">Login</a>
+    </li>
+  {% endif %}
+</ul>

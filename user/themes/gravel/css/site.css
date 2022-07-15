@@ -23,6 +23,37 @@
   #submit-form .msa-wrapper label {
     @apply label;
   }
+
+  form[name="comments"] textarea {
+    @apply textarea textarea-bordered w-full;
+  }
+  form[name="comments"] input {
+    @apply input input-bordered w-full;
+  }
+
+  form[name="comments"] .form-label {
+    @apply label;
+  }
+
+  form[name="comments"] label {
+    @apply label-text;
+  }
+
+  form[name="comments"] .buttons {
+    @apply mt-4 flex justify-center;
+  }
+
+  form[name="comments"] button[type="submit"] {
+    @apply btn btn-primary;
+  }
+
+  .template-location .comments h3 {
+    @apply mb-3;
+  }
+
+  .template-location .comments .g-recaptcha {
+    @apply flex justify-center bg-transparent;
+  }
 }
 
 @tailwind components;

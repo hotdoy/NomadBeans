@@ -1,5 +1,5 @@
 version: '1.1'
-timestamp: 1657774764
+timestamp: 1657832724
 count: 3
 index:
   james:
@@ -9,7 +9,7 @@ index:
     email: james.auble@gmail.com
   james0r:
     storage_key: james0r
-    storage_timestamp: 1657774283
+    storage_timestamp: 1657832724
     key: james0r
     email: hello@jamesauble.com
   johndoe:
