@@ -44,7 +44,8 @@ module.exports = {
     require("daisyui"),
     plugin(function ({ addVariant }) {
       addVariant('scrolled', '.scrolled &')
-    })
+    }),
+    require('postcss-import')
   ],
   important: false,
 }

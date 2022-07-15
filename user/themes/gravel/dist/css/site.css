@@ -1,6 +1,6 @@
-/*@import 'yourcssfile.css';*/
-
-/*! tailwindcss v3.1.4 | MIT License | https://tailwindcss.com*/
+/*
+! tailwindcss v3.1.4 | MIT License | https://tailwindcss.com
+*/
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -582,6 +582,10 @@ h3 {
 #submit-form .msa-wrapper label a:hover {
   --tw-text-opacity: 1;
   color: hsl(var(--bc) / var(--tw-text-opacity));
+}
+
+form[name="comments"] {
+  margin-bottom: 1rem;
 }
 
 form[name="comments"] textarea {
