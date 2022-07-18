@@ -20,6 +20,7 @@
 {% endblock %}
 
 {% block hero %}
+
 	{# Location Carousel #}
 	{% set swiper %}
 	const swiper = new Swiper('#location-carousel', {
@@ -252,7 +253,7 @@
 		{% do assets.addInlineJs(map, {id: 'google-map', group: 'bottom'}) %}
 	{% endif %}
 
-	<div class="bg-base-100 lg:bg-gray-50 py-4 lg:py-12">
+	<div class="bg-base-100 lg:bg-gray-50 pt-4 pb-8 lg:py-12">
 		<div class="container mx-auto">
 			<div class="px-4">
 				<div class="flex flex-col-reverse lg:flex-row lg:gap-8 items-start">
@@ -276,7 +277,7 @@
 								{% endfor %}
 							</div>
 						</div>
-            <div class="comments mt-6">
+            <div class="comments mt-8">
               {% include 'partials/comments.html.twig' with {'page': page} %}
             </div>
 					</main>
