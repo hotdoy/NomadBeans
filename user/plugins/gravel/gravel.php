@@ -6,6 +6,7 @@ namespace Grav\Plugin;
 use Composer\Autoload\ClassLoader;
 use Grav\Common\Plugin;
 use Grav\Common\Grav;
+use Grav\Common\Page\Page;
 use Grav\Common\Uri;
 use Grav\Common\Utils;
 use Grav\Plugin\Gravel\Utils as GravelUtils;
@@ -48,6 +49,9 @@ class GravelPlugin extends Plugin {
       return;
     }
 
+    $flex = Grav::instance()->get('flex');
+    $location = $flex->getObject($path, 'locations');
+
     $page = $pages->find('/locations/location');
     if ($page) {
       $page->id($page->modified() . md5($route));
@@ -56,13 +60,16 @@ class GravelPlugin extends Plugin {
       $page->route($route);
       $page->rawRoute($route);
       $page->modifyHeader('object', $path);
+      if ($location) {
+        $page->modifyHeader('title', $location->getProperty('name'));
+      }
       $pages->addPage($page, $route);
     }
   }
 
   public static function getFlexCities(): array {
     $flex       = Grav::instance()['flex'] ?? null;
-    $collection = $flex ? $flex->getCollection('cities') : null; // change this line
+    $collection = $flex ? $flex->getCollection('cities') : null;
 
     if (!$collection) {
       return [];
@@ -116,7 +123,8 @@ class GravelPlugin extends Plugin {
     if ($this->isAdmin()) {
       $this->enable([
         'onAdminTwigTemplatePaths' => ['onAdminTwigTemplatePaths', 11],
-        'onFlexObjectBeforeSave' => ['onFlexObjectBeforeSave', 0]
+        'onFlexObjectBeforeSave' => ['onFlexObjectBeforeSave', 0],
+        'onPageInitialized' => ['onAdminPageInitialized', 0]
       ]);
       return;
     }
@@ -125,9 +133,6 @@ class GravelPlugin extends Plugin {
     $this->enable([]);
 
     $this->router();
-  }
-
-  public function onFlexObjectBeforeSave($event) {
   }
 
   /**
@@ -146,5 +151,12 @@ class GravelPlugin extends Plugin {
     $twig = $this->grav['twig'];
 
     $twig->twig_vars['gravel_utils'] = new GravelUtils;
+  }
+
+  public function onAdminPageInitialized() {
+
+    if (isset($_GET['blahblah'])) {
+      dd($_GET["blahblah"]);
+    }
   }
 }
