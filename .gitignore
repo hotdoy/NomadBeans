@@ -6,6 +6,8 @@ assets/*
 logs/*
 images/*
 backup
+user/data/feed
+user/data/notifications
 
 # OS Generated
 .DS_Store*
