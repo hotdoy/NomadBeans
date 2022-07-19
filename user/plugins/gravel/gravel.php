@@ -116,7 +116,8 @@ class GravelPlugin extends Plugin {
     if ($this->isAdmin()) {
       $this->enable([
         'onAdminTwigTemplatePaths' => ['onAdminTwigTemplatePaths', 11],
-        'onFlexObjectBeforeSave' => ['onFlexObjectBeforeSave', 0]
+        'onFlexObjectBeforeSave' => ['onFlexObjectBeforeSave', 0],
+        'onTask.task:comment.delete' => ['onTaskDeleteComment', 0],
       ]);
       return;
     }
@@ -127,7 +128,8 @@ class GravelPlugin extends Plugin {
     $this->router();
   }
 
-  public function onFlexObjectBeforeSave($event) {
+  public function onTaskDeleteComment($val) {
+    dd($val);
   }
 
   /**
