@@ -1,44 +1,9 @@
-/*@import 'yourcssfile.css';*/
+@import 'tailwindcss/base';
+@import './base.css';
 
-@tailwind base;
+@import 'tailwindcss/components';
+@import './components.css';
 
-@layer base {
-  h1 {
-    @apply text-5xl font-bold;
-  }
-  h2 {
-    @apply text-4xl font-bold;
-  }
-  h3 {
-    @apply text-2xl font-bold;
-  }
-  #submit-form .buttons {
-    @apply flex justify-between;
-  }
-
-  #submit-form h2 {
-    @apply text-3xl sm:text-4xl;
-  }
-
-  #submit-form .msa-wrapper label {
-    @apply label;
-  }
-}
-
-@tailwind components;
-@tailwind utilities;
-
-@layer utilities {
-  .pin {
-    @apply top-0 right-0 bottom-0 left-0;
-  }
-
-  .pin-y {
-    @apply top-0 bottom-0;
-  }
-
-  .pin-x {
-    @apply left-0 right-0;
-  }
-}
+@import 'tailwindcss/utilities';
+@import './utilities.css';
 

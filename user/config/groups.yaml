@@ -1,0 +1,7 @@
+Reviewer:
+  access:
+    site:
+      login: true
+  readableName: Reviewer
+  description: 'Ability to review cafes.'
+  enabled: true

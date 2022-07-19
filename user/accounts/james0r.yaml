@@ -1,0 +1,20 @@
+state: enabled
+email: hello@jamesauble.com
+fullname: 'James Auble'
+level: Newbie
+groups:
+  - Reviewer
+hashed_password: $2y$10$NauMzHGglSSjyRkmqgREZ.Cx.HTYGqkbB241AiQuCw1Mif8IDs0Y.
+language: en
+content_editor: default
+twofa_enabled: false
+twofa_secret: OBTL7KTQPC4M5C3BM7PKM45P4DMHQVXT
+avatar:
+  user/accounts/avatars/6ougkpn0rvgzhec.jpeg:
+    name: 6ougkpn0rvgzhec.jpeg
+    type: image/jpeg
+    size: 127862
+    path: user/accounts/avatars/6ougkpn0rvgzhec.jpeg
+access:
+  site:
+    login: true

@@ -322,4 +322,8 @@ class Utils {
 
     return $formatted_list;
   }
+
+  public static function getAmenityNameByKey($key) {
+    return Self::$amenities_list[$key];
+  }
 }

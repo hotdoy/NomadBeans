@@ -1,0 +1,71 @@
+{% if enable_comments_plugin %}
+    {% set scope = scope ?: 'data.' %}
+
+    <h3>{{'PLUGIN_COMMENTS.ADD_COMMENT'|t}}</h3>
+
+    {# Replace later with grav.user.username #}
+    {% if true %}
+      <div class="{% if form.message %}bg-gray-200 rounded-lg text-black p-4 my-6 flex flex-col items-start{% endif %}">{{ form.message|raw }}</div>
+
+      <form name="{{ grav.config.plugins.comments.form.name }}"
+            action="{{ grav.config.plugins.comments.form.action ?  base_url ~ grav.config.plugins.comments.form.action : page.url }}"
+            method="{{ grav.config.plugins.comments.form.method|upper|default('POST') }}">
+
+          {% for field in grav.config.plugins.comments.form.fields %}
+              {% set value = form.value(field.name) %}
+              {% if field.evaluateDefault %}
+                  {% set value = evaluate(field.evaluateDefault) %}
+              {% endif %}
+              {% if config.plugins.login.enabled and grav.user.authenticated %}
+                  {% if field.name == 'name' %}
+                      <input type="hidden" name="{{ (scope ~ field.name)|fieldName }}" value="{{grav.user.fullname}}">
+                  {% elseif field.name == 'email' %}
+                      <input type="hidden" name="{{ (scope ~ field.name)|fieldName }}" value="{{grav.user.email}}">
+                  {% else %}
+                      <div>
+                          {% include "forms/fields/#{field.type}/#{field.type}.html.twig" %}
+                      </div>
+                  {% endif %}
+              {% else %}
+                  <div>
+                      {% include "forms/fields/#{field.type}/#{field.type}.html.twig" %}
+                  </div>
+              {% endif %}
+          {% endfor %}
+          {% include "forms/fields/formname/formname.html.twig" %}
+
+          <div class="buttons">
+          {% for button in grav.config.plugins.comments.form.buttons %}
+              <button class="button" type="{{ button.type|default('submit') }}">{{ button.value|t|default('Submit') }}</button>
+          {% endfor %}
+          </div>
+
+          {{ nonce_field('form', 'form-nonce')|raw }}
+      </form>
+    {% else %}
+      <div class="buttons mb-6">
+        <a href="/login" class="btn btn-primary">
+          Login
+        </a>
+      </div>
+    {% endif %}
+
+
+    {% if grav.twig.comments|length %}
+
+        <h3>{{'PLUGIN_COMMENTS.COMMENTS'|t}}</h3>
+
+        <div class="w-full">
+            {% for comment in comments|array_reverse %}
+            <div class="card shadow-lg px-6 py-4 bg-primary text-white mb-4">
+              <div class="text-normal">
+                <span class="font-bold text-accent">{{comment.author}} <span class="italic font-normal">says</span>&nbsp;:</span>&nbsp; {{comment.text}}
+              </div>
+              <div class="text-sm pl-8 text-right pt-4 text-accent ">
+                {{'PLUGIN_COMMENTS.WRITTEN_ON'|t}} {{comment.date|e}}
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endif %}
