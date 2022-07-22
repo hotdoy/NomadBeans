@@ -1,0 +1,123 @@
+title: Reported
+description: Reported / Flagged locations.
+type: flex-objects
+
+# Flex Configuration
+config:
+  # Administration Configuration
+  admin:
+    # Admin router (optional)
+    router:
+      path: "/reported"
+
+    # Admin menu (optional)
+    menu:
+      list:
+        route: "/reported"
+        title: Reported
+        icon: fa-flag
+        # Authorization to collection admin
+        authorize: ["admin.reported.list", "admin.super"]
+        # Priority -10 .. 10 (highesgitt goes up)
+        priority: 0
+
+    # Admin template type / folder
+    template: default
+
+    # Permissions
+    permissions:
+      # Primary permissions
+      admin.reported:
+        type: crudpl
+        label: Reported
+
+    # List view
+    list:
+      title: name
+      fields:
+        location:
+        tag:
+
+    # Edit View
+    edit:
+      title:
+        template: "{{ object.location ?? 'Reported Location' }}"
+
+    # Preview View
+    preview:
+      enabled: false
+      route:
+        #template: '/plugins/flex-objects/directory:cities'
+
+    # Data Export
+    export:
+      enabled: true
+      method: "jsonSerialize"
+      formatter:
+        class: 'Grav\Framework\File\Formatter\YamlFormatter'
+      filename: "reported"
+
+  # Site Configuration
+  site:
+    templates:
+      collection:
+        # Lookup for the template layout files for collections of objects
+        paths:
+          - "flex/{TYPE}/collection/{LAYOUT}{EXT}"
+      object:
+        # Lookup for the template layout files for objects
+        paths:
+          - "flex/{TYPE}/object/{LAYOUT}{EXT}"
+      defaults:
+        # Default template {TYPE}; overridden by filename of this blueprint if template folder exists
+        type: reported
+        # Default template {LAYOUT}; can be overridden in render calls (usually Twig in templates)
+        layout: default
+
+  # Data Configuration
+  data:
+    # Object class to be used, allowing custom methods for the object
+    object: 'Grav\Common\Flex\Types\Generic\GenericObject'
+    # Collection class to be used, allowing custom methods for the collections
+    collection: 'Grav\Common\Flex\Types\Generic\GenericCollection'
+    # Index class to be used, works as a quick database-like lookup index
+    index: 'Grav\Common\Flex\Types\Generic\GenericIndex'
+    storage:
+      # Storage class, use single file storage (does not support images and assets)
+      class: 'Grav\Framework\Flex\Storage\FolderStorage'
+      options:
+        formatter:
+          # File formatter class, in this case the file is stored in markdown
+          class: 'Grav\Framework\File\Formatter\JsonFormatter'
+        # JSON file where all the objects will be stored
+        folder: user-data://reported
+    search:
+      # Search options
+      options:
+        contains: 1
+      # Fields to be searched
+      fields:
+        - published
+
+
+form:
+  validation: loose
+
+  fields:
+    location:
+      type: text
+      label: Location
+      validate:
+        required: true
+
+    datetime:
+      type: text
+      label: Datetime
+
+    tags:
+      type: selectize
+      size: long
+      label: Tags
+      classes: fancy
+      validate:
+        type: commalist

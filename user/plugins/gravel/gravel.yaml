@@ -1,2 +1,3 @@
 enabled: true
+active: true
 text_var: Custom Text added by the **Gravel** plugin (disable plugin to remove)

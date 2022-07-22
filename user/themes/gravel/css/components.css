@@ -35,4 +35,50 @@
   .template-location .comments .g-recaptcha {
     @apply flex justify-center bg-transparent;
   }
+
+  /* Login Modal */
+
+  .login-modal input[type="text"] {
+    @apply input input-bordered w-full;
+  }
+
+  .login-modal input[type="password"] {
+    @apply input input-bordered w-full;
+  }
+
+  .login-modal .form-label {
+    @apply label;
+  }
+
+  .login-modal .form-label .inline {
+    @apply label-text;
+  }
+
+  .login-modal .button.primary {
+    @apply btn btn-primary;
+  }
+
+  .login-modal .button.secondary {
+    @apply btn btn-link;
+  }
+
+  .login-modal .form-actions {
+    @apply flex flex-col justify-center;
+  }
+  
+  .login-modal .rememberme {
+    @apply form-control;
+  }
+
+  .login-modal .rememberme input[type="checkbox"] {
+    @apply checkbox checkbox-primary mr-2 my-2;
+  }
+
+  .login-modal .rememberme .form-input-wrapper {
+    @apply label cursor-pointer max-w-max mx-auto;
+  }
+
+  .login-modal .rememberme label {
+    @apply label-text;
+  }
 }

@@ -19,4 +19,8 @@
   #submit-form .msa-wrapper label {
     @apply label;
   }
+
+  [x-cloak] {
+    display: none !important;
+  }
 }

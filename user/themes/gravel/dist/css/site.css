@@ -584,6 +584,10 @@ h3 {
   color: hsl(var(--bc) / var(--tw-text-opacity));
 }
 
+[x-cloak] {
+  display: none !important;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -3739,6 +3743,20 @@ body[dir="rtl"] .checkbox:checked,
   width: 1.25rem;
 }
 
+.alert-info {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--in) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--inc, var(--nc)) / var(--tw-text-opacity));
+}
+
+.alert-success {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--su) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--suc, var(--nc)) / var(--tw-text-opacity));
+}
+
 .avatar.online:before {
   content: "";
   position: absolute;
@@ -4272,6 +4290,747 @@ form[name="comments"] button[type="submit"] {
   background-color: transparent;
 }
 
+/* Login Modal */
+
+.login-modal input[type="text"] {
+  flex-shrink: 1;
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  height: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  line-height: 2;
+  border-width: 1px;
+  border-color: hsl(var(--bc) / var(--tw-border-opacity));
+  --tw-border-opacity: 0;
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--b1) / var(--tw-bg-opacity));
+  border-radius: var(--rounded-btn, 0.5rem);
+}
+
+.login-modal input[type="text"]-group > *,  
+  .login-modal input[type="text"]-group > .input {
+  border-radius: 0px;
+}
+
+.login-modal input[type="text"][list]::-webkit-calendar-picker-indicator {
+  line-height: 1em;
+}
+
+.login-modal input[type="text"] {
+  --tw-border-opacity: 0.2;
+}
+
+.login-modal input[type="text"]:focus {
+  outline: 2px solid hsla(var(--bc) / 0.2);
+  outline-offset: 2px;
+}
+
+.login-modal input[type="text"]-disabled,  
+  .login-modal input[type="text"][disabled] {
+  cursor: not-allowed;
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--b2, var(--b1)) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--b2, var(--b1)) / var(--tw-bg-opacity));
+  --tw-text-opacity: 0.2;
+}
+
+.login-modal input[type="text"]-disabled::-moz-placeholder, .login-modal input[type="text"][disabled]::-moz-placeholder {
+  color: hsl(var(--bc) / var(--tw-placeholder-opacity));
+  --tw-placeholder-opacity: 0.2;
+}
+
+.login-modal input[type="text"]-disabled::placeholder,  
+  .login-modal input[type="text"][disabled]::placeholder {
+  color: hsl(var(--bc) / var(--tw-placeholder-opacity));
+  --tw-placeholder-opacity: 0.2;
+}
+
+.login-modal input[type="text"] {
+  width: 100%;
+}
+
+.login-modal input[type="password"] {
+  flex-shrink: 1;
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  height: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  line-height: 2;
+  border-width: 1px;
+  border-color: hsl(var(--bc) / var(--tw-border-opacity));
+  --tw-border-opacity: 0;
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--b1) / var(--tw-bg-opacity));
+  border-radius: var(--rounded-btn, 0.5rem);
+}
+
+.login-modal input[type="password"]-group > *,  
+  .login-modal input[type="password"]-group > .input {
+  border-radius: 0px;
+}
+
+.login-modal input[type="password"][list]::-webkit-calendar-picker-indicator {
+  line-height: 1em;
+}
+
+.login-modal input[type="password"] {
+  --tw-border-opacity: 0.2;
+}
+
+.login-modal input[type="password"]:focus {
+  outline: 2px solid hsla(var(--bc) / 0.2);
+  outline-offset: 2px;
+}
+
+.login-modal input[type="password"]-disabled,  
+  .login-modal input[type="password"][disabled] {
+  cursor: not-allowed;
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--b2, var(--b1)) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--b2, var(--b1)) / var(--tw-bg-opacity));
+  --tw-text-opacity: 0.2;
+}
+
+.login-modal input[type="password"]-disabled::-moz-placeholder, .login-modal input[type="password"][disabled]::-moz-placeholder {
+  color: hsl(var(--bc) / var(--tw-placeholder-opacity));
+  --tw-placeholder-opacity: 0.2;
+}
+
+.login-modal input[type="password"]-disabled::placeholder,  
+  .login-modal input[type="password"][disabled]::placeholder {
+  color: hsl(var(--bc) / var(--tw-placeholder-opacity));
+  --tw-placeholder-opacity: 0.2;
+}
+
+.login-modal input[type="password"] {
+  width: 100%;
+}
+
+.login-modal .form-label {
+  display: flex;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+       user-select: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.login-modal .form-label a:hover {
+  --tw-text-opacity: 1;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+}
+
+.login-modal .form-label .inline {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+}
+
+.login-modal .button.primary {
+  display: inline-flex;
+  flex-shrink: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+       user-select: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  border-color: transparent;
+  border-color: hsl(var(--n) / var(--tw-border-opacity));
+  text-align: center;
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--rounded-btn, 0.5rem);
+  height: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  line-height: 1em;
+  min-height: 3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-transform: var(--btn-text-case, uppercase);
+  -webkit-text-decoration-line: none;
+  text-decoration-line: none;
+  border-width: var(--border-btn, 1px);
+  -webkit-animation: button-pop var(--animation-btn, 0.25s) ease-out;
+          animation: button-pop var(--animation-btn, 0.25s) ease-out;
+  --tw-border-opacity: 1;
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--n) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--nc) / var(--tw-text-opacity));
+}
+
+.login-modal .button.primary-disabled,  
+  .login-modal .button.primary[disabled] {
+  pointer-events: none;
+}
+
+.login-modal .button.primary.loading,  
+    .login-modal .button.primary.loading:hover {
+  pointer-events: none;
+}
+
+.login-modal .button.primary.loading:before {
+  margin-right: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 9999px;
+  border-width: 2px;
+  -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+  content: "";
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: currentColor;
+  border-right-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-modal .button.primary.loading:before {
+    -webkit-animation: spin 10s linear infinite;
+            animation: spin 10s linear infinite;
+  }
+}
+
+.login-modal .button.primary-group > input[type="radio"].btn {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+.login-modal .button.primary-group > input[type="radio"].btn:before {
+  content: attr(data-title);
+}
+
+.btn-outline.login-modal .button.primary .badge {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--p) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--p) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--pc) / var(--tw-text-opacity));
+}
+
+.btn-outline.login-modal .button.primary .badge-outline {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--p) / var(--tw-border-opacity));
+  background-color: transparent;
+  --tw-text-opacity: 1;
+  color: hsl(var(--p) / var(--tw-text-opacity));
+}
+
+.btn-outline.login-modal .button.primary:hover .badge {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--pc) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--pc) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--p) / var(--tw-text-opacity));
+}
+
+.btn-outline.login-modal .button.primary:hover .badge.outline {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--pc) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--pf, var(--p)) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--pc) / var(--tw-text-opacity));
+}
+
+.login-modal .button.primary:active:hover, 
+  .login-modal .button.primary:active:focus {
+  -webkit-animation: none;
+          animation: none;
+  transform: scale(var(--btn-focus-scale, 0.95));
+}
+
+.login-modal .button.primary:hover,  
+    .login-modal .button.primary-active {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--nf, var(--n)) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--nf, var(--n)) / var(--tw-bg-opacity));
+}
+
+.login-modal .button.primary:focus-visible {
+  outline: 2px solid hsl(var(--nf));
+  outline-offset: 2px;
+}
+
+.login-modal .button.primary {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--p) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--p) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--pc) / var(--tw-text-opacity));
+}
+
+.login-modal .button.primary:hover,  
+    .login-modal .button.primary.btn-active {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--pf, var(--p)) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--pf, var(--p)) / var(--tw-bg-opacity));
+}
+
+.login-modal .button.primary:focus-visible {
+  outline: 2px solid hsl(var(--p));
+}
+
+.login-modal .button.primary.glass:hover, 
+    .login-modal .button.primary.glass.btn-active {
+  --glass-opacity: 25%;
+  --glass-border-opacity: 15%;
+}
+
+.login-modal .button.primary.glass:focus-visible {
+  outline: 2px solid 0 0 2px currentColor;
+}
+
+.btn-outline.login-modal .button.primary {
+  --tw-text-opacity: 1;
+  color: hsl(var(--p) / var(--tw-text-opacity));
+}
+
+.btn-outline.login-modal .button.primary:hover {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--pf, var(--p)) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--pf, var(--p)) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--pc) / var(--tw-text-opacity));
+}
+
+.login-modal .button.primary-disabled,  
+  .login-modal .button.primary-disabled:hover,  
+  .login-modal .button.primary[disabled],  
+  .login-modal .button.primary[disabled]:hover {
+  --tw-border-opacity: 0;
+  background-color: hsl(var(--n) / var(--tw-bg-opacity));
+  --tw-bg-opacity: 0.2;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+  --tw-text-opacity: 0.2;
+}
+
+.login-modal .button.primary.loading.btn-square:before,  
+    .login-modal .button.primary.loading.btn-circle:before {
+  margin-right: 0px;
+}
+
+.login-modal .button.primary.loading.btn-xl:before,  
+    .login-modal .button.primary.loading.btn-lg:before {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.login-modal .button.primary.loading.btn-sm:before,  
+    .login-modal .button.primary.loading.btn-xs:before {
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.login-modal .button.primary-group > input[type="radio"]:checked.btn,  
+  .login-modal .button.primary-group > .btn-active {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--p) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--p) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--pc) / var(--tw-text-opacity));
+}
+
+.login-modal .button.primary-group > input[type="radio"]:checked.btn:focus-visible,  .login-modal .button.primary-group > .btn-active:focus-visible {
+  outline: 2px solid hsl(var(--p));
+}
+
+.login-modal .button.primary-group:not(.btn-group-vertical) > .btn:not(:first-of-type) {
+  margin-left: -1px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.login-modal .button.primary-group:not(.btn-group-vertical) > .btn:not(:last-of-type) {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.login-modal .button.primary-group-vertical > .btn:not(:first-of-type) {
+  margin-top: -1px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.login-modal .button.primary-group-vertical > .btn:not(:last-of-type) {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.login-modal .button.primary {
+  outline: 2px solid hsl(var(--p));
+}
+
+.login-modal .button.secondary {
+  display: inline-flex;
+  flex-shrink: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+       user-select: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  border-color: transparent;
+  border-color: hsl(var(--n) / var(--tw-border-opacity));
+  text-align: center;
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--rounded-btn, 0.5rem);
+  height: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  line-height: 1em;
+  min-height: 3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-transform: var(--btn-text-case, uppercase);
+  -webkit-text-decoration-line: none;
+  text-decoration-line: none;
+  border-width: var(--border-btn, 1px);
+  -webkit-animation: button-pop var(--animation-btn, 0.25s) ease-out;
+          animation: button-pop var(--animation-btn, 0.25s) ease-out;
+  --tw-border-opacity: 1;
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--n) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--nc) / var(--tw-text-opacity));
+}
+
+.login-modal .button.secondary-disabled,  
+  .login-modal .button.secondary[disabled] {
+  pointer-events: none;
+}
+
+.login-modal .button.secondary.loading,  
+    .login-modal .button.secondary.loading:hover {
+  pointer-events: none;
+}
+
+.login-modal .button.secondary.loading:before {
+  margin-right: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 9999px;
+  border-width: 2px;
+  -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+  content: "";
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: currentColor;
+  border-right-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-modal .button.secondary.loading:before {
+    -webkit-animation: spin 10s linear infinite;
+            animation: spin 10s linear infinite;
+  }
+}
+
+.login-modal .button.secondary-group > input[type="radio"].btn {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+.login-modal .button.secondary-group > input[type="radio"].btn:before {
+  content: attr(data-title);
+}
+
+.login-modal .button.secondary:active:hover, 
+  .login-modal .button.secondary:active:focus {
+  -webkit-animation: none;
+          animation: none;
+  transform: scale(var(--btn-focus-scale, 0.95));
+}
+
+.login-modal .button.secondary:hover,  
+    .login-modal .button.secondary-active {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--nf, var(--n)) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--nf, var(--n)) / var(--tw-bg-opacity));
+}
+
+.login-modal .button.secondary:focus-visible {
+  outline: 2px solid hsl(var(--nf));
+  outline-offset: 2px;
+}
+
+.login-modal .button.secondary.glass:hover, 
+    .login-modal .button.secondary.glass.btn-active {
+  --glass-opacity: 25%;
+  --glass-border-opacity: 15%;
+}
+
+.login-modal .button.secondary.glass:focus-visible {
+  outline: 2px solid 0 0 2px currentColor;
+}
+
+.login-modal .button.secondary {
+  border-color: transparent;
+  background-color: transparent;
+  --tw-text-opacity: 1;
+  color: hsl(var(--p) / var(--tw-text-opacity));
+}
+
+.login-modal .button.secondary:hover,  
+    .login-modal .button.secondary.btn-active {
+  border-color: transparent;
+  background-color: transparent;
+  -webkit-text-decoration-line: underline;
+  text-decoration-line: underline;
+}
+
+.login-modal .button.secondary:focus-visible {
+  outline: 2px solid 0 0 2px currentColor;
+}
+
+.login-modal .button.secondary-disabled,  
+  .login-modal .button.secondary-disabled:hover,  
+  .login-modal .button.secondary[disabled],  
+  .login-modal .button.secondary[disabled]:hover {
+  --tw-border-opacity: 0;
+  background-color: hsl(var(--n) / var(--tw-bg-opacity));
+  --tw-bg-opacity: 0.2;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+  --tw-text-opacity: 0.2;
+}
+
+.login-modal .button.secondary.loading.btn-square:before,  
+    .login-modal .button.secondary.loading.btn-circle:before {
+  margin-right: 0px;
+}
+
+.login-modal .button.secondary.loading.btn-xl:before,  
+    .login-modal .button.secondary.loading.btn-lg:before {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.login-modal .button.secondary.loading.btn-sm:before,  
+    .login-modal .button.secondary.loading.btn-xs:before {
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.login-modal .button.secondary-group > input[type="radio"]:checked.btn,  
+  .login-modal .button.secondary-group > .btn-active {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--p) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--p) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--pc) / var(--tw-text-opacity));
+}
+
+.login-modal .button.secondary-group > input[type="radio"]:checked.btn:focus-visible,  .login-modal .button.secondary-group > .btn-active:focus-visible {
+  outline: 2px solid hsl(var(--p));
+}
+
+.login-modal .button.secondary-group:not(.btn-group-vertical) > .btn:not(:first-of-type) {
+  margin-left: -1px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.login-modal .button.secondary-group:not(.btn-group-vertical) > .btn:not(:last-of-type) {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.login-modal .button.secondary-group-vertical > .btn:not(:first-of-type) {
+  margin-top: -1px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.login-modal .button.secondary-group-vertical > .btn:not(:last-of-type) {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.login-modal .button.secondary {
+  outline: 2px solid currentColor;
+}
+
+.login-modal .form-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-modal .rememberme {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-modal .rememberme input[type="checkbox"] {
+  flex-shrink: 0;
+  --chkbg: var(--bc);
+  --chkfg: var(--b1);
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-width: 1px;
+  border-color: hsl(var(--bc) / var(--tw-border-opacity));
+  --tw-border-opacity: 0.2;
+  border-radius: var(--rounded-btn, 0.5rem);
+}
+
+.login-modal .rememberme input[type="checkbox"]:focus-visible {
+  outline: 2px solid hsl(var(--bc));
+  outline-offset: 2px;
+}
+
+.login-modal .rememberme input[type="checkbox"]:checked,  
+  .login-modal .rememberme input[type="checkbox"][checked="true"] {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--bc) / var(--tw-bg-opacity));
+  background-repeat: no-repeat;
+  -webkit-animation: checkmark var(--animation-input, 0.2s) ease-in-out;
+          animation: checkmark var(--animation-input, 0.2s) ease-in-out;
+  background-image: linear-gradient(-45deg, transparent 65%, hsl(var(--chkbg)) 65.99%), linear-gradient(45deg, transparent 75%, hsl(var(--chkbg)) 75.99%), linear-gradient(-45deg, hsl(var(--chkbg)) 40%, transparent 40.99%), linear-gradient(45deg, hsl(var(--chkbg)) 30%, hsl(var(--chkfg)) 30.99%, hsl(var(--chkfg)) 40%, transparent 40.99%), linear-gradient(-45deg, hsl(var(--chkfg)) 50%, hsl(var(--chkbg)) 50.99%);
+}
+
+.login-modal .rememberme input[type="checkbox"]:indeterminate {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--bc) / var(--tw-bg-opacity));
+  background-repeat: no-repeat;
+  -webkit-animation: checkmark var(--animation-input, 0.2s) ease-in-out;
+          animation: checkmark var(--animation-input, 0.2s) ease-in-out;
+  background-image: linear-gradient(90deg, transparent 80%, hsl(var(--chkbg)) 80%), linear-gradient(-90deg, transparent 80%, hsl(var(--chkbg)) 80%), linear-gradient(0deg, hsl(var(--chkbg)) 43%, hsl(var(--chkfg)) 43%, hsl(var(--chkfg)) 57%, hsl(var(--chkbg)) 57%);
+}
+
+.login-modal .rememberme input[type="checkbox"] {
+  --chkbg: var(--p);
+  --chkfg: var(--pc);
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--p) / var(--tw-border-opacity));
+}
+
+.login-modal .rememberme input[type="checkbox"]:hover {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--p) / var(--tw-border-opacity));
+}
+
+.login-modal .rememberme input[type="checkbox"]:focus-visible {
+  outline: 2px solid hsl(var(--p));
+}
+
+.login-modal .rememberme input[type="checkbox"]:checked,  
+    .login-modal .rememberme input[type="checkbox"][checked="true"] {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--p) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--p) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--pc) / var(--tw-text-opacity));
+}
+
+.login-modal .rememberme input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  border-color: transparent;
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--bc) / var(--tw-bg-opacity));
+  opacity: 0.2;
+}
+
+body[dir="rtl"] .login-modal .rememberme input[type="checkbox"] {
+  --chkbg: var(--bc);
+  --chkfg: var(--b1);
+}
+
+body[dir="rtl"] .login-modal .rememberme input[type="checkbox"]:checked, 
+    body[dir="rtl"] .login-modal .rememberme input[type="checkbox"][checked="true"] {
+  background-image: linear-gradient(45deg, transparent 65%, hsl(var(--chkbg)) 65.99%), linear-gradient(-45deg, transparent 75%, hsl(var(--chkbg)) 75.99%), linear-gradient(45deg, hsl(var(--chkbg)) 40%, transparent 40.99%), linear-gradient(-45deg, hsl(var(--chkbg)) 30%, hsl(var(--chkfg)) 30.99%, hsl(var(--chkfg)) 40%, transparent 40.99%), linear-gradient(45deg, hsl(var(--chkfg)) 50%, hsl(var(--chkbg)) 50.99%);
+}
+
+.login-modal .rememberme input[type="checkbox"] {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.login-modal .rememberme .form-input-wrapper {
+  display: flex;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+       user-select: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.login-modal .rememberme .form-input-wrapper a:hover {
+  --tw-text-opacity: 1;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+}
+
+.login-modal .rememberme .form-input-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: -webkit-max-content;
+  max-width: -moz-max-content;
+  max-width: max-content;
+  cursor: pointer;
+}
+
+.login-modal .rememberme label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -4290,6 +5049,10 @@ form[name="comments"] button[type="submit"] {
 
 .visible {
   visibility: visible;
+}
+
+.fixed {
+  position: fixed;
 }
 
 .absolute {
@@ -4325,12 +5088,24 @@ form[name="comments"] button[type="submit"] {
   top: 1px;
 }
 
+.top-4 {
+  top: 1rem;
+}
+
+.right-4 {
+  right: 1rem;
+}
+
 .z-10 {
   z-index: 10;
 }
 
 .z-50 {
   z-index: 50;
+}
+
+.z-40 {
+  z-index: 40;
 }
 
 .mx-auto {
@@ -4478,6 +5253,10 @@ form[name="comments"] button[type="submit"] {
   height: 2rem;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .h-12 {
   height: 3rem;
 }
@@ -4524,6 +5303,10 @@ form[name="comments"] button[type="submit"] {
   width: 20%;
 }
 
+.w-screen {
+  width: 100vw;
+}
+
 .w-52 {
   width: 13rem;
 }
@@ -4554,6 +5337,10 @@ form[name="comments"] button[type="submit"] {
 
 .max-w-xs {
   max-width: 20rem;
+}
+
+.max-w-md {
+  max-width: 28rem;
 }
 
 .max-w-min {
@@ -4781,6 +5568,10 @@ form[name="comments"] button[type="submit"] {
   background-color: hsl(var(--b1) / var(--tw-bg-opacity));
 }
 
+.bg-black\/30 {
+  background-color: rgb(0 0 0 / 0.3);
+}
+
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
@@ -4841,6 +5632,10 @@ form[name="comments"] button[type="submit"] {
   padding: 2.5rem;
 }
 
+.p-12 {
+  padding: 3rem;
+}
+
 .p-0 {
   padding: 0px;
 }
@@ -4883,6 +5678,21 @@ form[name="comments"] button[type="submit"] {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .pt-4 {

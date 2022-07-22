@@ -9,7 +9,10 @@ use Grav\Common\Grav;
 use Grav\Common\Page\Page;
 use Grav\Common\Uri;
 use Grav\Common\Utils;
+use Grav\Framework\Psr7\Response;
 use Grav\Plugin\Gravel\Utils as GravelUtils;
+use RocketTheme\Toolbox\File\File;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class GravelPlugin
@@ -20,6 +23,95 @@ class GravelPlugin extends Plugin {
   public $features = [
     'blueprints' => 1000,
   ];
+
+  /**
+   * @return array
+   *
+   * The getSubscribedEvents() gives the core a list of events
+   *     that the plugin wants to listen to. The key of each
+   *     array section is the event that the plugin listens to
+   *     and the value (in the form of an array) contains the
+   *     callable (or function) as well as the priority. The
+   *     higher the number the higher the priority.
+   */
+  public static function getSubscribedEvents(): array {
+    return [
+      'onPluginsInitialized' => ['onPluginsInitialized', 0],
+      'onTwigSiteVariables' => ['onTwigSiteVariables', 0]
+    ];
+  }
+
+  /**
+   * Initialize the plugin
+   */
+  public function onPluginsInitialized(): void {
+    if ($this->isAdmin()) {
+      $this->enable([
+        'onAdminTwigTemplatePaths' => ['onAdminTwigTemplatePaths', 11],
+        'onTask.comments.delete' => ['onCommentDelete', 0]
+      ]);
+      // Don't proceed if we are in the admin plugin
+      return;
+    }
+
+    // Enable the main events we are interested in
+    $this->enable([
+      'onTask.report.submit' => ['onReportSubmit', 0]
+    ]);
+
+    $this->router();
+  }
+
+  protected function json(array $json, $code = 200): void {
+    $response = new Response(
+      $code,
+      [
+        'Content-Type' => 'application/json',
+        'Cache-Control' => 'no-cache, no-store, must-revalidate'
+      ],
+      json_encode($json)
+    );
+
+    $this->grav->close($response);
+  }
+
+  public function onReportSubmit() {
+    $slug = $this->grav['uri']->param('location_slug');
+    $username = $this->grav['uri']->param('username');
+
+    $this->json([
+      'success' => true,
+      'slug' => $slug
+    ]);
+  }
+
+  public function onCommentDelete($stuff) {
+    $directory = $this->grav['uri']->param('directory');
+    $filename = $this->grav['uri']->param('filename');
+    $email = $this->grav['uri']->param('email');
+    $date = $this->grav['uri']->param('date');
+    $locator = $this->grav['locator'];
+
+    $relpath = $directory . '/' . $filename . '.yaml';
+    $filepath = $locator->findResource('user://data/comments/' . $relpath);
+    $file = File::instance($filepath);
+
+    if (file_exists($filepath)) {
+      $data = Yaml::parse($file->content());
+
+      $data['comments'] = array_filter($data['comments'], function ($c) use ($email, $date) {
+        return ($c['email'] != $email && $c['date'] != urldecode($date));
+      });
+
+      $data['comments'] = array_values($data['comments']);
+
+      $file->save(Yaml::dump($data));
+
+      $this->grav->redirect('/admin/comments');
+    } else {
+      $this->grav['messages']->add('The requested location doesn\'t exist.', 'error');
+    }
+  }
 
   public function router() {
     /** @var Uri $uri */
@@ -86,57 +178,12 @@ class GravelPlugin extends Plugin {
   }
 
   /**
-   * @return array
-   *
-   * The getSubscribedEvents() gives the core a list of events
-   *     that the plugin wants to listen to. The key of each
-   *     array section is the event that the plugin listens to
-   *     and the value (in the form of an array) contains the
-   *     callable (or function) as well as the priority. The
-   *     higher the number the higher the priority.
-   */
-  public static function getSubscribedEvents(): array {
-    return [
-      'onPluginsInitialized' => [
-        // Uncomment following line when plugin requires Grav < 1.7
-        // ['autoload', 100000],
-        ['onPluginsInitialized', 0]
-      ],
-      'onTwigSiteVariables' => ['onTwigSiteVariables', 0]
-    ];
-  }
-
-  /**
    * Composer autoload
    *
    * @return ClassLoader
    */
   public function autoload(): ClassLoader {
     return require __DIR__ . '/vendor/autoload.php';
-  }
-
-  /**
-   * Initialize the plugin
-   */
-  public function onPluginsInitialized(): void {
-    // Don't proceed if we are in the admin plugin
-    if ($this->isAdmin()) {
-      $this->enable([
-        'onAdminTwigTemplatePaths' => ['onAdminTwigTemplatePaths', 11],
-        'onFlexObjectBeforeSave' => ['onFlexObjectBeforeSave', 0],
-        'onTask.task:comment.delete' => ['onTaskDeleteComment', 0],
-      ]);
-      return;
-    }
-
-    // Enable the main events we are interested in
-    $this->enable([]);
-
-    $this->router();
-  }
-
-  public function onTaskDeleteComment($val) {
-    dd($val);
   }
 
   /**
@@ -155,12 +202,5 @@ class GravelPlugin extends Plugin {
     $twig = $this->grav['twig'];
 
     $twig->twig_vars['gravel_utils'] = new GravelUtils;
-  }
-
-  public function onAdminPageInitialized() {
-
-    if (isset($_GET['blahblah'])) {
-      dd($_GET["blahblah"]);
-    }
   }
 }

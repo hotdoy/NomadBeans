@@ -8,7 +8,7 @@ PLUGIN_LOGIN:
   LOGIN_SUCCESSFUL: "You have been successfully logged in."
   BTN_LOGIN: "Login"
   BTN_LOGOUT: "Logout"
-  BTN_FORGOT: "Forgot"
+  BTN_FORGOT: "Forgot Password"
   BTN_REGISTER: "Register"
   BTN_SUBMIT_PROFILE: "Submit"
   BTN_RESET: "Reset"

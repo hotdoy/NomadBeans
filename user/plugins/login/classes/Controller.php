@@ -143,6 +143,8 @@ class Controller
             if ($user->authorized) {
                 $event->defMessage('PLUGIN_LOGIN.LOGIN_SUCCESSFUL', 'info');
 
+                // dd($this->grav['uri']->referrer('/', '', true));
+                
                 $event->defRedirect(
                     $this->grav['session']->redirect_after_login ?:
                         $login_redirect ?: $this->grav['uri']->referrer('/', '', true)

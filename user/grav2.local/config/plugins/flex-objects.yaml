@@ -10,5 +10,6 @@ directories:
   0: 'blueprints://flex-objects/cities.yaml'
   2: 'blueprints://flex-objects/locations.yaml'
   3: 'blueprints://flex-objects/pages.yaml'
-  4: 'blueprints://flex-objects/user-accounts.yaml'
-  5: 'blueprints://flex-objects/user-groups.yaml'
+  4: 'blueprints://flex-objects/reported.yaml'
+  5: 'blueprints://flex-objects/user-accounts.yaml'
+  6: 'blueprints://flex-objects/user-groups.yaml'

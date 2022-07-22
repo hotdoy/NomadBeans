@@ -1,4 +1,4 @@
-last_checked: 1658175780
+last_checked: 1658439770
 data:
   -
     title: 'macOS 12.0 Monterey Apache Setup: LetsEncrypt SSL'
@@ -39,7 +39,7 @@ data:
     title: 'Grav 1.7 Released!'
     url: 'https://getgrav.org/blog/grav-1.7-released'
     date: 1611050100
-    nicetime: '1 years ago'
+    nicetime: '2 years ago'
   -
     title: 'Grav Premium Focus: NextGen Editor'
     url: 'https://getgrav.org/blog/premium-focus-nextgen-editor'

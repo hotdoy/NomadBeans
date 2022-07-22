@@ -8,150 +8,177 @@
 {% extends 'partials/base.html.twig' %}
 
 {% block javascripts %}
-	{% do assets.addJs('https://unpkg.com/swiper@8/swiper-bundle.min.js', {'priority': 98}) %}
-	{% do assets.addJs('https://maps.googleapis.com/maps/api/js?key=AIzaSyAryZvmZHDUIxifP2P2j3-GOMl2w9VwNQY&callback=initMap&v=weekly', {'loading': 'defer', 'priority': 97}) %}
-	{{ parent() }}
+  {% do assets.addJs('https://unpkg.com/swiper@8/swiper-bundle.min.js', {'priority': 98}) %}
+  {% do assets.addJs('https://maps.googleapis.com/maps/api/js?key=AIzaSyAryZvmZHDUIxifP2P2j3-GOMl2w9VwNQY&callback=initMap&v=weekly', {'loading': 'defer', 'priority': 97}) %}
+  {{ parent() }}
 {% endblock %}
 
 {% block stylesheets %}
-	{% do assets.addCss('https://unpkg.com/swiper@8/swiper-bundle.min.css') %}
-	{% do assets.addCss('https://unpkg.com/photoswipe@5.2.2/dist/photoswipe.css') %}
-	{{ parent() }}
+  {% do assets.addCss('https://unpkg.com/swiper@8/swiper-bundle.min.css') %}
+  {% do assets.addCss('https://unpkg.com/photoswipe@5.2.2/dist/photoswipe.css') %}
+  {{ parent() }}
 {% endblock %}
+
+{% if grav.user.username %}
+  {% set alpine %}
+  document.addEventListener('alpine:init', () => {
+      Alpine.data('reportButton', () => ({
+        disabled: false,
+        submit() {
+          Alpine.store('gravel').fetchPost('/task:report.submit/location_slug:{{object.slug}}/username:{{ grav.user.username }}', {}, (data) => {
+            if (data.success) {
+              this.disabled = true
+            }
+          })
+        }
+      }))
+    })
+  {% endset %}
+  {% do assets.addInlineJs(alpine, {id: 'alpine-js', group: 'bottom'}) %}
+{% endif %}
 
 {% block hero %}
 
-	{# Location Carousel #}
-	{% set swiper %}
-	const swiper = new Swiper('#location-carousel', {
-    direction: 'horizontal',
-    loop: true,
-    slidesPerView: 1,
-    spaceBetween: 10,
-    pagination: {
-      el: '.swiper-pagination',
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    breakpoints: {
-      640: {
-        slidesPerView: 3
-      }
-    }
-  });
-	{% endset %}
-	{% do assets.addInlineJs(swiper, {id: 'alpine-dropdown', group: 'bottom'}) %}
+  {# Location Carousel #}
+  {% set swiper %}
+  const swiper = new Swiper('#location-carousel', {
+        direction: 'horizontal',
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 10,
+        pagination: {
+          el: '.swiper-pagination',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 3
+          }
+        }
+      });
+  {% endset %}
+  {% do assets.addInlineJs(swiper, {id: 'swiper-js', group: 'bottom'}) %}
 
-	{% set photoSwipe %}
-	import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe/dist/photoswipe-lightbox.esm.js';
-	
-	    const lightbox = new PhotoSwipeLightbox({
-	      gallery: '#my-gallery',
-	      children: 'a',
-	      pswpModule: () => import('https://unpkg.com/photoswipe'),
-	    });
-	
-	    lightbox.init();
-	{% endset %}
-	{% do assets.addInlineJsModule(photoSwipe, {id: 'photoswipe', group: 'bottom'}) %}
+  {% set photoSwipe %}
+  import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe/dist/photoswipe-lightbox.esm.js';
+    	
+    	    const lightbox = new PhotoSwipeLightbox({
+    	      gallery: '#my-gallery',
+    	      children: 'a',
+    	      pswpModule: () => import('https://unpkg.com/photoswipe'),
+    	    });
+    	
+    	    lightbox.init();
+  {% endset %}
+  {% do assets.addInlineJsModule(photoSwipe, {id: 'photoswipe', group: 'bottom'}) %}
 
-	<!-- Slider main container -->
-	<div id="location-carousel" class="swiper h-[64vw] sm:h-[22vw]" style="--swiper-pagination-color: hsl(var(--p));">
-		<div class="swiper-wrapper" id="my-gallery">
-			{% for image in object.media.images %}
-				<a href="{{ image.url|e }}" class="swiper-slide relative" target="_blank" data-pswp-width="{{ image.width }}" data-pswp-height="{{ image.height }}">
-					{{ image.derivatives(800,2000,300).sizes('(max-width: 639px) 100vw, 33vw').html('', 'Alt', 'absolute top-0 left-0 right-0 bottom-0 object-cover w-full h-full')|raw }}
-				</a>
-			{% endfor %}
-		</div>
+  <!-- Slider main container -->
+  <div id="location-carousel" class="swiper h-[64vw] sm:h-[22vw]" style="--swiper-pagination-color: hsl(var(--p));">
+    <div class="swiper-wrapper" id="my-gallery">
+      {% for image in object.media.images %}
+        <a href="{{ image.url|e }}" class="swiper-slide relative" target="_blank" data-pswp-width="{{ image.width }}" data-pswp-height="{{ image.height }}">
+          {{ image.derivatives(800,2000,300).sizes('(max-width: 639px) 100vw, 33vw').html('', 'Alt', 'absolute top-0 left-0 right-0 bottom-0 object-cover w-full h-full')|raw }}
+        </a>
+      {% endfor %}
+    </div>
 
-		<!-- If we need navigation buttons -->
-		<div class="swiper-button-prev btn btn-primary btn-circle after:content-none hidden sm:flex">❮</div>
-		<div class="swiper-button-next btn btn-primary btn-circle after:content-none hidden sm:flex">❯</div>
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev btn btn-primary btn-circle after:content-none hidden sm:flex">❮</div>
+    <div class="swiper-button-next btn btn-primary btn-circle after:content-none hidden sm:flex">❯</div>
 
-		<!-- If we need pagination -->
-		<div class="swiper-pagination sm:hidden"></div>
-	</div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination sm:hidden"></div>
+  </div>
 {% endblock %}
 
 {% block content %}
-	{# Page title #}
-	<div class="container mx-auto my-8 sm:my-12">
-		<div class="px-4">
-			<header class="flex items-center mb-4 sm:mb-7">
-				<h1 class="text-3xl md:text-5xl">
-					{{ object.name }}
-				</h1>
-			</header>
-			<div class="prose max-w-max">
-				{{ object.description }}
-			</div>
-			<footer class="flex-col sm:flex-row flex justify-start mt-8 sm:mt-4">
-				<button class="btn btn-secondary btn-sm gap-2 mb-4 sm:mb-0">
-					Review This Cafe
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewbox="0 0 16 16">
-						<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-						<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-					</svg>
-				</button>
-				<button class="btn btn-accent btn-sm gap-2 items-center mb-4 sm:mb-0 sm:ml-4">
-					Share
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share-fill" viewbox="0 0 16 16">
-						<path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
-					</svg>
-				</button>
-				<button class="btn btn-primary btn-sm sm:ml-4 mb-4 sm:mb-0 gap-2 bg-red-400 border-red-400 hover:border-red-500 hover:bg-red-500 text-white">
-					Favorite
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewbox="0 0 16 16">
-						<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-					</svg>
-				</button>
-				<button class="btn bg-red-500 text-white hover:bg-red-600 border-red-500 hover:border-red-600 btn-sm gap-2 sm:ml-auto">
-					Report
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag" viewBox="0 0 16 16">
-          <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21.294 21.294 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21.317 21.317 0 0 0 14 7.655V1.222z"/>
-        </svg>
-				</button>
-			</footer>
-		</div>
-	</div>
+  {# Page title #}
+  <div class="container mx-auto my-8 sm:my-12">
+    <div class="px-4">
+      <header class="flex items-center mb-4 sm:mb-7">
+        <h1 class="text-3xl md:text-5xl">
+          {{ object.name }}
+        </h1>
+      </header>
+      <div class="prose max-w-max">
+        {{ object.description }}
+      </div>
+      <footer class="flex-col sm:flex-row flex justify-start mt-8 sm:mt-4">
+        <button class="btn btn-secondary btn-sm gap-2 mb-4 sm:mb-0">
+          Review This Cafe
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewbox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+          </svg>
+        </button>
+        <button class="btn btn-accent btn-sm gap-2 items-center mb-4 sm:mb-0 sm:ml-4">
+          Share
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share-fill" viewbox="0 0 16 16">
+            <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+          </svg>
+        </button>
+        <button class="btn btn-primary btn-sm sm:ml-4 mb-4 sm:mb-0 gap-2 bg-red-400 border-red-400 hover:border-red-500 hover:bg-red-500 text-white">
+          Favorite
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewbox="0 0 16 16">
+            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+          </svg>
+        </button>
+        {% if grav.user.username %}
+          <button x-data="reportButton" @click="submit()" x-bind:disabled="disabled" class="btn bg-red-500 text-white hover:bg-red-600 border-red-500 hover:border-red-600 btn-sm gap-2 sm:ml-auto">
+            Report
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag" viewbox="0 0 16 16">
+              <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21.294 21.294 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21.317 21.317 0 0 0 14 7.655V1.222z"/>
+            </svg>
+          </button>
+        {% else %}
+          <button x-data @click.prevent="$store.gravel.loginModalShowing = true" class="btn bg-red-500 text-white hover:bg-red-600 border-red-500 hover:border-red-600 btn-sm gap-2 sm:ml-auto">
+            Report
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag" viewbox="0 0 16 16">
+              <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21.294 21.294 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21.317 21.317 0 0 0 14 7.655V1.222z"/>
+            </svg>
+          </button>
+        {% endif %}
+      </footer>
+    </div>
+  </div>
 
-	<div class="divider hidden sm:flex"></div>
+  <div class="divider hidden sm:flex"></div>
 
-	{# Ratings #}
-	<div class="container mx-auto mb-6 mt-12 sm:my-12">
-		<div class="px-4">
-			<h1 class="mb-12 mx-auto text-2xl sm:text-3xl w-max">
-				{% if object.rating_overall > 6 %}
-					{% set rating_class = 'bg-success' %}
-				{% elseif object.rating_overall > 3 %}
-					{% set rating_class = 'bg-warning' %}
-				{% else %}
-					{% set rating_class = 'bg-error' %}
-				{% endif %}
+  {# Ratings #}
+  <div class="container mx-auto mb-6 mt-12 sm:my-12">
+    <div class="px-4">
+      <h1 class="mb-12 mx-auto text-2xl sm:text-3xl w-max">
+        {% if object.rating_overall > 6 %}
+          {% set rating_class = 'bg-success' %}
+        {% elseif object.rating_overall > 3 %}
+          {% set rating_class = 'bg-warning' %}
+        {% else %}
+          {% set rating_class = 'bg-error' %}
+        {% endif %}
 
-				<div class="flex flex-col items-center px-4 py-2 mt-4 mx-auto font-semibold min-w-8">
+        <div class="flex flex-col items-center px-4 py-2 mt-4 mx-auto font-semibold min-w-8">
           <div class="mb-2 sm:mb-4">
             Overall
           </div>
-					<div class="rating rating:md sm:rating-lg rating-half pointer-events-none">
-            <input type="radio" name="rating-10" class="rating-hidden" />
+          <div class="rating rating:md sm:rating-lg rating-half pointer-events-none">
+            <input type="radio" name="rating-10" class="rating-hidden"/>
             {% set k = 10 %}
             {% for i in range(1, k) %}
               {% if i % 2 == 0 %}
-                <input type="radio" name="rating-10" class="{{ rating_class }} mask mask-star-2 mask-half-2" {% if i == object.rating_overall %}checked{% endif %}/>
+                <input type="radio" name="rating-10" class="{{ rating_class }} mask mask-star-2 mask-half-2" {% if i == object.rating_overall %} checked {% endif %}/>
               {% else %}
-                <input type="radio" name="rating-10" class="{{ rating_class }} mask mask-star-2 mask-half-1" {% if i == object.rating_overall %}checked{% endif %}/>
+                <input type="radio" name="rating-10" class="{{ rating_class }} mask mask-star-2 mask-half-1" {% if i == object.rating_overall %} checked {% endif %}/>
               {% endif %}
             {% endfor %}
           </div>
-				</div>
-			</h1>
-			<div class="grid grid-cols-1 md:grid-cols-2 md:gap-8">
-				<div class="overflow-x-auto border-b-base-200 border-[1px] md:border-0 border-r-0 border-t-0 border-l-0">
-              {% set metrics = {
+        </div>
+      </h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 md:gap-8">
+        <div class="overflow-x-auto border-b-base-200 border-[1px] md:border-0 border-r-0 border-t-0 border-l-0">
+          {% set metrics = {
                 'ratings_coffee': {
                   name: 'Coffee',
                   key: 'rating_coffee'
@@ -177,22 +204,22 @@
                   key: 'rating_location'
                 },
               } %}
-              {% set metrics_half_first = metrics|slice(0, metrics|length / 2) %}
-              {% set metrics_half_second = metrics|slice(metrics|length / 2) %}
-					<table class="table w-full">
-						<tbody>
+          {% set metrics_half_first = metrics|slice(0, metrics|length / 2) %}
+          {% set metrics_half_second = metrics|slice(metrics|length / 2) %}
+          <table class="table w-full">
+            <tbody>
               {% for metric in metrics_half_first %}
                 <tr>
                   <th class="pl-0">{{ metric.name }}</th>
                   <td class="flex items-center justify-end">
                     <div class="rating rating-md rating-half pointer-events-none">
-                      <input type="radio" name="rating-10" class="rating-hidden" />
+                      <input type="radio" name="rating-10" class="rating-hidden"/>
                       {% set k = 10 %}
                       {% for i in range(1, k) %}
                         {% if i % 2 == 0 %}
-                          <input type="radio" name="{{ metric.key }}" class="bg-primary mask mask-star-2 mask-half-2" {% if i == object[metric.key] %}checked{% endif %}/>
+                          <input type="radio" name="{{ metric.key }}" class="bg-primary mask mask-star-2 mask-half-2" {% if i == object[metric.key] %} checked {% endif %}/>
                         {% else %}
-                          <input type="radio" name="{{ metric.key }}" class="bg-primary mask mask-star-2 mask-half-1" {% if i == object[metric.key] %}checked{% endif %}/>
+                          <input type="radio" name="{{ metric.key }}" class="bg-primary mask mask-star-2 mask-half-1" {% if i == object[metric.key] %} checked {% endif %}/>
                         {% endif %}
                       {% endfor %}
                     </div>
@@ -200,93 +227,94 @@
                 </tr>
               {% endfor %}
 
-						</tbody>
-					</table>
-				</div>
-				<div class="overflow-x-auto">
-					<table class="table w-full table-fixed">
-						<tbody>
+            </tbody>
+          </table>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="table w-full table-fixed">
+            <tbody>
               {% for metric in metrics_half_second %}
                 <tr>
                   <th class="pl-0">{{ metric.name }}</th>
                   <td class="flex items-center justify-end">
                     <div class="rating rating-md rating-half pointer-events-none">
-                      <input type="radio" name="rating-10" class="rating-hidden" />
+                      <input type="radio" name="rating-10" class="rating-hidden"/>
                       {% set k = 10 %}
                       {% for i in range(1, k) %}
                         {% if i % 2 == 0 %}
-                          <input type="radio" name="{{ metric.key }}" class="bg-primary mask mask-star-2 mask-half-2" {% if i == object[metric.key] %}checked{% endif %}/>
+                          <input type="radio" name="{{ metric.key }}" class="bg-primary mask mask-star-2 mask-half-2" {% if i == object[metric.key] %} checked {% endif %}/>
                         {% else %}
-                          <input type="radio" name="{{ metric.key }}" class="bg-primary mask mask-star-2 mask-half-1" {% if i == object[metric.key] %}checked{% endif %}/>
+                          <input type="radio" name="{{ metric.key }}" class="bg-primary mask mask-star-2 mask-half-1" {% if i == object[metric.key] %} checked {% endif %}/>
                         {% endif %}
                       {% endfor %}
                     </div>
                   </td>
                 </tr>
               {% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
-	{% if object.lat and object.lng %}
-		{% set map %}
-		function initMap() {
-		      const loc = { lat:
-		{{ object.lat }}, lng:
-		{{ object.lng }}
-		};
-		      const map = new google.maps.Map(document.getElementById("map"), {
-		        zoom: 18,
-		        center: loc,
-		      });
-		      const marker = new google.maps.Marker({
-		        position: loc,
-		        map: map,
-		      });
-		    }
-		
-		    window.initMap = initMap;
-		{% endset %}
-		{% do assets.addInlineJs(map, {id: 'google-map', group: 'bottom'}) %}
-	{% endif %}
+  {% if object.lat and object.lng %}
+    {% set map %}
+    function initMap() {
+    const loc = { lat:
+      {{ object.lat }}, lng:
+      {{ object.lng }}
+    };
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 18,
+        center: loc,
+      });
+      const marker = new google.maps.Marker({
+        position: loc,
+        map: map,
+      });
+    }
+        		
+      window.initMap = initMap;
+    {% endset %}
+    {% do assets.addInlineJs(map, {id: 'google-map', group: 'bottom'}) %}
+  {% endif %}
 
-	<div class="bg-base-100 lg:bg-gray-50 pt-4 pb-8 lg:py-12">
-		<div class="container mx-auto">
-			<div class="px-4">
-				<div class="flex flex-col-reverse lg:flex-row lg:gap-8 items-start">
-					<main class="w-full lg:w-2/3">
-						<div>
-							<h2 class="text-2xl text-accent mb-6">
-								Amenities
-							</h2>
-							<div>
+  <div class="bg-base-100 lg:bg-gray-50 pt-4 pb-8 lg:py-12">
+    <div class="container mx-auto">
+      <div class="px-4">
+        <div class="flex flex-col-reverse lg:flex-row lg:gap-8 items-start">
+          <main class="w-full lg:w-2/3">
+            <div>
+              <h2 class="text-2xl text-accent mb-6">
+                Amenities
+              </h2>
+              <div>
                 {{ object.amenities_description }}
-							</div>
-							<div class="grid grid-cols-2 sm:grid-cols-3 mt-8 gap-3">
-								{% for amenity in object.amenities %}
-									<div class="flex items-center gap-2">
-										<svg class="text-primary" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-square" viewbox="0 0 16 16">
-											<path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
-											<path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
-										</svg>
-										{{ gravel_utils.getAmenityNameByKey(amenity) }}
-									</div>
-								{% endfor %}
-							</div>
-						</div>
-            <div class="comments mt-8">
-              {% include 'partials/comments.html.twig' with {'page': page} %}
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-3 mt-8 gap-3">
+                {% for amenity in object.amenities %}
+                  <div class="flex items-center gap-2">
+                    <svg class="text-primary" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-square" viewbox="0 0 16 16">
+                      <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
+                      <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+                    </svg>
+                    {{ gravel_utils.getAmenityNameByKey(amenity) }}
+                  </div>
+                {% endfor %}
+              </div>
             </div>
-					</main>
-					<aside class="w-full lg:w-1/3 bg-white rounded-lg">
-						<div class="relative pt-[75%] lg:pt-[100%]">
-							<div id="map" class="w-full absolute top-0 right-0 bottom-0 left-0 h-full rounded-lg lg:rounded-b-none"></div>
-						</div>
+            {# <div class="comments mt-8">
+                          {% include 'partials/comments.html.twig' with {'page': page} %}
+                        </div> #}
+          </main>
+          <aside class="w-full lg:w-1/3 bg-white rounded-lg">
+            <div class="relative pt-[75%] lg:pt-[100%]">
+              <div id="map" class="w-full absolute top-0 right-0 bottom-0 left-0 h-full rounded-lg lg:rounded-b-none"></div>
+            </div>
             <div class="px-0 py-8 lg:px-8">
-              <h3 class="font-bold text-base">{{ city_obj.name }}, {{ city_obj.country_long }}</h3>
+              <h3 class="font-bold text-base">{{ city_obj.name }},
+                {{ city_obj.country_long }}</h3>
               {% if object.address_line_1 %}
                 <div>{{ object.address_line_1 }}</div>
               {% endif %}
@@ -296,7 +324,7 @@
               <div class="pt-4">
                 {% if object.tel %}
                   <div class="flex items-center gap-3">
-                    <svg class="text-primary" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                    <svg class="text-primary" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-telephone-fill" viewbox="0 0 16 16">
                       <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
                     </svg>
                     <a href="tel:{{ object.tel }}" class="text-sm">
@@ -306,7 +334,7 @@
                 {% endif %}
                 {% if object.email %}
                   <div class="flex items-center gap-3 mt-2">
-                    <svg class="text-primary" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                    <svg class="text-primary" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewbox="0 0 16 16">
                       <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
                     </svg>
                     <a href="mailto:{{ object.email }}" class="text-sm">
@@ -317,7 +345,7 @@
 
                 {% if object.website %}
                   <div class="flex items-center gap-3 mt-2">
-                    <svg class="text-primary" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe2" viewBox="0 0 16 16">
+                    <svg class="text-primary" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe2" viewbox="0 0 16 16">
                       <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855-.143.268-.276.56-.395.872.705.157 1.472.257 2.282.287V1.077zM4.249 3.539c.142-.384.304-.744.481-1.078a6.7 6.7 0 0 1 .597-.933A7.01 7.01 0 0 0 3.051 3.05c.362.184.763.349 1.198.49zM3.509 7.5c.036-1.07.188-2.087.436-3.008a9.124 9.124 0 0 1-1.565-.667A6.964 6.964 0 0 0 1.018 7.5h2.49zm1.4-2.741a12.344 12.344 0 0 0-.4 2.741H7.5V5.091c-.91-.03-1.783-.145-2.591-.332zM8.5 5.09V7.5h2.99a12.342 12.342 0 0 0-.399-2.741c-.808.187-1.681.301-2.591.332zM4.51 8.5c.035.987.176 1.914.399 2.741A13.612 13.612 0 0 1 7.5 10.91V8.5H4.51zm3.99 0v2.409c.91.03 1.783.145 2.591.332.223-.827.364-1.754.4-2.741H8.5zm-3.282 3.696c.12.312.252.604.395.872.552 1.035 1.218 1.65 1.887 1.855V11.91c-.81.03-1.577.13-2.282.287zm.11 2.276a6.696 6.696 0 0 1-.598-.933 8.853 8.853 0 0 1-.481-1.079 8.38 8.38 0 0 0-1.198.49 7.01 7.01 0 0 0 2.276 1.522zm-1.383-2.964A13.36 13.36 0 0 1 3.508 8.5h-2.49a6.963 6.963 0 0 0 1.362 3.675c.47-.258.995-.482 1.565-.667zm6.728 2.964a7.009 7.009 0 0 0 2.275-1.521 8.376 8.376 0 0 0-1.197-.49 8.853 8.853 0 0 1-.481 1.078 6.688 6.688 0 0 1-.597.933zM8.5 11.909v3.014c.67-.204 1.335-.82 1.887-1.855.143-.268.276-.56.395-.872A12.63 12.63 0 0 0 8.5 11.91zm3.555-.401c.57.185 1.095.409 1.565.667A6.963 6.963 0 0 0 14.982 8.5h-2.49a13.36 13.36 0 0 1-.437 3.008zM14.982 7.5a6.963 6.963 0 0 0-1.362-3.675c-.47.258-.995.482-1.565.667.248.92.4 1.938.437 3.008h2.49zM11.27 2.461c.177.334.339.694.482 1.078a8.368 8.368 0 0 0 1.196-.49 7.01 7.01 0 0 0-2.275-1.52c.218.283.418.597.597.932zm-.488 1.343a7.765 7.765 0 0 0-.395-.872C9.835 1.897 9.17 1.282 8.5 1.077V4.09c.81-.03 1.577-.13 2.282-.287z"/>
                     </svg>
                     <a href="{{ object.website }}" class="text-sm">{{ object.website }}</a>
@@ -325,9 +353,9 @@
                 {% endif %}
               </div>
             </div>
-					</aside>
-				</div>
-			</div>
-		</div>
-	</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

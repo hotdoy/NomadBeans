@@ -3,105 +3,110 @@
 
 <!DOCTYPE html>
 <html lang="{{ (grav.language.getActive ?: grav.config.site.default_lang)|e }}" data-theme="bumblebee" class="antialiased">
-	<head>
-		{% block head %}
-			<meta charset="utf-8"/>
-			<title>
-				{% if header.title %}
-					{{ header.title|e }}
-					|
-				{% endif %}
-				{{ site.title|e }}</title>
+  <head>
+    {% block head %}
+      <meta charset="utf-8"/>
+      <title>
+        {% if header.title %}
+          {{ header.title|e }}
+          |
+        {% endif %}
+        {{ site.title|e }}</title>
 
-			<meta http-equiv="X-UA-Compatible" content="IE=edge">
-			<meta name="viewport" content="width=device-width, initial-scale=1">
-			{% include 'partials/metadata.html.twig' %}
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      {% include 'partials/metadata.html.twig' %}
 
-			<link rel="canonical" href="{{ page.url(true, true)|e }}"/>
-		{% endblock head %}
+      <link rel="canonical" href="{{ page.url(true, true)|e }}"/>
+    {% endblock head %}
 
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
 
-		{% block stylesheets %}
-			{% do assets.addCss('theme://dist/css/site' ~ extension ~ '.css') %}
-		{% endblock %}
+    {% block stylesheets %}
+      {% do assets.addCss('theme://dist/css/site' ~ extension ~ '.css') %}
+    {% endblock %}
 
-		{% block javascripts %}
-			{% do assets.addJs('theme://js/main.js', 100) %}
-			{% do assets.addJs('https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js', {'loading': 'defer', 'priority': 99}) %}
-		{% endblock %}
+    {% block javascripts %}
+      {% do assets.addJs('theme://js/main.js', 100) %}
+      {% do assets.addJs('https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js', {'loading': 'defer', 'priority': 99}) %}
+    {% endblock %}
 
-		{% block assets deferred %}
-			{{ assets.css()|raw }}
-			{{ assets.js()|raw }}
-		{% endblock %}
-	</head>
+    {% block assets deferred %}
+      {{ assets.css()|raw }}
+      {{ assets.js()|raw }}
+    {% endblock %}
+  </head>
 
-	{% set body_classes = [] %}
-	{% if page.header.body_classes is not empty %}
-		{% set body_classes = body_classes|merge([page.header.body_classes]) %}
-	{% endif %}
-	{% if body_classes_slot is not empty %}
-		{% set body_classes = body_classes|merge([body_classes_slot]) %}
-	{% endif %}
+  {% set body_classes = [] %}
+  {% if page.header.body_classes is not empty %}
+    {% set body_classes = body_classes|merge([page.header.body_classes]) %}
+  {% endif %}
+  {% if body_classes_slot is not empty %}
+    {% set body_classes = body_classes|merge([body_classes_slot]) %}
+  {% endif %}
 
-	<body id="top" class="{{ body_classes|join(' ')|e }} font-poppins tracking-wide">
+  <body id="top" class="{{ body_classes|join(' ')|e }} font-poppins tracking-wide">
 
-  {% block body %}
+    {% block body %}
+      {% include 'partials/login-modal.html.twig' %}
+      <div class="drawer">
+        <input x-data x-model="$store.gravel.mobileMenuShowing" id="my-drawer-3" type="checkbox" class="drawer-toggle"/>
+        <div
+          id="drawer-content" class="drawer-content relative flex flex-col">
+          <!-- Navbar -->
 
-    <div class="drawer">
-      <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
-      <div id="drawer-content" class="drawer-content flex flex-col">
-        <!-- Navbar -->
+          {% block header %}
+            {% include 'partials/header.html.twig' %}
+          {% endblock %}
 
-        {% block header %}
-          {% include 'partials/header.html.twig' %}
-        {% endblock %}
 
-      
-        <!-- Page content here -->
-        {% block main %}
+          <!-- Page content here -->
+          {% block main %}
 
-          <main id="site-main" class="site-main">
+            <main id="site-main" class="site-main">
 
-            {% block hero %} {% endblock %}
-          
-            {% block content %}
-              {{ content }}
-            {% endblock %}
+              {% block hero %}{% endblock %}
 
-          </main>
+              {% block content %}
+                {{ content }}
+              {% endblock %}
 
-        {% endblock %}
+            </main>
 
-        {% block footer %}
-          {% include 'partials/footer.html.twig' %}
-        {% endblock %}
-        
-      </div> 
-      <div class="drawer-side">
-        <label for="my-drawer-3" class="drawer-overlay"></label> 
-        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
-          <li>
-            <a href="/" class="btn btn-ghost normal-case text-2xl font-shadows-light hover:bg-transparent justify-start mb-2">MadBeans</a>
-          </li>
-          <!-- Sidebar content here -->
-          <li><a>Sidebar Item 1</a></li>
-          <li><a>Sidebar Item 2</a></li>
-          
-        </ul>
-        
+          {% endblock %}
+
+          {% block footer %}
+            {% include 'partials/footer.html.twig' %}
+          {% endblock %}
+
+        </div>
+        <div class="drawer-side">
+          <label for="my-drawer-3" class="drawer-overlay"></label>
+          <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
+            <li>
+              <a href="/" class="btn btn-ghost normal-case text-2xl font-shadows-light hover:bg-transparent justify-start mb-2">MadBeans</a>
+            </li>
+            <!-- Sidebar content here -->
+            <li>
+              <a>Sidebar Item 1</a>
+            </li>
+            <li>
+              <a>Sidebar Item 2</a>
+            </li>
+
+          </ul>
+
+        </div>
       </div>
-    </div>
 
-  {% endblock %}
+    {% endblock %}
 
 
-  {% block bottom %}
-    {{ assets.js('bottom')|raw }}
-  {% endblock %}
+    {% block bottom %}
+      {{ assets.js('bottom')|raw }}
+    {% endblock %}
 
-	</body>
+  </body>
 </html>

@@ -2,6 +2,7 @@
 title: Home
 media_order: 'Abstract Shapes.jpg'
 page_media_alt_desc: 'some interesting patterns'
+login_redirect_here: true
 ---
 
 # Say Hello to Grav!
