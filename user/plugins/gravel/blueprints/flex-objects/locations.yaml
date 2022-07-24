@@ -51,17 +51,18 @@ config:
           width: 8
         features:
         tags:
+        categories:
 
     # Edit View
     edit:
       title:
-        template: "{{ object.name ?? 'Name' }}"
+        template: "{{ object.name ?? 'Location' }}"
 
     # Preview View
     preview:
       enabled: false
       route:
-        #template: '/plugins/flex-objects/directory:countries'
+        #template: '/plugins/flex-objects/directory:locations'
 
     # Data Export
     export:
@@ -69,7 +70,7 @@ config:
       method: "jsonSerialize"
       formatter:
         class: 'Grav\Framework\File\Formatter\YamlFormatter'
-      filename: "countries"
+      filename: "locations"
 
   # Site Configuration
   site:
@@ -216,34 +217,36 @@ form:
 
     tags:
       type: selectize
-      size: long
-      label: Tags
+      selectize:
+        data-options@: ['\Grav\Plugin\Gravel\Utils::getTaxonomiesForSelectizeByType', 'location_tag']
+      size: large
+      label: Location Tags
       classes: fancy
-      help: 'Tags used for internal use only.'
       validate:
-        type: commalist
+          type: commalist
 
-    test:
+    categories:
+      type: selectize
+      selectize:
+        data-options@: ['\Grav\Plugin\Gravel\Utils::getTaxonomiesForSelectizeByType', 'location_category']
+      size: large
+      label: Location Categories
+      classes: fancy
+      validate:
+          type: commalist
+
+    ratings-spacer:
       type: spacer
       title: Ratings
       underline: false
 
     rating_overall:
-      type: select
-      size: long
-      classes: fancy
+      type: range
       label: Overall Rating
-      options:
-          1: '.5 Stars'
-          2: '1 Star'
-          3: '1.5 Stars'
-          4: '2 Stars'
-          5: '2.5 Stars'
-          6: '3 Stars'
-          7: '3.5 Stars'
-          8: '4 Stars'
-          9: '4.5 Stars'
-          10: '5 Stars'
+      default: 5
+      validate:
+        min: 0
+        max: 10
       
     rating_coffee:
       type: range

@@ -8,6 +8,8 @@ content_editor: default
 twofa_enabled: false
 twofa_secret: PFQ2OQDWMA4P2PJXXR2NLDUZI54XV6E2
 avatar: {  }
+groups:
+  - Contributor
 access:
   site:
     login: true

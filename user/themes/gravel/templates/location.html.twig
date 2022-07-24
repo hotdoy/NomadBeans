@@ -168,9 +168,9 @@
             {% set k = 10 %}
             {% for i in range(1, k) %}
               {% if i % 2 == 0 %}
-                <input type="radio" name="rating-10" class="{{ rating_class }} mask mask-star-2 mask-half-2" {% if i == object.rating_overall %} checked {% endif %}/>
+                <input type="radio" name="rating-10" class="{{ rating_class }} mask mask-star-2 mask-half-2 {% if object.rating_overall == 0 %}opacity-20{% endif %}" {% if i == object.rating_overall %} checked {% endif %}/>
               {% else %}
-                <input type="radio" name="rating-10" class="{{ rating_class }} mask mask-star-2 mask-half-1" {% if i == object.rating_overall %} checked {% endif %}/>
+                <input type="radio" name="rating-10" class="{{ rating_class }} mask mask-star-2 mask-half-1 {% if object.rating_overall == 0 %}opacity-20{% endif %}" {% if i == object.rating_overall %} checked {% endif %}/>
               {% endif %}
             {% endfor %}
           </div>

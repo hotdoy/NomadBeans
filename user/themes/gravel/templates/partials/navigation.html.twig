@@ -12,7 +12,7 @@
 	</ul> #}
 
 <ul class="menu menu-horizontal p-0 hidden lg:flex font-medium items-center">
-  <li tabindex="0" class="dropdown dropdown-hover dropdown-end">
+  {# <li tabindex="0" class="dropdown dropdown-hover dropdown-end">
     <label tabindex="0" class="">Listings</label>
     <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-primary text-white rounded-box w-52">
       <li>
@@ -22,12 +22,12 @@
         <a>Item 2</a>
       </li>
     </ul>
+  </li> #}
+  <li>
+    <a href="/locations/" class="nav-link">Locations</a>
   </li>
   <li>
-    <a href="/locations/">Locations</a>
-  </li>
-  <li>
-    <a>Blog</a>
+    <a href="/blog" class="nav-link">Blog</a>
   </li>
   {% if config.plugins.login.enabled and grav.user.username %}
     {% if grav.user.authenticated %}
@@ -53,7 +53,7 @@
 
   {% else %}
     <li>
-      <a href="/login">Login</a>
+      <a href="/account/login" class="nav-link">Login</a>
     </li>
   {% endif %}
 </ul>

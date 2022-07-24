@@ -1,0 +1,14 @@
+{% set body_classes_slot = "template-blog" %}
+{% extends 'partials/base.html.twig' %}
+
+{% block hero %}
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto">
+  <div class="px-4">
+    {{ page.content|raw }}
+  
+  </div>
+</div>
+{% endblock %}

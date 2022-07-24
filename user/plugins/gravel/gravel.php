@@ -13,6 +13,7 @@ use Grav\Framework\Psr7\Response;
 use Grav\Plugin\Gravel\Utils as GravelUtils;
 use RocketTheme\Toolbox\File\File;
 use Symfony\Component\Yaml\Yaml;
+use Grav\Plugin\Gravel\GravelLoginController as Controller;
 
 /**
  * Class GravelPlugin
@@ -37,7 +38,8 @@ class GravelPlugin extends Plugin {
   public static function getSubscribedEvents(): array {
     return [
       'onPluginsInitialized' => ['onPluginsInitialized', 0],
-      'onTwigSiteVariables' => ['onTwigSiteVariables', 0]
+      'onTwigSiteVariables' => ['onTwigSiteVariables', 0],
+      'onTask.login.login'  => ['gravelLoginController', 1],
     ];
   }
 
@@ -79,10 +81,24 @@ class GravelPlugin extends Plugin {
     $slug = $this->grav['uri']->param('location_slug');
     $username = $this->grav['uri']->param('username');
 
-    $this->json([
-      'success' => true,
-      'slug' => $slug
-    ]);
+    if ($username === $this->grav['session']->user->username) {
+      $dir = $this->grav['flex']->getDirectory('reported');
+      $obj = $dir->createObject([
+        'location' => $slug,
+        'datetime' => date('m/d/Y h:i:s a', time()),
+        'username' => $username
+      ]);
+
+      $obj->save();
+
+      $this->json([
+        'success' => true,
+        'slug' => json_encode($obj)
+      ]);
+    } else {
+      $response = new Response(403);
+      $this->grav->close($response);
+    }
   }
 
   public function onCommentDelete($stuff) {
@@ -123,6 +139,43 @@ class GravelPlugin extends Plugin {
         'onPagesInitialized' => ['addLocationPage', 0]
       ]);
     }
+  }
+
+  /**
+   * Initialize login controller
+   */
+  public function gravelLoginController(): void {
+    /** @var Uri $uri */
+    $uri = $this->grav['uri'];
+    $task = $_POST['task'] ?? $uri->param('task');
+    $task = substr($task, \strlen('login.'));
+    $post = !empty($_POST) ? $_POST : [];
+
+    switch ($task) {
+      case 'login':
+        if (!isset($post['login-form-nonce']) || !Utils::verifyNonce($post['login-form-nonce'], 'login-form')) {
+          $this->grav['messages']->add(
+            $this->grav['language']->translate('PLUGIN_LOGIN.ACCESS_DENIED'),
+            'info'
+          );
+          $twig = $this->grav['twig'];
+          $twig->twig_vars['notAuthorized'] = true;
+
+          return;
+        }
+        break;
+
+      case 'forgot':
+        if (!isset($post['forgot-form-nonce']) || !Utils::verifyNonce($post['forgot-form-nonce'], 'forgot-form')) {
+          $this->grav['messages']->add($this->grav['language']->translate('PLUGIN_LOGIN.ACCESS_DENIED'), 'info');
+          return;
+        }
+        break;
+    }
+
+    $controller = new Controller($this->grav, $task, $post);
+    $controller->execute();
+    $controller->redirect();
   }
 
   public function addLocationPage() {

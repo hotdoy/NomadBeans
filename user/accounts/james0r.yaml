@@ -3,7 +3,7 @@ email: hello@jamesauble.com
 fullname: 'James Auble'
 level: Newbie
 groups:
-  - Reviewer
+  - Contributor
 hashed_password: $2y$10$NauMzHGglSSjyRkmqgREZ.Cx.HTYGqkbB241AiQuCw1Mif8IDs0Y.
 language: en
 content_editor: default

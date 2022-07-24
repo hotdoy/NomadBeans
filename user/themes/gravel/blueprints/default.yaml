@@ -12,6 +12,6 @@ form:
       fields:
         content:
           fields:
-            header.page_media_alt_desc:
+            header.featured_image_alt_description:
               type: text
-              label: Page Media Alt Description
+              label: Featured Image Alt Description

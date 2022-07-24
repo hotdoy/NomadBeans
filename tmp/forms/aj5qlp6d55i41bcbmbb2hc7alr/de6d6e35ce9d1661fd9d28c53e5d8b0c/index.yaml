@@ -1,0 +1,21 @@
+form: flex-articles
+unique_id: de6d6e35ce9d1661fd9d28c53e5d8b0c
+url: 'https://grav2.local/admin/articles/a2d097a8d2f4faa4b9a072c31392864a'
+user:
+  username: james
+  email: james.auble@gmail.com
+timestamps:
+  created: 1658630477
+  updated: 1658630549
+data: {  }
+files:
+  images:
+    nathan-dumlao-6VhPY27jdps-unsplash.jpeg:
+      name: nathan-dumlao-6VhPY27jdps-unsplash.jpeg
+      type: image/jpeg
+      size: 2549469
+      tmp_name: 2XpLf15u8Tg9
+    'ruben-ramirez-xhKG01FN2uk-unsplash Large.jpeg': null
+  images/original:
+    nathan-dumlao-6VhPY27jdps-unsplash.jpeg: null
+    'ruben-ramirez-xhKG01FN2uk-unsplash Large.jpeg': null

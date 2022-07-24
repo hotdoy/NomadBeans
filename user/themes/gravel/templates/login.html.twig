@@ -1,0 +1,12 @@
+{% set body_classes_slot = "template-login" %}
+{% extends 'partials/base.html.twig' %}
+
+{% block hero %}
+  <h1 class="text-center my-12 lg:my-20 text-4xl sm:text-5xl">Login</h1>
+{% endblock %}
+
+{% block content %}
+  <div class="max-w-md px-4 my-20 mx-auto">
+    {% include 'partials/login-form.html.twig' with {show_login_form: true, form: forms('login') } %}
+  </div>
+{% endblock %}

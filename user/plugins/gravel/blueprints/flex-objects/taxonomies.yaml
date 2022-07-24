@@ -1,0 +1,133 @@
+title: Taxonomies
+description: Custom NomadBeans taxonomies.
+type: flex-objects
+
+# Flex Configuration
+config:
+  # Administration Configuration
+  admin:
+    # Admin router (optional)
+    router:
+      path: "/taxonomies"
+
+    # Admin menu (optional)
+    menu:
+      list:
+        route: "/taxonomies"
+        title: Taxonomies
+        icon: fa-sitemap
+        # Authorization to collection admin
+        authorize: ["admin.taxonomies.list", "admin.super"]
+        # Priority -10 .. 10 (highesgitt goes up)
+        priority: 0
+
+    # Admin template type / folder
+    template: default
+
+    # Permissions
+    permissions:
+      # Primary permissions
+      admin.articles:
+        type: crudpl
+        label: Taxonomies
+
+    # List view
+    list:
+      title: name
+      fields:
+        taxonomy_type:
+        taxonomy_value:
+        taxonomy_slug:
+
+    # Edit View
+    edit:
+      title:
+        template: "{{ object.title ?? 'Taxonomy' }}"
+
+    # Preview View
+    preview:
+      enabled: false
+      route:
+        #template: '/plugins/flex-objects/directory:taxonomies'
+
+    # Data Export
+    export:
+      enabled: true
+      method: "jsonSerialize"
+      formatter:
+        class: 'Grav\Framework\File\Formatter\YamlFormatter'
+      filename: "taxonomies"
+
+  # Site Configuration
+  site:
+    templates:
+      collection:
+        # Lookup for the template layout files for collections of objects
+        paths:
+          - "flex/{TYPE}/collection/{LAYOUT}{EXT}"
+      object:
+        # Lookup for the template layout files for objects
+        paths:
+          - "flex/{TYPE}/object/{LAYOUT}{EXT}"
+      defaults:
+        # Default template {TYPE}; overridden by filename of this blueprint if template folder exists
+        type: taxonomies
+        # Default template {LAYOUT}; can be overridden in render calls (usually Twig in templates)
+        layout: default
+
+  # Data Configuration
+  data:
+    # Object class to be used, allowing custom methods for the object
+    object: 'Grav\Plugin\Gravel\Flex\Types\Taxonomies\TaxonomiesObject'
+    # Collection class to be used, allowing custom methods for the collections
+    collection: 'Grav\Common\Flex\Types\Generic\GenericCollection'
+    # Index class to be used, works as a quick database-like lookup index
+    index: 'Grav\Common\Flex\Types\Generic\GenericIndex'
+    storage:
+      # Storage class, use single file storage (does not support images and assets)
+      class: 'Grav\Framework\Flex\Storage\FolderStorage'
+      options:
+        formatter:
+          # File formatter class, in this case the file is stored in markdown
+          class: 'Grav\Framework\File\Formatter\JsonFormatter'
+        # JSON file where all the objects will be stored
+        folder: user-data://taxonomies
+    ordering:
+      taxonomy_type: ASC
+    search:
+      # Search options
+      options:
+        contains: 1
+      # Fields to be searched
+      fields:
+        - taxonomy_type
+        - taxonomy_value
+        - taxonomy_slug
+
+form:
+  validation: loose
+
+  fields:
+    taxonomy_type:
+      type: select
+      size: long
+      classes: fancy
+      label: Taxonomy Type
+      default: location_category
+      options:
+          location_category:
+            value: 'Location Category'
+          location_tag:
+            value: 'Location Tag'
+          article_category:
+            value: 'Article Category'
+          article_tag:
+            value: 'Article Tag'
+
+    taxonomy_value:
+      type: text
+      autofocus: true
+      label: Taxonomy Value
+
+
+

@@ -1,0 +1,22 @@
+{% set body_classes_slot = "template-locations" %}
+{% extends 'partials/base.html.twig' %}
+{% set directory = grav.get('flex').directory('locations') %}
+{% set locations = directory.collection() %}
+
+{% block hero %}
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-8">
+  <div class="px-4">
+    i'm the locations collection page <br>
+
+    All locations: <br>
+    {% for obj in locations %}
+    <a href="/locations/{{ obj.slug }}">
+      {{ obj.name }}
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

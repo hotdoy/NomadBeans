@@ -1,8 +1,9 @@
 ---
 title: Cities
 flex:
-  directory: cities
-  object:
-    title: 'City: {{ object.name }}'
-    layout: default
+    directory: cities
+    object:
+        title: 'City: {{ object.name }}'
+        layout: default
 ---
+

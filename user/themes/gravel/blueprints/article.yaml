@@ -15,13 +15,12 @@ form:
           title: Content
 
           fields:
-            header.page_media_alt_desc:
-              type: text
-              label: Page Media Alt Description
             header.page_title:
               unset@: true
+
             header.page_subtitle:
               unset@: true
+
             header.author:
               type: pages
               size: medium
@@ -31,5 +30,24 @@ form:
               show_all: false
               show_modular: false
               show_root: false
-              help: PLUGIN_ADMIN.HOME_PAGE_HELP
+
+            tags:
+              type: selectize
+              selectize:
+                data-options@: ['\Grav\Plugin\Gravel\Utils::getTaxonomiesForSelectizeByType', 'article_tag']
+              size: large
+              label: Article Tags
+              classes: fancy
+              validate:
+                  type: commalist
+
+            categories:
+              type: selectize
+              selectize:
+                data-options@: ['\Grav\Plugin\Gravel\Utils::getTaxonomiesForSelectizeByType', 'article_category']
+              size: large
+              label: Article Categories
+              classes: fancy
+              validate:
+                  type: commalist
             

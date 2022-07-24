@@ -1,4 +1,10 @@
 @layer components {
+  /* Nav Link */
+
+  .nav-link {
+    @apply hover:text-primary hover:bg-transparent;
+  }
+
   /* Comments form */
   form[name="comments"] {
     @apply mb-8;
@@ -80,5 +86,137 @@
 
   .login-modal .rememberme label {
     @apply label-text;
+  }
+
+  /* Login Template */
+
+  .template-login .site-header {
+    @apply shadow-lg;
+  }
+
+  .template-login input[type="text"] {
+    @apply input input-bordered w-full;
+  }
+
+  .template-login input[type="password"] {
+    @apply input input-bordered w-full;
+  }
+
+  .template-login .form-label {
+    @apply label;
+  }
+
+  .template-login .form-label .inline {
+    @apply label-text;
+  }
+
+  .template-login .button.primary {
+    @apply btn btn-primary;
+  }
+
+  .template-login .button.secondary {
+    @apply btn btn-link;
+  }
+
+  .template-login .form-actions {
+    @apply flex flex-col justify-center;
+  }
+  
+  .template-login .rememberme {
+    @apply form-control;
+  }
+
+  .template-login .rememberme input[type="checkbox"] {
+    @apply checkbox checkbox-primary mr-2 my-2;
+  }
+
+  .template-login .rememberme .form-input-wrapper {
+    @apply label cursor-pointer max-w-max mx-auto;
+  }
+
+  .template-login .rememberme label {
+    @apply label-text;
+  }
+
+  .template-login #grav-login h2 {
+    @apply hidden;
+  }
+
+  .template-login .site-footer {
+    @apply mt-auto;
+  }
+
+  /* Register Template */
+
+  .template-register .site-header {
+    @apply shadow-lg;
+  }
+
+  .template-register input[type="text"] {
+    @apply input input-bordered w-full;
+  }
+
+  .template-register input[type="email"] {
+    @apply input input-bordered w-full;
+  }
+
+  .template-register input[type="password"] {
+    @apply input input-bordered w-full;
+  }
+
+  .template-register .form-label {
+    @apply label;
+  }
+
+  .template-register .form-label .inline {
+    @apply label-text;
+  }
+
+  .template-register .button.primary {
+    @apply btn btn-primary;
+  }
+
+  .template-register .button.secondary {
+    @apply btn btn-link;
+  }
+
+  .template-register .form-actions {
+    @apply flex flex-col justify-center;
+  }
+  
+  .template-register .rememberme {
+    @apply form-control;
+  }
+
+  .template-register .rememberme input[type="checkbox"] {
+    @apply checkbox checkbox-primary mr-2 my-2;
+  }
+
+  .template-register .rememberme .form-input-wrapper {
+    @apply label cursor-pointer max-w-max mx-auto;
+  }
+
+  .template-register .rememberme label {
+    @apply label-text;
+  }
+
+  .template-register #grav-login h2 {
+    @apply hidden;
+  }
+
+  .template-register .site-footer {
+    @apply mt-auto;
+  }
+
+  .template-register .buttons {
+    @apply mt-4 flex justify-between flex-row-reverse;
+  }
+  
+  .template-register button[type="submit"] {
+    @apply btn btn-primary;
+  }
+
+  .template-register button[type="reset"] {
+    @apply btn btn-link;
   }
 }

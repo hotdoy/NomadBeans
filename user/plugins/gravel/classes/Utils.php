@@ -3,7 +3,6 @@
 namespace Grav\Plugin\Gravel;
 
 use Grav\Common\Grav;
-use Grav\Common\Utils as GravUtils;
 
 class Utils {
 
@@ -321,6 +320,44 @@ class Utils {
     }
 
     return $formatted_list;
+  }
+
+  public static function getTaxonomiesByType($type) {
+    $taxonomies = Grav::instance()->get('flex')->getDirectory('taxonomies');
+    $col = $taxonomies ? $taxonomies->getCollection() : null;
+
+    if ($col) {
+      return $col->filterBy(['taxonomy_type' => $type]);
+    }
+
+    return;
+  }
+
+  public static function getTaxonomiesForCheckboxesByType() {
+    $t = Self::getTaxonomiesByType('article_tag');
+
+    $slugValuePairs = [];
+
+    foreach($t as $taxObject) {
+      $slugValuePairs[$taxObject->getProperty('taxonomy_slug')] = $taxObject->getProperty('taxonomy_value');
+    }
+
+    return $slugValuePairs;
+  }
+
+  public static function getTaxonomiesForSelectizeByType($type) {
+    $t = Self::getTaxonomiesByType($type); 
+
+    $slugValuePairs = [];
+
+    foreach($t as $taxObject) {
+      array_push($slugValuePairs, [
+        'value' => $taxObject->getProperty('taxonomy_slug'),
+        'text' => $taxObject->getProperty('taxonomy_value')
+      ]);
+    }
+
+    return $slugValuePairs;
   }
 
   public static function getAmenityNameByKey($key) {

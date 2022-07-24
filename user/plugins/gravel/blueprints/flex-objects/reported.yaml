@@ -36,7 +36,8 @@ config:
       title: name
       fields:
         location:
-        tag:
+        username:
+        datetime:
 
     # Edit View
     edit:
@@ -114,10 +115,6 @@ form:
       type: text
       label: Datetime
 
-    tags:
-      type: selectize
-      size: long
-      label: Tags
-      classes: fancy
-      validate:
-        type: commalist
+    username:
+      type: text
+      label: Username

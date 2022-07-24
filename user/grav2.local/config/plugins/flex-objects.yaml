@@ -7,9 +7,11 @@ admin_list:
     by: updated_timestamp
     dir: desc
 directories:
-  0: 'blueprints://flex-objects/cities.yaml'
-  2: 'blueprints://flex-objects/locations.yaml'
-  3: 'blueprints://flex-objects/pages.yaml'
-  4: 'blueprints://flex-objects/reported.yaml'
-  5: 'blueprints://flex-objects/user-accounts.yaml'
-  6: 'blueprints://flex-objects/user-groups.yaml'
+  0: 'blueprints://flex-objects/articles.yaml'
+  1: 'blueprints://flex-objects/cities.yaml'
+  3: 'blueprints://flex-objects/locations.yaml'
+  4: 'blueprints://flex-objects/pages.yaml'
+  5: 'blueprints://flex-objects/reported.yaml'
+  6: 'blueprints://flex-objects/taxonomies.yaml'
+  7: 'blueprints://flex-objects/user-accounts.yaml'
+  8: 'blueprints://flex-objects/user-groups.yaml'

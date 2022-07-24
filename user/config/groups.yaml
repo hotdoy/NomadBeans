@@ -1,7 +1,10 @@
-Reviewer:
+Contributor:
   access:
     site:
       login: true
-  readableName: Reviewer
-  description: 'Ability to review cafes.'
+      review: true
+      submit: true
+  readableName: Contributor
+  description: 'Contributors can review, submit, and report cafes.'
+  icon: edit
   enabled: true
