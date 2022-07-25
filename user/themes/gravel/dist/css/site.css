@@ -3091,6 +3091,30 @@ body[dir="rtl"] .checkbox:checked,
   box-shadow: 0 0 0 4px hsl(var(--b1)) inset, 0 0 0 4px hsl(var(--b1)) inset;
 }
 
+.radio-primary {
+  --chkbg: var(--p);
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--p) / var(--tw-border-opacity));
+}
+
+.radio-primary:hover {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--p) / var(--tw-border-opacity));
+}
+
+.radio-primary:focus-visible {
+  outline: 2px solid hsl(var(--p));
+}
+
+.radio-primary:checked {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--p) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--p) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--pc) / var(--tw-text-opacity));
+}
+
 .radio:disabled {
   cursor: not-allowed;
   opacity: 0.2;
@@ -3744,6 +3768,11 @@ body[dir="rtl"] .checkbox:checked,
 .rating-md input {
   height: 1.5rem;
   width: 1.5rem;
+}
+
+.rating-lg input {
+  height: 2.5rem;
+  width: 2.5rem;
 }
 
 .rating-half.rating-xs input:not(.rating-hidden) {
@@ -7155,6 +7184,10 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
   top: 1px;
 }
 
+.top-1 {
+  top: 0.25rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -7165,6 +7198,14 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
 
 .z-40 {
   z-index: 40;
+}
+
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
+.col-span-3 {
+  grid-column: span 3 / span 3;
 }
 
 .mx-auto {
@@ -7207,6 +7248,14 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
 
 .\!mb-0 {
   margin-bottom: 0px !important;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
 }
 
 .mb-20 {
@@ -7259,14 +7308,6 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
 
 .ml-2 {
   margin-left: 0.5rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
-}
-
-.ml-auto {
-  margin-left: auto;
 }
 
 .block {
@@ -7359,10 +7400,6 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
   width: 2rem;
 }
 
-.w-80 {
-  width: 20rem;
-}
-
 .w-2\/5 {
   width: 40%;
 }
@@ -7373,6 +7410,10 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
 
 .w-screen {
   width: 100vw;
+}
+
+.w-80 {
+  width: 20rem;
 }
 
 .w-52 {
@@ -7445,12 +7486,41 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
   grid-auto-flow: column;
 }
 
+.auto-rows-auto {
+  grid-auto-rows: auto;
+}
+
+.auto-rows-min {
+  grid-auto-rows: -webkit-min-content;
+  grid-auto-rows: min-content;
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-12 {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.grid-cols-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-rows-2 {
+  grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -7493,6 +7563,14 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
   justify-content: space-between;
 }
 
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-items-center {
+  justify-items: center;
+}
+
 .gap-8 {
   gap: 2rem;
 }
@@ -7511,6 +7589,34 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
 
 .gap-0 {
   gap: 0px;
+}
+
+.gap-y-2 {
+  row-gap: 0.5rem;
+}
+
+.gap-y-4 {
+  row-gap: 1rem;
+}
+
+.gap-x-2 {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+}
+
+.gap-x-3 {
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
+}
+
+.gap-x-1 {
+  -moz-column-gap: 0.25rem;
+       column-gap: 0.25rem;
+}
+
+.gap-x-0 {
+  -moz-column-gap: 0px;
+       column-gap: 0px;
 }
 
 .overflow-hidden {
@@ -7569,6 +7675,18 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
 
 .border-l-0 {
   border-left-width: 0px;
+}
+
+.border-b-0 {
+  border-bottom-width: 0px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-none {
+  border-style: none;
 }
 
 .border-red-400 {
@@ -7704,6 +7822,10 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
   padding: 0px;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -7790,6 +7912,10 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
   padding-left: 2rem;
 }
 
+.pr-2 {
+  padding-right: 0.5rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -7835,19 +7961,14 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
   line-height: 1.25rem;
 }
 
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
-
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
 
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .font-bold {
@@ -8150,6 +8271,14 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
     margin-bottom: 3rem;
   }
 
+  .sm\:mb-6 {
+    margin-bottom: 1.5rem;
+  }
+
+  .sm\:mt-0 {
+    margin-top: 0px;
+  }
+
   .sm\:flex {
     display: flex;
   }
@@ -8174,8 +8303,21 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .sm\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .sm\:grid-rows-1 {
+    grid-template-rows: repeat(1, minmax(0, 1fr));
+  }
+
   .sm\:flex-row {
     flex-direction: row;
+  }
+
+  .sm\:gap-x-1 {
+    -moz-column-gap: 0.25rem;
+         column-gap: 0.25rem;
   }
 
   .sm\:p-12 {
@@ -8184,6 +8326,10 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
 
   .sm\:pt-\[100\%\] {
     padding-top: 100%;
+  }
+
+  .sm\:text-left {
+    text-align: left;
   }
 
   .sm\:text-5xl {
@@ -8199,6 +8345,11 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
   .sm\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+
+  .sm\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   .sm\:leading-\[3\.5rem\] {
@@ -8274,6 +8425,10 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
 
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .lg\:flex-row {

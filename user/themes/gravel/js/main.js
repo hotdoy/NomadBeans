@@ -45,4 +45,14 @@ document.addEventListener("alpine:init", () => {
         })
     }
   })
+
+  Alpine.data('locationRatings', () => ({
+    ratingMode: false,
+    init() {
+      console.log('locationRatings component loaded')
+    },
+    send() {
+      console.log('send rating');
+    }
+  }))
 })
