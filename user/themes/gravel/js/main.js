@@ -47,7 +47,7 @@ document.addEventListener("alpine:init", () => {
   })
 
   Alpine.data('locationRatings', () => ({
-    ratingMode: false,
+    ratingMode: true,
     init() {
       console.log('locationRatings component loaded')
     },
