@@ -1,0 +1,12 @@
+: james
+Message (Optional): some optional message
+I am working for or are affiliated with this cafe.: 1
+: gb-london-johns-coffee-house
+Images: {&quot;user\/pages\/07.review\/roman-bozhko-OXXsAafHDeo-unsplash Large.jpeg&quot;:{&quot;name&quot;:&quot;roman-bozhko-OXXsAafHDeo-unsplash Large.jpeg&quot;,&quot;type&quot;:&quot;image\/jpeg&quot;,&quot;size&quot;:293462,&quot;path&quot;:&quot;user\/pages\/07.review\/roman-bozhko-OXXsAafHDeo-unsplash Large.jpeg&quot;}}
+How is the coffee?: 5
+How is the Wi-Fi?: 8
+How is the price?: 8
+How is the seating?: 5
+How is the food?: 7
+How is the location?: 5
+

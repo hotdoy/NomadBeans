@@ -9,7 +9,7 @@
     @apply text-2xl font-bold;
   }
   #submit-form .buttons {
-    @apply flex justify-between;
+    @apply flex justify-center;
   }
 
   #submit-form h2 {
@@ -17,6 +17,18 @@
   }
 
   #submit-form .msa-wrapper label {
+    @apply label;
+  }
+
+  #review-form .buttons {
+    @apply flex justify-center;
+  }
+
+  #review-form h2 {
+    @apply text-3xl sm:text-4xl;
+  }
+
+  #review-form .msa-wrapper label {
     @apply label;
   }
 

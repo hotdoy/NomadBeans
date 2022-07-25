@@ -216,8 +216,7 @@ form:
         reset:
             type: reset
             value: Reset
-            classes: 'btn btn-ghost'
-            button_container_classes: container-test
+            classes: 'btn btn-ghost mr-4'
         submit:
             type: submit
             value: Submit

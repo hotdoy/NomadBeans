@@ -1,0 +1,257 @@
+title: Reviews
+description: Location reviews.
+type: flex-objects
+
+# Flex Configuration
+config:
+  # Administration Configuration
+  admin:
+    # Admin router (optional)
+    router:
+      path: "/reviews"
+
+    # Admin menu (optional)
+    menu:
+      list:
+        route: "/reviews"
+        title: Reviews
+        icon: fa-check-square-o
+        # Authorization to collection admin
+        authorize: ["admin.reviews.list", "admin.super"]
+        # Priority -10 .. 10 (highesgitt goes up)
+        priority: 0
+
+    # Admin template type / folder
+    template: default
+
+    # Permissions
+    permissions:
+      # Primary permissions
+      admin.reported:
+        type: crudpl
+        label: Reviews
+
+    # List view
+    list:
+      title: name
+      fields:
+        accepted:
+          type: toggle
+          width: 8
+        processed:
+          type: toggle
+          width: 8
+        cafe_key:
+        cafe_rating_overall:
+          link: edit
+        submitted_at:
+        processed_at:
+
+
+    # Edit View
+    edit:
+      title:
+        template: "{{ object.cafe_name ?? 'Review' }} - Reviewed at {{ object.submitted_at ?? 'Date Unknown' }}"
+
+    # Preview View
+    preview:
+      enabled: false
+      route:
+        #template: '/plugins/flex-objects/directory:cities'
+
+    # Data Export
+    export:
+      enabled: true
+      method: "jsonSerialize"
+      formatter:
+        class: 'Grav\Framework\File\Formatter\YamlFormatter'
+      filename: "reviews"
+
+  # Site Configuration
+  site:
+    templates:
+      collection:
+        # Lookup for the template layout files for collections of objects
+        paths:
+          - "flex/{TYPE}/collection/{LAYOUT}{EXT}"
+      object:
+        # Lookup for the template layout files for objects
+        paths:
+          - "flex/{TYPE}/object/{LAYOUT}{EXT}"
+      defaults:
+        # Default template {TYPE}; overridden by filename of this blueprint if template folder exists
+        type: reported
+        # Default template {LAYOUT}; can be overridden in render calls (usually Twig in templates)
+        layout: default
+
+  # Data Configuration
+  data:
+    # Object class to be used, allowing custom methods for the object
+    object: 'Grav\Common\Flex\Types\Generic\GenericObject'
+    # Collection class to be used, allowing custom methods for the collections
+    collection: 'Grav\Common\Flex\Types\Generic\GenericCollection'
+    # Index class to be used, works as a quick database-like lookup index
+    index: 'Grav\Common\Flex\Types\Generic\GenericIndex'
+    storage:
+      # Storage class, use single file storage (does not support images and assets)
+      class: 'Grav\Framework\Flex\Storage\FolderStorage'
+      options:
+        formatter:
+          # File formatter class, in this case the file is stored in markdown
+          class: 'Grav\Framework\File\Formatter\JsonFormatter'
+        # JSON file where all the objects will be stored
+        folder: user-data://reviews
+    ordering:
+      accepted: ASC
+      submitted_at: DESC
+    search:
+      # Search options
+      options:
+        contains: 1
+      # Fields to be searched
+      fields:
+        - published
+
+
+form:
+  validation: loose
+
+  fields:
+    accepted:
+      type: toggle
+      label: Accepted
+      highlight: 0
+      options:
+          1: PLUGIN_ADMIN.YES
+          0: PLUGIN_ADMIN.NO
+      validate:
+          type: bool
+
+    processed:
+      type: toggle
+      label: Processed
+      highlight: 0
+      options:
+          1: PLUGIN_ADMIN.YES
+          0: PLUGIN_ADMIN.NO
+      validate:
+          type: bool
+
+    reviewer_name:
+      type: text
+      label: 'Reviewer Name'
+
+    reviewer_username:
+      type: text
+      label: 'Reviewer Username'
+
+    reviewer_email:
+      type: email
+      label: 'Reviewer Email'
+      validate:
+        type: email
+
+    reviewer_message:
+      label: 'Reviewer Message'
+      type: textarea
+
+    reviewer_is_affilitated:
+      type: checkbox
+      label: 'Reviewer is affiliated?'
+
+    cafe_key:
+      type: text
+      label: Cafe Key
+      validate:
+        required: true
+
+    cafe_name:
+      label: Cafe Name
+      type: text
+
+    cafe_images:
+      type: file
+      label: Images
+      multiple: true
+      destination: self@
+      random_name: false
+      avoid_overwriting: true
+      filesize: 3
+      limit: 10
+      accept:
+        - "image/*"
+
+    cafe_rating_overall:
+      type: range
+      label: "How is the cafe overall?"
+      default: 5
+      validate:
+        min: 0
+        max: 10
+
+    cafe_rating_coffee:
+      type: range
+      label: "How is the coffee?"
+      default: 5
+      validate:
+        min: 0
+        max: 10
+
+    cafe_rating_wifi:
+      type: range
+      label: "How is the Wi-Fi?"
+      default: 5
+      validate:
+        min: 0
+        max: 10
+
+    cafe_rating_price:
+      type: range
+      label: "How is the price?"
+      default: 5
+      validate:
+        min: 0
+        max: 10
+
+    cafe_rating_seating:
+      type: range
+      label: "How is the seating?"
+      default: 5
+      validate:
+        min: 0
+        max: 10
+
+    cafe_rating_food:
+      type: range
+      label: "How is the food?"
+      default: 5
+      validate:
+        min: 0
+        max: 10
+
+    cafe_rating_location:
+      type: range
+      label: "How is the location?"
+      default: 5
+      validate:
+        min: 0
+        max: 10
+    
+    cafe_amenities:
+      type: selectize
+      label: Amenities
+      selectize:
+        data-options@: '\Grav\Plugin\Gravel\Utils::getAmenitiesForSelectize'
+      size: long
+      classes: fancy
+      help: 'Add features separated by commas.'
+      validate:
+        type: commalist
+
+    submitted_at:
+      type: datetime
+      label: Submitted At
+
+    processed_at:
+      type: datetime
+      label: Processed At

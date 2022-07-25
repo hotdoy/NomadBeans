@@ -367,4 +367,35 @@ class Utils {
   public static function getAmenitiesList() {
     return Self::$amenities_list;
   }
+
+  public static function getUserFullname() {
+    return Grav::instance()['user']->fullname;
+  }
+
+  public static function getUserEmail() {
+    return Grav::instance()['user']->email;
+  }
+
+  public static function getLocationNameByKey($key) {
+    $locations = Grav::instance()->get('flex')->getDirectory('locations');
+    $col = $locations ? $locations->getCollection() : null;
+
+    if ($col) {
+      $obj = $col->get($key);
+
+      if ($obj) {
+        return $obj->name;
+      }
+    }
+    
+    return null;
+  }
+
+  public static function getLocationNameFromUri() {
+    $location_key = Grav::instance()['uri']->param('location');
+    
+    if ($location_key) {
+      return Self::getLocationNameByKey($location_key);
+    }
+  }
 }
