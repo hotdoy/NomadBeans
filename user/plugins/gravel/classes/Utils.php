@@ -309,19 +309,6 @@ class Utils {
     return Self::$country_list;
   }
 
-  public static function getAmenitiesForSelectize() {
-    $formatted_list = array();
-
-    foreach(Self::$amenities_list as $key => $value) {
-      array_push($formatted_list, [
-        'text' => $value,
-        'value' => $key
-      ]);
-    }
-
-    return $formatted_list;
-  }
-
   public static function getTaxonomiesByType($type) {
     $taxonomies = Grav::instance()->get('flex')->getDirectory('taxonomies');
     $col = $taxonomies ? $taxonomies->getCollection() : null;
@@ -360,7 +347,24 @@ class Utils {
     return $slugValuePairs;
   }
 
+  public static function getAmenitiesForSelectize() {
+    $formatted_list = array();
+
+    foreach(Self::$amenities_list as $key => $value) {
+      array_push($formatted_list, [
+        'text' => $value,
+        'value' => $key
+      ]);
+    }
+
+    return $formatted_list;
+  }
+
   public static function getAmenityNameByKey($key) {
     return Self::$amenities_list[$key];
+  }
+
+  public static function getAmenitiesList() {
+    return Self::$amenities_list;
   }
 }
