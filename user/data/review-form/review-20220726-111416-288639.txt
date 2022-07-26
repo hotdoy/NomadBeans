@@ -1,0 +1,12 @@
+: james
+: gb-london-johns-coffee-house
+Images: {&quot;image:\/\/reviews\/tyler-nix-2rZq49uGxLk-unsplash Large.jpeg&quot;:{&quot;name&quot;:&quot;tyler-nix-2rZq49uGxLk-unsplash Large.jpeg&quot;,&quot;type&quot;:&quot;image\/jpeg&quot;,&quot;size&quot;:228844,&quot;path&quot;:&quot;image:\/\/reviews\/tyler-nix-2rZq49uGxLk-unsplash Large.jpeg&quot;}}
+How is the cafe overall?: 5
+How is the coffee?: 5
+How is the Wi-Fi?: 5
+How is the price?: 5
+How is the seating?: 5
+How is the food?: 5
+How is the location?: 5
+Amenities: [&quot;natural-light&quot;,&quot;outdoor-seating&quot;]
+

@@ -4,7 +4,7 @@ Contributor:
       login: true
       review: true
       submit: true
-  readableName: Contributor2
+  readableName: Contributor
   description: 'Contributors can review, submit, and report cafes.'
   icon: edit
   enabled: true

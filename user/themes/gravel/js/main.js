@@ -47,23 +47,7 @@ document.addEventListener("alpine:init", () => {
   })
 
   Alpine.data("locationRatings", () => ({
-    ratingMode: false,
     init() {
-      console.log("locationRatings component loaded")
-    },
-    send() {
-      console.log("send rating")
-    },
-    scrollToTop() {
-      setTimeout(function() {
-        const id = "location-ratings"
-        const yOffset = -70
-        const element = document.getElementById(id)
-        const drawerContent = document.getElementById('drawer-content')
-        const y = element.getBoundingClientRect().top + drawerContent.scrollTop + yOffset
-        
-        drawerContent.scrollTo({ top: y, behavior: "smooth" })
-      },200)
     }
   }))
 })

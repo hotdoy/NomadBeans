@@ -1,0 +1,11 @@
+: james
+: gb-london-johns-coffee-house
+How is the cafe overall?: 3
+How is the coffee?: 7
+How is the Wi-Fi?: 3
+How is the price?: 3
+How is the seating?: 2
+How is the food?: 3
+How is the location?: 8
+Amenities: [&quot;natural-light&quot;,&quot;outdoor-seating&quot;,&quot;fast-service&quot;]
+

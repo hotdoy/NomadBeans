@@ -52,7 +52,7 @@
               values.push(selectedObj.value)
             })
 
-            this.selectedString = values.join(' ')
+            this.selectedString = values.join(',')
           })
         },
         addMe(e) {
@@ -130,6 +130,7 @@
                                                     aria-hidden="true" 
                                                     x-bind:aria-expanded="listActive.toString()" 
                                                     aria-haspopup="tag-list"
+                                                    name="data[cafe_amenities]"
                                                     hidden>
                                               <div class="input-presentation" @click="listActive = !listActive" @click.away="listActive = false" x-bind:class="{'active': listActive}">
                                                 <span class="placeholder" x-show="selected.length == 0">Select Amenities</span>

@@ -1,0 +1,14 @@
+: james
+Message (Optional): some message
+I am working for or are affiliated with this cafe.: 1
+: es-madrid-carlos-coffee
+Images: {&quot;user\/pages\/review\/tyler-nix-2rZq49uGxLk-unsplash Large.jpeg&quot;:{&quot;name&quot;:&quot;tyler-nix-2rZq49uGxLk-unsplash Large.jpeg&quot;,&quot;type&quot;:&quot;image\/jpeg&quot;,&quot;size&quot;:228844,&quot;path&quot;:&quot;user\/pages\/review\/tyler-nix-2rZq49uGxLk-unsplash Large.jpeg&quot;}}
+How is the cafe overall?: 8
+How is the coffee?: 7
+How is the Wi-Fi?: 6
+How is the price?: 8
+How is the seating?: 8
+How is the food?: 8
+How is the location?: 7
+Amenities: [&quot;public-restrooms&quot;,&quot;power-outlets&quot;]
+

@@ -144,7 +144,13 @@ class GravelLoginController
             if ($user->authorized) {
                 $event->defMessage('PLUGIN_LOGIN.LOGIN_SUCCESSFUL', 'info');
                 
-                if ($this->grav['uri']->referrer('/', '', true) === $this->grav['config']->get('plugins.login.route')) {
+                if (isset($this->post['redirect']) && isset($this->post['redirect_type'])) {
+                  if ($this->post['redirect_type'] == 'review') {
+                    $event->defRedirect(
+                      'review/' . $this->post['redirect_dir'] . ':' . $this->post['redirect_page']
+                    );
+                  }
+                } elseif ($this->grav['uri']->referrer('/', '', true) === $this->grav['config']->get('plugins.login.route')) {
                   $event->defRedirect(
                     '/'
                   );

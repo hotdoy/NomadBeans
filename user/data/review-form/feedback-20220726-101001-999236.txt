@@ -1,0 +1,13 @@
+: james
+Message (Optional): What a great website!
+I am working for or are affiliated with this cafe.: 1
+: gb-london-johns-coffee-house
+How is the cafe overall?: 5
+How is the coffee?: 5
+How is the Wi-Fi?: 5
+How is the price?: 5
+How is the seating?: 5
+How is the food?: 5
+How is the location?: 5
+Amenities: [&quot;natural-light&quot;,&quot;power-outlets&quot;]
+

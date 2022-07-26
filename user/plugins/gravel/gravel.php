@@ -4,6 +4,7 @@ namespace Grav\Plugin;
 
 // use Grav\Plugin\Gravel\Utils;
 use Composer\Autoload\ClassLoader;
+use Grav\Common\File\CompiledYamlFile;
 use Grav\Common\Plugin;
 use Grav\Common\Grav;
 use Grav\Common\Page\Page;
@@ -14,6 +15,7 @@ use Grav\Plugin\Gravel\Utils as GravelUtils;
 use RocketTheme\Toolbox\File\File;
 use Symfony\Component\Yaml\Yaml;
 use Grav\Plugin\Gravel\GravelLoginController as Controller;
+use RocketTheme\Toolbox\Event\Event;
 
 /**
  * Class GravelPlugin
@@ -58,7 +60,8 @@ class GravelPlugin extends Plugin {
 
     // Enable the main events we are interested in
     $this->enable([
-      'onTask.report.submit' => ['onReportSubmit', 0]
+      'onTask.report.submit' => ['onReportSubmit', 0],
+      'onFormProcessed' => ['onFormProcessed', 0]
     ]);
 
     $this->router();
@@ -75,6 +78,34 @@ class GravelPlugin extends Plugin {
     );
 
     $this->grav->close($response);
+  }
+
+  public function onFormProcessed(Event $event)
+  {
+      $form = $event['form'];
+      $action = $event['action'];
+
+      switch ($action) {
+          case 'review':
+              $this->processForm($form, $event);
+              break;
+      }
+  }
+
+  private function processForm(mixed $form, Event $event)
+  {
+      /** @var \Grav\Plugin\Form\Form $form */
+      $form->validate();
+
+      /** @var array $data */
+      $data = $form->getData()->toArray();
+
+      $data['submitted_at'] = date("d-m-Y H:i");
+
+      $dir = $this->grav['flex']->getDirectory('reviews');
+      $obj = $dir->createObject($data);
+
+      $obj->save();
   }
 
   public function onReportSubmit() {

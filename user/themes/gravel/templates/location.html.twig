@@ -38,7 +38,6 @@
 {% endif %}
 
 {% block hero %}
-
   {# Location Carousel #}
   {% set swiper %}
   const swiper = new Swiper('#location-carousel', {
@@ -141,7 +140,7 @@
   <div class="divider hidden sm:flex"></div>
 
   {# Start Ratings #}
-  <div id="location-ratings" x-data="locationRatings" class="container mx-auto mb-6 mt-12 sm:my-12">
+  <div id="location-ratings" class="container mx-auto mb-6 mt-12 sm:my-12">
     <div class="px-4">
       <form>
         <div class="mb-8 md:mb-12 mx-auto text-2xl sm:text-3xl">
@@ -157,7 +156,7 @@
             <h1 class="mb-4 sm:mb-6 text-3xl sm:text-4xl">
               Overall
             </h1>
-            <div x-show="!ratingMode" class="rating rating-lg rating-half pointer-events-none">
+            <div class="rating rating-lg rating-half pointer-events-none">
               <input type="radio" name="rating-10" class="rating-hidden"/>
               {% set k = 10 %}
               {% for i in range(1, k) %}
@@ -166,23 +165,6 @@
                 {% else %}
                   <input type="radio" name="rating_overall_presentational" value="{{ i }}" class="{{ rating_class }} mask mask-star-2 mask-half-1 {% if object.rating_overall == 0 %}opacity-20{% endif %}" {% if i == object.rating_overall %} checked {% endif %}/>
                 {% endif %}
-              {% endfor %}
-            </div>
-            <div x-show="ratingMode" class="grid auto-rows-auto grid-cols-6 items-center justify-items-center gap-y-4 gap-x-2 w-full sm:max-w-lg">
-              <div class="grid grid-cols-2 items-center justify-items-center gap-x-0 sm:gap-x-1">
-                <label for="rating_overall-0" class="text-base font-normal">0</label>
-                <input id="rating_overall-0" type="radio" name="rating-10" class="radio radio-primary"/>
-              </div>
-              {% set k = 10 %}
-              {% for i in range(1, k) %}
-                <div class="grid grid-cols-2 items-center justify-items-center gap-x-0 sm:gap-x-1">
-                  <label for="rating_overall-{{ i }}" class="text-base font-normal">{{ i }}</label>
-                  {% if i % 2 == 0 %}
-                    <input id="rating_overall-{{ i }}" type="radio" name="rating_overall" value="{{ i }}" class="radio radio-primary" {% if i == object.rating_overall %} checked {% endif %}/>
-                  {% else %}
-                    <input id="rating_overall-{{ i }}" type="radio" name="rating_overall" value="{{ i }}" class="radio radio-primary" {% if i == object.rating_overall %} checked {% endif %}/>
-                  {% endif %}
-                </div>
               {% endfor %}
             </div>
           </div>
@@ -220,31 +202,17 @@
              <table class="table w-full">
               <tbody>
                 {% for metric in metrics_half_first %}
-                  <tr x-bind:class="ratingMode ? 'grid grid-cols-1 auto-rows-auto sm:grid-cols-4 sm:grid-rows-1 mb-4' : 'flex justify-between border-b'">
-                    <th class="py-2 px-0 border-b-0" x-bind:class="ratingMode ? 'text-center sm:text-left pl-0 border-none' : 'flex items-center'">{{ metric.name }}</th>
-                    <td class="py-2 px-0 border-b-0" x-bind:class="ratingMode ? 'p-0 col-span-3 border-none' : 'ml-auto'">
-                      <div x-bind:class="ratingMode ? 'grid auto-rows-auto grid-cols-6 items-center justify-items-center gap-y-4 gap-x-2' : 'rating rating-md rating-half'" class="{% if not grav.user.username %}pointer-events-none{% endif %}">
-                        <div x-show="ratingMode" class="grid grid-cols-2 items-center justify-items-center gap-x-1">
-                          <label for="{{ metric.key }}-0">0</label>
-                          <input id="{{ metric.key }}-0" type="radio" name="{{ metric.key }}" value="0" class="radio radio-primary"/>
-                        </div>
-                        <input x-show="!ratingMode" id="{{ metric.key }}-0" type="radio" name="{{ metric.key }}-presentational" value="0" class="rating-hidden"/>
+                  <tr x-bind:class="flex justify-between border-b">
+                    <th class="py-2 px-0 border-b-0" class="flex items-center">{{ metric.name }}</th>
+                    <td class="py-2 px-0 border-b-0 flex justify-end" class="ml-auto">
+                      <div class="rating rating-md rating-half" class="pointer-events-none">
+                        <input id="{{ metric.key }}-0" type="radio" name="{{ metric.key }}-presentational" value="0" class="rating-hidden"/>
                         {% set k = 10 %}
                         {% for i in range(1, k) %}
-                          <div x-show="ratingMode" class="grid grid-cols-2 items-center justify-items-center gap-x-0 sm:gap-x-1">
-                            <label for="{{ metric.key }}-{{ i }}" class="">{{ i }}</label>
                             {% if i % 2 == 0 %}
-                              <input id="{{ metric.key }}-{{ i }}" type="radio" name="{{ metric.key }}" class="radio radio-primary" {% if i == object[metric.key] %} checked {% endif %}/>
+                              <input id="{{ metric.key }}-{{ i }}" type="radio" name="{{ metric.key }}-presentational" class="bg-primary mask mask-star-2 mask-half-2 pointer-events-none" {% if i == object[metric.key] %} checked {% endif %}/>
                             {% else %}
-                              <input id="{{ metric.key }}-{{ i }}" type="radio" name="{{ metric.key }}" class="radio radio-primary" {% if i == object[metric.key] %} checked {% endif %}/>
-                            {% endif %}
-                          </div>
-                        {% endfor %}
-                        {% for i in range(1, k) %}
-                            {% if i % 2 == 0 %} 
-                              <input x-show="!ratingMode" id="{{ metric.key }}-{{ i }}" type="radio" name="{{ metric.key }}-presentational" class="bg-primary mask mask-star-2 mask-half-2 pointer-events-none" {% if i == object[metric.key] %} checked {% endif %}/>
-                            {% else %}
-                              <input x-show="!ratingMode" id="{{ metric.key }}-{{ i }}" type="radio" name="{{ metric.key }}-presentational" class="bg-primary mask mask-star-2 mask-half-1 pointer-events-none" {% if i == object[metric.key] %} checked {% endif %}/>
+                              <input id="{{ metric.key }}-{{ i }}" type="radio" name="{{ metric.key }}-presentational" class="bg-primary mask mask-star-2 mask-half-1 pointer-events-none" {% if i == object[metric.key] %} checked {% endif %}/>
                             {% endif %}
                         {% endfor %}
                       </div>
@@ -258,31 +226,17 @@
             <table class="table w-full">
               <tbody>
                 {% for metric in metrics_half_second %}
-                  <tr x-bind:class="ratingMode ? 'grid grid-cols-1 auto-rows-auto sm:grid-cols-4 sm:grid-rows-1 mb-4' : 'flex justify-between border-b'">
-                    <th class="py-2 px-0 border-b-0" x-bind:class="ratingMode ? 'text-center sm:text-left pl-0 border-none' : 'flex items-center'">{{ metric.name }}</th>
-                    <td class="py-2 px-0 border-b-0" x-bind:class="ratingMode ? 'p-0 col-span-3 border-none' : 'ml-auto'">
-                      <div x-bind:class="ratingMode ? 'grid auto-rows-auto grid-cols-6 items-center justify-items-center gap-y-4 gap-x-2' : 'rating rating-md rating-half'" class="{% if not grav.user.username %}pointer-events-none{% endif %}">
-                        <div x-show="ratingMode" class="grid grid-cols-2 items-center justify-items-center gap-x-1">
-                          <label for="{{ metric.key }}-0">0</label>
-                          <input id="{{ metric.key }}-0" type="radio" name="{{ metric.key }}" value="0" class="radio radio-primary"/>
-                        </div>
-                        <input x-show="!ratingMode" id="{{ metric.key }}-0" type="radio" name="{{ metric.key }}-presentational" value="0" class="rating-hidden"/>
+                  <tr x-bind:class="flex justify-between border-b">
+                    <th class="py-2 px-0 border-b-0" class="flex items-center">{{ metric.name }}</th>
+                    <td class="py-2 px-0 border-b-0 flex justify-end" class="ml-auto">
+                      <div class="rating rating-md rating-half" class="pointer-events-none">
+                        <input id="{{ metric.key }}-0" type="radio" name="{{ metric.key }}-presentational" value="0" class="rating-hidden"/>
                         {% set k = 10 %}
                         {% for i in range(1, k) %}
-                          <div x-show="ratingMode" class="grid grid-cols-2 items-center justify-items-center gap-x-0 sm:gap-x-1">
-                            <label for="{{ metric.key }}-{{ i }}" class="">{{ i }}</label>
                             {% if i % 2 == 0 %}
-                              <input id="{{ metric.key }}-{{ i }}" type="radio" name="{{ metric.key }}" class="radio radio-primary" {% if i == object[metric.key] %} checked {% endif %}/>
+                              <input id="{{ metric.key }}-{{ i }}" type="radio" name="{{ metric.key }}-presentational" class="bg-primary mask mask-star-2 mask-half-2 pointer-events-none" {% if i == object[metric.key] %} checked {% endif %}/>
                             {% else %}
-                              <input id="{{ metric.key }}-{{ i }}" type="radio" name="{{ metric.key }}" class="radio radio-primary" {% if i == object[metric.key] %} checked {% endif %}/>
-                            {% endif %}
-                          </div>
-                        {% endfor %}
-                        {% for i in range(1, k) %}
-                            {% if i % 2 == 0 %}
-                              <input x-show="!ratingMode" id="{{ metric.key }}-{{ i }}" type="radio" name="{{ metric.key }}-presentational" class="bg-primary mask mask-star-2 mask-half-2 pointer-events-none" {% if i == object[metric.key] %} checked {% endif %}/>
-                            {% else %}
-                              <input x-show="!ratingMode" id="{{ metric.key }}-{{ i }}" type="radio" name="{{ metric.key }}-presentational" class="bg-primary mask mask-star-2 mask-half-1 pointer-events-none" {% if i == object[metric.key] %} checked {% endif %}/>
+                              <input id="{{ metric.key }}-{{ i }}" type="radio" name="{{ metric.key }}-presentational" class="bg-primary mask mask-star-2 mask-half-1 pointer-events-none" {% if i == object[metric.key] %} checked {% endif %}/>
                             {% endif %}
                         {% endfor %}
                       </div>
@@ -293,24 +247,8 @@
             </table>
           </div>
         </div>
-
-        <div x-show="ratingMode" class="max-w-lg mx-auto mt-8">
-          <h2 class="text-2xl text-accent mb-6 text-center">
-            Amenities
-          </h2>
-          <div class="grid grid-cols-2 gap-x-8">
-          {% for slug,text in gravel_utils.getAmenitiesList %}
-            <div class="form-control">
-              <label class="label cursor-pointer">
-                <span class="label-text">{{ text }}</span> 
-                <input type="checkbox" name="{{ slug }}" class="checkbox checkbox-primary" />
-              </label>
-            </div>
-          {% endfor %}
-          </div>
-        </div>
-
         <div class="mt-8 flex justify-center">
+          {% if grav.user.username %}
           <a href="/review/location:{{ object.slug }}/" class="btn btn-secondary btn-sm gap-2 mx-auto">
             Review This Cafe
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewbox="0 0 16 16">
@@ -318,6 +256,15 @@
               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
             </svg>
           </a>
+          {% else %}
+            <a href="/account/login/redirect:true/redirectType:review/redirectDir:location/redirectPage:{{ object.slug }}/" class="btn btn-secondary btn-sm gap-2 mx-auto">
+              Review This Cafe
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewbox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+              </svg>
+            </a>
+          {% endif %}
         </div>
       </form>
     </div>

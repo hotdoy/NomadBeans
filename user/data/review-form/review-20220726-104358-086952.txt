@@ -1,0 +1,11 @@
+: james
+: es-madrid-carlos-coffee
+How is the cafe overall?: 7
+How is the coffee?: 8
+How is the Wi-Fi?: 8
+How is the price?: 5
+How is the seating?: 5
+How is the food?: 5
+How is the location?: 5
+Amenities: [&quot;vegan-food&quot;,&quot;power-outlets&quot;,&quot;fast-service&quot;,&quot;artistic-decorations&quot;,&quot;outdoor-seating&quot;]
+

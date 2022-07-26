@@ -10,7 +10,6 @@ form:
       title: "Your Details"
       title_level: h2
       classes: "mb-4 mt-8"
-
     reviewer_name:
       type: text
       id: name
@@ -23,12 +22,10 @@ form:
       disabled: true
       validate:
         required: true
-
     reviewer_username:
       type: hidden
       evaluate: true
       default: grav.user.username
-
     reviewer_email:
       type: email
       data-default@: '\Grav\Plugin\Gravel\Utils::getUserEmail'
@@ -42,7 +39,6 @@ form:
       classes: "input input-ghost w-full"
       validate:
         required: true
-
     reviewer_message:
       type: textarea
       id: message
@@ -53,24 +49,20 @@ form:
       outerclasses: " form-control mb-4"
       label_classes: label
       maxlength: 255
-
     reviewer_is_affilitated:
       type: checkbox
       id: is-affiliated
       label: "I am working for or are affiliated with this cafe."
       outerclasses: mb-4
-
     cafe_details:
       type: section
       title: "Cafe Details"
       title_level: h2
       classes: "mb-4 mt-8"
-
     cafe_key:
       type: hidden
       evaluate: true
-      default: uri.param('location')
-
+      default: "uri.param('location')"
     cafe_name:
       type: text
       id: cafe-name
@@ -83,7 +75,6 @@ form:
       disabled: true
       validate:
         required: true
-
     cafe_images:
       type: file
       id: cafe-images
@@ -94,7 +85,7 @@ form:
       outer_label_classes: test
       multiple: true
       classes: "!mb-0"
-      destination: self@
+      destination: "image://reviews"
       random_name: false
       avoid_overwriting: true
       outerclasses: "form-control mb-4"
@@ -102,7 +93,6 @@ form:
       limit: 10
       accept:
         - "image/*"
-
     cafe_rating_overall:
       type: range
       id: cafe-rating-overall
@@ -114,7 +104,6 @@ form:
       validate:
         min: 0
         max: 10
-
     cafe_rating_coffee:
       type: range
       id: cafe-rating-coffee
@@ -126,7 +115,6 @@ form:
       validate:
         min: 0
         max: 10
-
     cafe_rating_wifi:
       type: range
       id: cafe-rating-coffee
@@ -138,7 +126,6 @@ form:
       validate:
         min: 0
         max: 10
-
     cafe_rating_price:
       type: range
       id: cafe-rating-coffee
@@ -150,7 +137,6 @@ form:
       validate:
         min: 0
         max: 10
-
     cafe_rating_seating:
       type: range
       id: cafe-rating-coffee
@@ -162,7 +148,6 @@ form:
       validate:
         min: 0
         max: 10
-
     cafe_rating_food:
       type: range
       id: cafe-rating-coffee
@@ -174,7 +159,6 @@ form:
       validate:
         min: 0
         max: 10
-
     cafe_rating_location:
       type: range
       id: cafe-rating-coffee
@@ -186,10 +170,9 @@ form:
       validate:
         min: 0
         max: 10
-        
     cafe_amenities:
       type: text
-      label: Features
+      label: Amenities
       id: cafe-amenities
       display_label: false
       outerclasses: form-control
@@ -198,16 +181,12 @@ form:
       help: PLUGIN_ADMIN.TAXONOMY_TYPES_HELP
       validate:
         type: commalist
-
-    
-
     g-recaptcha-response:
       label: Captcha
       type: captcha
       recaptcha_not_validated: "Captcha not valid!"
       classes: "mx-auto max-w-max"
       outerclasses: "mx-auto max-w-max my-8"
-
   buttons:
     reset:
       type: reset
@@ -219,16 +198,17 @@ form:
       classes: "btn btn-primary btn-wide"
   process:
     captcha: true
+    review: true
     save:
-      fileprefix: feedback-
+      fileprefix: review-
       dateformat: Ymd-His-u
       extension: txt
       body: "{% include 'forms/data.txt.twig' %}"
     message: "Thank you for your feedback!"
     display: thankyou
 page_media_alt_desc: "a woman making coffee at a counter inside a cafe"
-media_order: nafinia-putra-Kwdp-0pok-I-unsplash.jpeg
 access:
-  site:
-    submit: true
+  site.review: true
+featured_image_alt_description: sdfdsf
+media_order: michal-parzuchowski-ItaV89TNkks-unsplash.jpeg
 ---
