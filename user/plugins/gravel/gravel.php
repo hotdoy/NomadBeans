@@ -2,20 +2,17 @@
 
 namespace Grav\Plugin;
 
-// use Grav\Plugin\Gravel\Utils;
-use Composer\Autoload\ClassLoader;
-use Grav\Common\File\CompiledYamlFile;
-use Grav\Common\Plugin;
-use Grav\Common\Grav;
-use Grav\Common\Page\Page;
 use Grav\Common\Uri;
+use Grav\Common\Grav;
 use Grav\Common\Utils;
-use Grav\Framework\Psr7\Response;
-use Grav\Plugin\Gravel\Utils as GravelUtils;
-use RocketTheme\Toolbox\File\File;
+use Grav\Common\Plugin;
 use Symfony\Component\Yaml\Yaml;
-use Grav\Plugin\Gravel\GravelLoginController as Controller;
+use Grav\Framework\Psr7\Response;
+use Composer\Autoload\ClassLoader;
+use RocketTheme\Toolbox\File\File;
 use RocketTheme\Toolbox\Event\Event;
+use Grav\Plugin\Gravel\Utils as GravelUtils;
+use Grav\Plugin\Gravel\GravelLoginController as Controller;
 
 /**
  * Class GravelPlugin

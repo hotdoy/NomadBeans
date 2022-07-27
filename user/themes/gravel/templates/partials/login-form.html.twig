@@ -28,9 +28,9 @@
 
                 {% if uri.param('redirect') %}
                   <input type="hidden" name="redirect" value="true">
-                  <input type="hidden" name="redirect_type" value="{{ uri.param('redirectType') }}">
-                  <input type="hidden" name="redirect_dir" value="{{ uri.param('redirectDir') }}">
-                  <input type="hidden" name="redirect_page" value="{{ uri.param('redirectPage') }}">
+                  <input type="hidden" name="redirect_type" value="{{ uri.param('redirect_type') }}">
+                  <input type="hidden" name="redirect_dir" value="{{ uri.param('redirect_dir') }}">
+                  <input type="hidden" name="redirect_page" value="{{ uri.param('redirect_page') }}">
                 {% endif %}
 
                 {# OLD WAY OF INCLUDING 3RD PARTY LOGIN OPTIONS #}

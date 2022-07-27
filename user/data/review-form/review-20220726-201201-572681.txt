@@ -1,0 +1,13 @@
+: james
+Message (Optional): A new submission
+I am working for or are affiliated with this cafe.: 1
+: es-madrid-carlos-coffee
+Images: {&quot;image:\/\/reviews\/nafinia-putra-Kwdp-0pok-I-unsplash.jpeg&quot;:{&quot;name&quot;:&quot;nafinia-putra-Kwdp-0pok-I-unsplash.jpeg&quot;,&quot;type&quot;:&quot;image\/jpeg&quot;,&quot;size&quot;:921278,&quot;path&quot;:&quot;image:\/\/reviews\/nafinia-putra-Kwdp-0pok-I-unsplash.jpeg&quot;}}
+How is the cafe overall?: 5
+How is the coffee?: 5
+How is the Wi-Fi?: 5
+How is the price?: 5
+How is the seating?: 5
+How is the food?: 5
+How is the location?: 5
+
