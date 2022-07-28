@@ -1,0 +1,14 @@
+: james
+Message (Optional): yo what&#039;s up 
+I am working for or are affiliated with this cafe.: 1
+: gb-london-johns-coffee-house
+Images: {&quot;image:\/\/reviews\/20220726233735-nafinia-putra-Kwdp-0pok-I-unsplash.jpeg&quot;:{&quot;name&quot;:&quot;20220726233735-nafinia-putra-Kwdp-0pok-I-unsplash.jpeg&quot;,&quot;type&quot;:&quot;image\/jpeg&quot;,&quot;size&quot;:921278,&quot;path&quot;:&quot;image:\/\/reviews\/20220726233735-nafinia-putra-Kwdp-0pok-I-unsplash.jpeg&quot;}}
+How is the cafe overall?: 8
+How is the coffee?: 8
+How is the Wi-Fi?: 6
+How is the price?: 5
+How is the seating?: 5
+How are the power outlets?: 8
+How is the location?: 5
+Amenities: [&quot;fast-service&quot;,&quot;good-food&quot;,&quot;artistic-decorations&quot;,&quot;open-late&quot;,&quot;outdoor-seating&quot;]
+

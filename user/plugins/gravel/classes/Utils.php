@@ -256,16 +256,16 @@ class Utils {
   );
 
   public static $amenities_list = array(
-    'vegan-food' => 'Vegan Food',
+    'good-food' => 'Good Food',
     'natural-light' => 'Natural LIght',
     'public-restrooms' => 'Public Restrooms',
     'fast-service' => 'Fast Service',
     'outdoor-seating' => 'Outdoor Seating',
-    'power-outlets' => 'Power Outlets',
     'spacious-interior' => 'Spacious Interior',
     'artistic-decorations' => 'Artistic Decorations',
     'nice-music' => 'Nice Music',
-    'open-late' => 'Open Late' 
+    'open-late' => 'Open Late' ,
+    'friendly-service' => 'Friendly Service'
   );
 
   /**
@@ -396,6 +396,21 @@ class Utils {
     
     if ($location_key) {
       return Self::getLocationNameByKey($location_key);
+    }
+  }
+
+  public static function getUserFavoritesWithNameAsLink() {
+    $favs = Grav::instance()['user']->favorites;
+    $favSlugNamePairs = [];
+
+    if ($favs) {
+      foreach($favs as $key => $val) {
+        if ($val) {
+          $favSlugNamePairs[$key] = '<a class="link link-primary" target="_blank" href="/locations/'.$key.'">' . Self::getLocationNameByKey($key) . '</a>';
+        }
+      }
+
+      return $favSlugNamePairs;
     }
   }
 }

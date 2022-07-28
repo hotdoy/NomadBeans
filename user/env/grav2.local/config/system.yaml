@@ -29,7 +29,7 @@ home:
   alias: /home
   hide_in_urls: true
 pages:
-  type: regular
+  type: flex
   theme: gravel
   order:
     by: default

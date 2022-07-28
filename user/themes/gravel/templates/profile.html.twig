@@ -1,0 +1,16 @@
+{% set body_classes_slot = "template-profile" %}
+{% extends 'partials/base.html.twig' %}
+
+{% do form.setAllData(grav.user.toArray) %}
+
+{% block hero %}
+  <h1 class="text-center mt-12 lg:mt-20 text-4xl sm:text-5xl">Profile</h1>
+{% endblock %}
+
+{% block content %}
+  <div class="max-w-md px-4 mb-20 mt-12 mx-auto">
+    {% include 'partials/messages.html.twig' %}
+    {{ page.content|raw }}
+    {% include 'forms/form.html.twig' %}
+  </div>
+{% endblock %}

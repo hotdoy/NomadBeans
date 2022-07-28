@@ -2,11 +2,11 @@
 {% extends 'partials/base.html.twig' %}
 
 {% block hero %}
-	<div class="py-20 bg-center relative min-h-[16rem] sm:min-h-[20rem] lg:min-h-[24rem] bg-cover" style="background-image: url({{ url('theme://images/digi-nomad.jpeg') }});">
-		<div class="hero-overlay absolute pin bg-gradient-to-b from-black/18 to-black/18"></div>
+	<div class="py-20 bg-center relative min-h-[16rem] sm:min-h-[28rem] lg:min-h-[40rem] bg-cover flex items-center" style="background-image: url({{ page.media.images|first.url }});">
+		<div class="hero-overlay absolute pin bg-gradient-to-b from-black/30 to-black/18"></div>
 		<div class="text-center text-base-100 flex flex-col justify-center relative z-10 mx-auto container">
-      <h1 class="mb-5 text-3xl sm:text-5xl font-bold sm:leading-[3.5rem] px-4"><div>Cafe Finder</div>for Digital Nomads</h1>
-      <p class="mb-5 font-shadows-light text-lg sm:text-2xl w-2/3 px-4 mx-auto">Spaces & fuel for digital workers on the road.</p>
+      <h1 class="mb-5 text-3xl sm:text-5xl font-bold px-4 tracking-wider font-shadows-light">NomadBeans</h1>
+      <p class="mb-5 text-lg sm:text-2xl w-2/3 px-4 mx-auto">Cafe Finder for Digital Nomads.</p>
       {% include 'partials/hero-search.html.twig' %}
 		</div>
 	</div>

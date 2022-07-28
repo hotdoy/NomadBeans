@@ -6,6 +6,7 @@ use Grav\Common\Uri;
 use Grav\Common\Grav;
 use Grav\Common\Utils;
 use Grav\Common\Plugin;
+use Grav\Common\Page\Pages;
 use Symfony\Component\Yaml\Yaml;
 use Grav\Framework\Psr7\Response;
 use Composer\Autoload\ClassLoader;
@@ -58,6 +59,7 @@ class GravelPlugin extends Plugin {
     // Enable the main events we are interested in
     $this->enable([
       'onTask.report.submit' => ['onReportSubmit', 0],
+      'onTask.favorite.submit' => ['onFavoriteSubmit', 0],
       'onFormProcessed' => ['onFormProcessed', 0]
     ]);
 
@@ -77,39 +79,38 @@ class GravelPlugin extends Plugin {
     $this->grav->close($response);
   }
 
-  public function onFormProcessed(Event $event)
-  {
-      $form = $event['form'];
-      $action = $event['action'];
+  public function onFormProcessed(Event $event) {
+    $form = $event['form'];
+    $action = $event['action'];
 
-      switch ($action) {
-          case 'review':
-              $this->processForm($form, $event);
-              break;
-      }
+    switch ($action) {
+      case 'review':
+        $this->processForm($form, $event);
+        break;
+    }
   }
 
-  private function processForm(mixed $form, Event $event)
-  {
-      /** @var \Grav\Plugin\Form\Form $form */
-      $form->validate();
+  private function processForm(mixed $form, Event $event) {
+    /** @var \Grav\Plugin\Form\Form $form */
+    $form->validate();
 
-      /** @var array $data */
-      $data = $form->getData()->toArray();
+    /** @var array $data */
+    $data = $form->getData()->toArray();
 
-      $data['submitted_at'] = date("d-m-Y H:i");
+    $data['submitted_at'] = date("d-m-Y H:i");
 
-      $dir = $this->grav['flex']->getDirectory('reviews');
-      $obj = $dir->createObject($data);
+    $dir = $this->grav['flex']->getDirectory('reviews');
+    $obj = $dir->createObject($data);
 
-      $obj->save();
+    $obj->save();
   }
 
   public function onReportSubmit() {
     $slug = $this->grav['uri']->param('location_slug');
     $username = $this->grav['uri']->param('username');
+    $user = $this->grav['user'];
 
-    if ($username === $this->grav['session']->user->username) {
+    if ($username === $user->username && $user->authorize('site.review')) {
       $dir = $this->grav['flex']->getDirectory('reported');
       $obj = $dir->createObject([
         'location' => $slug,
@@ -117,43 +118,45 @@ class GravelPlugin extends Plugin {
         'username' => $username
       ]);
 
+      $user->set('reported.' . $slug, true);
+      $user->save();
+
       $obj->save();
 
       $this->json([
         'success' => true,
-        'slug' => json_encode($obj)
+        'slug' => json_encode($slug)
       ]);
     } else {
       $response = new Response(403);
       $this->grav->close($response);
     }
   }
+  
+  public function onFavoriteSubmit() {
+    /** @var User $user */
+    $slug = $this->grav['uri']->param('location_slug');
+    $username = $this->grav['uri']->param('username');
+    $user = $this->grav['user'];
 
-  public function onCommentDelete($stuff) {
-    $directory = $this->grav['uri']->param('directory');
-    $filename = $this->grav['uri']->param('filename');
-    $email = $this->grav['uri']->param('email');
-    $date = $this->grav['uri']->param('date');
-    $locator = $this->grav['locator'];
+    if ($username === $user->username && $user->authorize('site.review')) {
 
-    $relpath = $directory . '/' . $filename . '.yaml';
-    $filepath = $locator->findResource('user://data/comments/' . $relpath);
-    $file = File::instance($filepath);
+      if ($user->get('favorites.' . $slug)) {
+        $user->set('favorites.' . $slug, false);
+      } else {
+        $user->set('favorites.' . $slug, true);
+      }
 
-    if (file_exists($filepath)) {
-      $data = Yaml::parse($file->content());
+      $user->save();
 
-      $data['comments'] = array_filter($data['comments'], function ($c) use ($email, $date) {
-        return ($c['email'] != $email && $c['date'] != urldecode($date));
-      });
-
-      $data['comments'] = array_values($data['comments']);
-
-      $file->save(Yaml::dump($data));
-
-      $this->grav->redirect('/admin/comments');
+      $this->json([
+        'success' => true,
+        'slug' => json_encode($slug),
+        'is_favorited' => $user->get('favorites.' . $slug)
+      ]);
     } else {
-      $this->grav['messages']->add('The requested location doesn\'t exist.', 'error');
+      $response = new Response(403);
+      $this->grav->close($response);
     }
   }
 
@@ -215,6 +218,7 @@ class GravelPlugin extends Plugin {
 
     /** @var Pages $pages */
     $pages = $this->grav['pages'];
+
     if ($pages->find($route)) {
       /** @var Debugger $debugger */
       $debugger = $this->grav['debugger'];
@@ -231,7 +235,7 @@ class GravelPlugin extends Plugin {
       $page->slug(basename($route));
       $page->folder(basename($route));
       $page->route($route);
-      $page->rawRoute($route);
+      // $page->rawRoute($route);
       $page->modifyHeader('object', $path);
       if ($location) {
         $page->modifyHeader('title', $location->getProperty('name'));

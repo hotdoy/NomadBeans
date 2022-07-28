@@ -1,0 +1,18 @@
+{% extends "forms/field.html.twig" %}
+
+{% block field %}
+	{% set avatar = form.value('avatar') %}
+	{% if avatar %}
+		<div class="avatar">
+			<div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 {{ field.classes }}">
+				<img class="{{ field.img_classes }}" style="max-width:200px;" src="{{ base_url_simple ~ '/' ~ (avatar|first).path }}"/>
+			</div>
+		</div>
+	{% else %}
+		<div class="avatar">
+			<div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 {{ field.classes }}">
+				<label class="{{ field.classes }}"><img class="{{ field.img_classes }}" src="https://www.gravatar.com/avatar/{{ form.value('email')|md5 }}?s=200"/></label>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

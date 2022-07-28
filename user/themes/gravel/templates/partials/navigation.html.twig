@@ -24,7 +24,10 @@
     </ul>
   </li> #}
   <li>
-    <a href="/locations/" class="nav-link">Locations</a>
+    <a href="/locations/" class="nav-link !active:bg-blue-500">Search</a>
+  </li>
+  <li>
+    <a href="/locations/" class="nav-link">Cafes</a>
   </li>
   <li>
     <a href="/blog" class="nav-link">Blog</a>
@@ -41,6 +44,9 @@
         </span>
         </label>
         <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-primary text-white mt-2 rounded-box min-w-max">
+          <li class="w-full">
+            <a href="/account/profile" class="text-center w-full justify-center">Profile</a>
+          </li>
           <li>
             <a href="/submit">Submit a Cafe</a>
           </li>
@@ -54,6 +60,9 @@
   {% else %}
     <li>
       <a href="/account/login" class="nav-link">Login</a>
+    </li>
+    <li>
+      <a href="/account/register" class="nav-link">Register</a>
     </li>
   {% endif %}
 </ul>

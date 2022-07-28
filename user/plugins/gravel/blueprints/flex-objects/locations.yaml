@@ -280,9 +280,9 @@ form:
         min: 0
         max: 10
 
-    rating_food:
+    rating_power:
       type: range
-      label: How is the food?
+      label: How are the power outlets?
       default: 5
       validate:
         min: 0

@@ -1,11 +1,14 @@
 {% set body_classes_slot = "template-review" %}
 {% extends 'partials/base.html.twig' %}
+{% set flex = grav.get('flex_objects') %}
+{% set locs = flex.directory('locations') %}  
+{% set loc = locs.object(uri.param('location')) %}
 
 {% block hero %}
 	<div class="flex items-center py-20 px-4 bg-center relative min-h-[16rem] sm:min-h-[20rem] lg:min-h-[24rem] bg-cover" style="background-image: url({{ page.media.images|first.url }});">
 		<div class="hero-overlay absolute pin bg-gradient-to-b from-black/18 to-black/18"></div>
 		<div class="text-center text-base-100 flex flex-col justify-center relative z-10 mx-auto container">
-			<h1 class="text-3xl sm:text-5xl font-bold sm:leading-[3.5rem] px-4">Review a Cafe</h1>
+			<h1 class="text-3xl sm:text-5xl font-bold sm:leading-[3.5rem] px-4 tracking-wider">Review {{ loc.name }}</h1>
 		</div>
 	</div>
 {% endblock %}
@@ -24,7 +27,7 @@
 		</div>
 	</div>
 
-	<div class="container mx-auto mb-12 sm:mt-12 max-w-xl">
+	<div class="container mx-auto mb-16 sm:mb-24 sm:mt-12 max-w-xl">
 		<div class="px-4">
 
 			{{ page.content|raw }}
@@ -32,10 +35,6 @@
 
 		</div>
 	</div>
-
-   <script>
-    console.log('{{ gravel_utils.getAmenitiesForSelectize()|json_encode|raw }}')
-  </script>
 
 	{% set alpine %}
 	document.addEventListener('alpine:init', () => {

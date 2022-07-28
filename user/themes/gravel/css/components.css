@@ -1,8 +1,12 @@
 @layer components {
   /* Nav Link */
 
-  .nav-link {
-    @apply hover:text-primary hover:bg-transparent;
+  .nav-link:active {
+    background-color: transparent !important;
+  }
+
+  .nav-link:hover {
+    background-color: transparent !important;
   }
 
   /* Comments form */
@@ -218,5 +222,94 @@
 
   .template-register button[type="reset"] {
     @apply btn btn-link;
+  }
+
+  /* Profile Template */
+
+  .template-profile input[type="text"] {
+    @apply input input-bordered w-full;
+  }
+
+  .template-profile input[type="email"] {
+    @apply input input-bordered w-full;
+  }
+
+  .template-profile input[type="password"] {
+    @apply input input-bordered w-full;
+  }
+
+  .template-profile .form-label {
+    @apply label;
+  }
+
+  .template-profile .form-label .inline {
+    @apply label-text;
+  }
+
+  .template-profile .button.primary {
+    @apply btn btn-primary;
+  }
+
+  .template-profile .button.secondary {
+    @apply btn btn-link;
+  }
+
+  .template-profile .form-actions {
+    @apply flex flex-col justify-center;
+  }
+  
+  .template-profile .rememberme {
+    @apply form-control;
+  }
+
+  .template-profile .rememberme input[type="checkbox"] {
+    @apply checkbox checkbox-primary mr-2 my-2;
+  }
+
+  .template-profile .rememberme .form-input-wrapper {
+    @apply label cursor-pointer max-w-max mx-auto;
+  }
+
+  .template-profile .rememberme label {
+    @apply label-text;
+  }
+
+  .template-profile form#profile .avatar {
+    @apply block mb-8;
+  }
+  .template-profile form#profile .avatar > div {
+    @apply mx-auto block;
+  }
+
+  .template-profile .buttons {
+    @apply flex justify-between flex-row-reverse mt-8;
+  }
+  
+  .template-profile button[type="submit"] {
+    @apply btn btn-primary;
+  }
+
+  .template-profile button[type="reset"] {
+    @apply btn btn-link;
+  }
+
+  .template-profile .site-header {
+    @apply shadow-lg;
+  }
+
+  .template-profile .link {
+    @apply link-primary;
+  }
+
+  .template-profile .checkboxes .link {
+    @apply ml-4;
+  }
+
+  .template-profile .checkboxes {
+    @apply mt-2;
+  }
+
+  .template-profile .checkboxes label::before {
+    @apply checkbox checkbox-primary;
   }
 }

@@ -1,9 +1,0 @@
-: James
-&lt;span class=&quot;label-text&quot;&gt;What is your email?&lt;/span&gt;: james.auble@gmail.com
-I am working for or are affiliated with this cafe.: 1
-&lt;span class=&quot;label-text&quot;&gt;Message (Optional)&lt;/span&gt;: fgdsfgsdf
-&lt;span class=&quot;label-text&quot;&gt;Images&lt;/span&gt;: {&quot;user\/pages\/06.submit\/james_cabo_rojo.jpeg&quot;:{&quot;name&quot;:&quot;james_cabo_rojo.jpeg&quot;,&quot;full_path&quot;:&quot;james_cabo_rojo.jpeg&quot;,&quot;type&quot;:&quot;image\/jpeg&quot;,&quot;size&quot;:127862,&quot;path&quot;:&quot;user\/pages\/06.submit\/james_cabo_rojo.jpeg&quot;}}
-&lt;span class=&quot;label-text&quot;&gt;City&lt;/span&gt;: us-san-francisco
-: ssafdsa
-: asdfasfd
-

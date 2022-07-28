@@ -173,10 +173,10 @@ form:
             validate:
                 min: 0
                 max: 10
-        cafe_rating_food:
+        cafe_rating_power:
             type: range
             id: cafe-rating-coffee
-            label: 'How is the food?'
+            label: 'How are the power outlets?'
             label_classes: label
             label_element_classes: label-text
             classes: 'range range-primary'

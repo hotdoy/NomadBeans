@@ -16,3 +16,10 @@ access:
   admin:
     login: true
     super: true
+favorites:
+  es-madrid-carlos-coffee: true
+  gb-london-johns-coffee-house: true
+  us-san-francisco-nomadbeans-san-francisco: false
+reported:
+  gb-london-johns-coffee-house: true
+  es-madrid-carlos-coffee: true

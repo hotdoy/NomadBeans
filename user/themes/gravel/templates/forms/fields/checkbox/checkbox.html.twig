@@ -16,7 +16,7 @@
                   {{ field.label|t|e }}
               {% endif %}     
             </span> 
-            {{ field.validate.required in ['on', 'true', 1] ? '<span class="required">*</span>' }}
+            {{ field.validate.required in ['on', 'true', 1] ? '<span class="required mr-auto ml-1">*</span>' }}
 
               <input
             {# required attribute structures #}
