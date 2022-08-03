@@ -297,7 +297,7 @@
     @apply shadow-lg;
   }
 
-  .template-profile .link {
+  .template-profile .checkboxes .link {
     @apply link-primary;
   }
 
@@ -311,5 +311,12 @@
 
   .template-profile .checkboxes label::before {
     @apply checkbox checkbox-primary;
+  } 
+
+  .template-profile .checkboxes input[type="checkbox"]:checked + label::before {
+    content: "";
+    background-repeat: no-repeat;
+    animation: checkmark var(--animation-input,.2s) ease-in-out;
+    background-image: linear-gradient(-45deg,transparent 65%,hsl(var(--chkbg)) 65.99%),linear-gradient(45deg,transparent 75%,hsl(var(--chkbg)) 75.99%),linear-gradient(-45deg,hsl(var(--chkbg)) 40%,transparent 40.99%),linear-gradient(45deg,hsl(var(--chkbg)) 30%,hsl(var(--chkfg)) 30.99%,hsl(var(--chkfg)) 40%,transparent 40.99%),linear-gradient(-45deg,hsl(var(--chkfg)) 50%,hsl(var(--chkbg)) 50.99%);
   }
 }

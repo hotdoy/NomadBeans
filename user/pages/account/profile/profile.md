@@ -35,6 +35,15 @@ form:
         message: PLUGIN_LOGIN.PASSWORD_VALIDATION_MESSAGE
         config-pattern@: system.pwd_regex
 
+    favorites:
+      type: checkboxes_html
+      label: Favorite Cafes
+      help: 'To remove a cafe from your favorites, uncheck the cafe and then click save at the bottom of the page.'
+      data-options@: '\Grav\Plugin\Gravel\Utils::getUserFavoritesWithNameAsLink'
+      use: keys
+      validate:
+        type: checkboxes
+
     twofa_check:
       type: conditional
       condition: config.plugins.login.twofa_enabled
@@ -65,13 +74,6 @@ form:
             label: PLUGIN_LOGIN.2FA_SECRET
             sublabel: PLUGIN_LOGIN.2FA_SECRET_HELP
 
-    favorites:
-      type: checkboxes_html
-      label: Favorite Cafes
-      help: 'To remove a cafe from your favorites, uncheck the cafe and then click save at the bottom of the page.'
-      data-options@: '\Grav\Plugin\Gravel\Utils::getUserFavoritesWithNameAsLink'
-      use: keys
-
   buttons:
       -
           type: submit
@@ -81,6 +83,7 @@ form:
           value: PLUGIN_LOGIN.BTN_RESET
 
   process:
+      update_user_favorites: true
       update_user: true
       message: PLUGIN_LOGIN.PROFILE_UPDATED
 ---

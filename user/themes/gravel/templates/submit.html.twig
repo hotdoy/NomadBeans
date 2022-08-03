@@ -103,7 +103,7 @@
         replaceCityOptions(cc) {
           fetch(`/cities.json/country_code:${cc}/as_options:true`)
             .then((response) => {
-                return response.text();
+                return response.text()
             })
             .then((responseText) => {
                 const html = new DOMParser().parseFromString(responseText, 'text/html')

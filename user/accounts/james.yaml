@@ -2,7 +2,7 @@ state: enabled
 email: james.auble@gmail.com
 fullname: 'James Auble'
 title: 'Web Developer'
-hashed_password: $2y$10$FNKevNceSmeuqmY0GYREIeL1tDvjt9a7zrTwEAvkYe8HfE4NMIA5u
+hashed_password: $2y$10$fbS5/U98QspOe9MIJD6c3OOoiX4tLlzq4jeER4XNrzVVU9U5Agu8G
 language: en
 content_editor: default
 twofa_enabled: false
@@ -16,10 +16,7 @@ access:
   admin:
     login: true
     super: true
-favorites:
-  es-madrid-carlos-coffee: true
-  gb-london-johns-coffee-house: true
-  us-san-francisco-nomadbeans-san-francisco: false
+favorites: false
 reported:
   gb-london-johns-coffee-house: true
   es-madrid-carlos-coffee: true

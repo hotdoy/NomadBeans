@@ -116,6 +116,7 @@ form:
         cafe_lat:
             type: text
             id: cafe-lat
+            help: 'To get the latitude and longitude of an address, search for a location on Google Maps and right click the exact position where the cafe is located. You will see the coordinates at the top of the menu that pops up.'
             label: 'Cafe Latitude'
             label_classes: label
             label_element_classes: label-text
@@ -124,6 +125,7 @@ form:
         cafe_lng:
             type: text
             id: cafe-lng
+            help: 'To get the latitude and longitude of an address, search for a location on Google Maps and right click the exact position where the cafe is located. You will see the coordinates at the top of the menu that pops up.'            
             label: 'Cafe Longitude'
             label_classes: label
             label_element_classes: label-text

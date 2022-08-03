@@ -1,22 +1,121 @@
 {% set body_classes_slot = "template-locations" %}
 {% extends 'partials/base.html.twig' %}
-{% set directory = grav.get('flex').directory('locations') %}
-{% set locations = directory.collection() %}
+
+{% set flex = grav.get('flex_objects') %}
+{% set locations = flex.directory('locations') %}
+{% set collection = locations.getCollection() %}
+{% set cities = flex.directory('cities') %}
+{% set citiesCol = cities.getCollection() %}
+
+{% set amenities = uri.param('amenities') %}
+{% set search = uri.param('search') %}
+{% set city = uri.param('city') %}
+
+{% if search %}
+	{% set collection = collection.search(search) %}
+{% endif %}
+
+{% if amenities %}
+	{% set amenities = amenities|split(',') %}
+	{% set collection = gravel_utils.filterLocationCollectionByAmenities(collection, amenities) %}
+{% endif %}
+
+{% if city %}
+	{% set collection = collection.filterBy({ 'city': city }) %}
+{% endif %}
+
+{% block javascripts %}
+	{% do assets.addJs('https://maps.googleapis.com/maps/api/js?key=AIzaSyAryZvmZHDUIxifP2P2j3-GOMl2w9VwNQY&callback=initMap&v=weekly', {'loading': 'defer', 'priority': 97}) %}
+	{{ parent() }}
+{% endblock %}
+
+{% set map %}
+let lat = '{{ header.map_default_lat ?? null }}'
+let long = '{{ header.map_default_long ?? null }}'
+
+navigator.geolocation.getCurrentPosition(function(position) {
+  console.log(lat)
+  lat = position.coords.latitude;
+  long = position.coords.longitude;
+  window.initMap()
+});
+
+function initMap() {
+  const loc = { 
+    lat: Number(lat), 
+    lng: Number(long)
+  };
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 18,
+    center: loc,
+  });
+  const marker = new google.maps.Marker({
+    position: loc,
+    map: map,
+  });
+}
+                    
+window.initMap = initMap;
+{% endset %}
+{# {% do assets.addInlineJs(map, {id: 'google-map', group: 'bottom'}) %} #}
 
 {% block hero %}
+	<div class="flex items-center py-20 px-4 bg-center relative min-h-[16rem] sm:min-h-[20rem] lg:min-h-[24rem] bg-gray-100">
+		<div id="map" class="h-full w-full absolute pin"></div>
+	</div>
 {% endblock %}
 
 {% block content %}
-<div class="container mx-auto py-8">
-  <div class="px-4">
-    i'm the locations collection page <br>
+	<div x-data="megaSearchComponent" class="container mx-auto py-10 md:py-20">
+    {{ drop(amenities) }}
+    <div x-text="query">
+    </div>
+		<div class="px-4">
+			<div class="flex flex-col-reverse sm:flex-col">
+				<div class="mb-8 sm:mb-0" id="sort-by-amenities">
+					<h2 class="text-2xl sm:text-3xl text-accent mb-6">
+						Sort by Amenities
+					</h2>
+					<div class="flex flex-wrap" x-init="{% if amenities %}amenities = '{{ amenities|join(',') }}'.split(','){% endif %}">
+						{% for key,value in gravel_utils.getAmenitiesList %}
+							<div class="form-control mr-6">
+								<label class="cursor-pointer label flex flex-row-reverse">
+									<span class="label-text">{{ value }}</span>
+									<input type="checkbox" class="checkbox checkbox-secondary mr-3" value="{{ key }}" x-bind:checked="amenities.includes('{{ key }}')" @change="amenitiesChangeHandler($event)"/>
+								</label>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				<div>
+					<h2 class="text-2xl sm:text-3xl text-accent mb-6 block sm:hidden">
+						Search
+					</h2>
+					<div class="flex flex-col sm:flex-row justify-between mb-8 sm:my-8">
+						<input type="text" placeholder="What are you looking for?" class="input input-bordered w-full mb-4 sm:mr-4 md:mr-8 flex-1" x-model="keywords" x-init="{% if search %}keywords = '{{ search }}'{% endif %}"/>
+						<select class="select select-bordered w-full flex-1 mb-4 sm:mr-4 md:mr-8" x-model="city">
+							<option disabled selected>Cities</option>
+							{% if citiesCol is not empty %}
+								{% for c in citiesCol %}
+									<option value="{{ c.slug }}" {% if city == c.slug %} selected {% endif %}>{{ c.name }}</option>
+								{% endfor %}
+							{% else %}
+								<option value="" disabled selected>No cities found.</option>
+							{% endif %}
+						</select>
+						<a x-bind:href="query" class="btn btn-primary">Search</a>
+					</div>
+				</div>
+			</div>
 
-    All locations: <br>
-    {% for obj in locations %}
-    <a href="/locations/{{ obj.slug }}">
-      {{ obj.name }}
-    </a>
-    {% endfor %}
-  </div>
-</div>
+			<ul id="results-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 lg:gap-x-8 gap-y-8">
+				{% for obj in collection %}
+					{% set cityObj = gravel_utils.getCityObjectByKey(obj.city) %}
+					{% do obj.setProperty('city_name', cityObj.name) %}
+					{% do obj.setProperty('country_long', cityObj.country_long) %}
+					{% render obj layout: 'grid-item' %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
 {% endblock %}

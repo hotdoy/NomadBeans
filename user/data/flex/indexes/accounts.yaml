@@ -1,10 +1,10 @@
 version: '1.1'
-timestamp: 1659046818
+timestamp: 1659068950
 count: 2
 index:
   james:
     storage_key: james
-    storage_timestamp: 1659045622
+    storage_timestamp: 1659057732
     key: james
     email: james.auble@gmail.com
   james0r:

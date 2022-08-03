@@ -1,1 +1,10 @@
-{"published":true,"country":"ES","name":"Madrid","ascii_name":"Madrid","lat":"235","lng":"253","slug":"es-madrid","country_long":"Spain"}
+{
+  "published": true,
+  "country": "ES",
+  "name": "Madrid",
+  "ascii_name": "Madrid",
+  "lat": "235",
+  "lng": "253",
+  "slug": "es-madrid",
+  "country_long": "Spain"
+}

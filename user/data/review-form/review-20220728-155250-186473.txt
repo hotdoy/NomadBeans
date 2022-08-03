@@ -1,0 +1,11 @@
+: james
+: us-san-francisco-nomadbeans-san-francisco
+How is the cafe overall?: 10
+How is the coffee?: 8
+How is the Wi-Fi?: 7
+How is the price?: 7
+How is the seating?: 8
+How are the power outlets?: 8
+How is the location?: 6
+Amenities: [&quot;good-food&quot;,&quot;spacious-interior&quot;]
+

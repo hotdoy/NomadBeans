@@ -35,8 +35,4 @@
   [x-cloak] {
     display: none !important;
   }
-
-  .site-footer {
-    @apply mt-auto;
-  }
 }

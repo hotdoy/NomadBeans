@@ -1,0 +1,20 @@
+<li class="relative">
+  <a href="/locations/{{ object.slug }}">
+    <div class="relative rounded-lg overflow-hidden">
+      {{ object.media.all[object.images|first.name].cropZoom(600,600).html(null, object.name, '')|raw }}
+      <div class="rating rating-sm absolute bottom-4 left-4">
+        <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+        <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+        <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+        <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" checked />
+        <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
+      </div>
+    </div>
+    <h3 class="text-xl mt-6">
+      {{ object.name }}
+    </h3>
+    <div class="opacity-50 mt-1">
+      {{ object.city_name }}, {{ object.country_long }}
+    </div>
+  </a>
+</li>

@@ -1,3 +1,5 @@
+{% spaceless %}
+
 {% set flex = grav.get('flex_objects') %}
 {% set directory = flex.directory('cities') %}  
 {% set collection = directory.getCollection() %}
@@ -21,11 +23,9 @@
       {% endif %}
     </div>
   {% endset %}
-  {% spaceless %}
     {{ htmlString }}
-  {% endspaceless %}
 {% else %}
-  {% spaceless %}
     {{ collection|json_encode|raw }}
-  {% endspaceless %}
 {% endif %}
+
+{% endspaceless %}

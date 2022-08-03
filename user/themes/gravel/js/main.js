@@ -46,8 +46,34 @@ document.addEventListener("alpine:init", () => {
     }
   })
 
-  Alpine.data("locationRatings", () => ({
+  Alpine.data("megaSearchComponent", () => ({
+    keywords: '',
+    city: 'Cities',
+    amenities: [],
     init() {
+      console.log('im the megaSearchComponent initted')
+    },
+    get query () {
+      let cityQuery = `${ this.city && this.city !== 'Cities' ? 'city:' + this.city + '/' : '' }`
+      let keywordsQuery = `${ this.keywords ? 'search:' + this.keywords + '/' : '' }`
+      let amenitiesQuery = `${ this.amenities.length ? 'amenities:' + this.amenities.join('%2C') + '/' : '' }`
+
+      return `/locations/${cityQuery}${keywordsQuery}${amenitiesQuery}`
+    },
+    amenitiesChangeHandler(e) {
+      const v = e.target.value
+      const c = e.target.checked
+
+      if (c) {
+        if (!this.amenities.includes(v)) {
+          this.amenities.push(v)
+        }
+      } else {
+        this.amenities = this.amenities.filter(element => element !== v)
+      }
+    },
+    keywordsChangeHandler() {
+
     }
   }))
 })

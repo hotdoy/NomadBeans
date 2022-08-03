@@ -399,6 +399,21 @@ class Utils {
     }
   }
 
+  public static function getCityObjectByKey($key) {
+
+    /** @var FlexDirectoryInterface|null $cities */
+    $directory = Grav::instance()->get('flex')->getDirectory('cities');
+
+    if ($directory) {
+      /** @var FlexObjectInterface|null $city */
+      $object = $directory->getObject($key);
+  
+      return $object;
+    }
+
+    return false;
+  }
+
   public static function getUserFavoritesWithNameAsLink() {
     $favs = Grav::instance()['user']->favorites;
     $favSlugNamePairs = [];
@@ -412,5 +427,15 @@ class Utils {
 
       return $favSlugNamePairs;
     }
+  }
+
+  public static function filterLocationCollectionByAmenities($collection, $amenities) {
+    return $collection->filter(function ($object) use ($amenities) {
+      foreach($amenities as $amenity) {
+        if (in_array($amenity, $object->getProperty('amenities'))) {
+          return true;
+        }
+      }
+    });
   }
 }

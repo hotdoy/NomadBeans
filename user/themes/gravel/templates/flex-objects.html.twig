@@ -1,6 +1,10 @@
 {% extends 'partials/base.html.twig' %}
 
+
 {% block content %}
+	{% if uri.param('tag') %}
+		{% set collection = collection.filterBy({ 'tags': uri.param('tag') }) %}
+	{% endif %}
 
 	{% block flex_content %}
 		{% set options = page.header.flex %}

@@ -1,0 +1,33 @@
+title: Locations
+'extends@':
+  type: default
+  context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        content:
+          type: tab
+          title: Content
+
+          fields:
+            header.page_title:
+              unset@: true
+
+            header.page_subtitle:
+              unset@: true
+
+            header.map_default_lat:
+              type: text
+              label: Map Default Latitude
+              default: '36.158547702649685'
+
+            header.map_default_long:
+              type: text
+              label: Map Default Longitude
+              default: '-115.15577392640867'
+            

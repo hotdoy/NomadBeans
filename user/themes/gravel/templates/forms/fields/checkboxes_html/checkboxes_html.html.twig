@@ -31,9 +31,9 @@
             >
             <label style="display: inline" for="{{ id|e }}">
                 {% if help %}
-                    <span class="hint--bottom" data-hint="{{ help|t|e('html_attr') }}">{{ text|raw }}</span>
+                    <span class="hint--bottom" data-hint="{{ help|t|e('html_attr') }}">{{ text|t|e }}</span>
                 {% else %}
-                    {{ text|raw }}
+                    {{ text|t|markdown(false) }}
                 {% endif %}
             </label>
         </div>

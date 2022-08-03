@@ -6,6 +6,7 @@ use Grav\Common\Uri;
 use Grav\Common\Grav;
 use Grav\Common\Utils;
 use Grav\Common\Plugin;
+use Grav\Common\User\User;
 use Grav\Common\Page\Pages;
 use Symfony\Component\Yaml\Yaml;
 use Grav\Framework\Psr7\Response;
@@ -85,12 +86,40 @@ class GravelPlugin extends Plugin {
 
     switch ($action) {
       case 'review':
-        $this->processForm($form, $event);
+        $this->processReviewForm($form, $event);
+        break;
+      case 'update_user_favorites':
+        $this->processUserFavorites($form, $event);
         break;
     }
   }
 
-  private function processForm(mixed $form, Event $event) {
+  private function processUserFavorites(mixed $form, Event $event) {
+    // /** @var \Grav\Plugin\Form\Form $form */
+    $form->validate();
+
+    /** @var array $data */
+    $data = $form->getData()->toArray();
+
+    /** @var User $user */
+    $user = $this->grav['user'];
+
+    if ($data['favorites'] ?? null) {
+      $favorites = $data['favorites'];
+      $user->set('favorites', false);
+  
+      foreach($favorites as $key => $val) {
+        $user->set('favorites.' . $key, true);
+      } 
+    } else {
+      $user->set('favorites', false);
+    }
+    $user->save();
+
+    return true;
+  }
+
+  private function processReviewForm(mixed $form, Event $event) {
     /** @var \Grav\Plugin\Form\Form $form */
     $form->validate();
 

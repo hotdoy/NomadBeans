@@ -49,9 +49,7 @@ config:
             label: City
         rating_overall:
           width: 8
-        features:
-        tags:
-        categories:
+        amenities:
 
     # Edit View
     edit:
@@ -117,7 +115,7 @@ config:
         - slug
         - country_code
         - city
-        - features
+        - amenities
         - tags
 
 form:
@@ -211,7 +209,7 @@ form:
         data-options@: '\Grav\Plugin\Gravel\Utils::getAmenitiesForSelectize'
       size: long
       classes: fancy
-      help: 'Add features separated by commas.'
+      help: 'Add amenities separated by commas.'
       validate:
         type: commalist
 
