@@ -101,7 +101,7 @@
           })
         },
         replaceCityOptions(cc) {
-          fetch(`/cities.json/country_code:${cc}/as_options:true`)
+          fetch(`/cities/country_code:${cc}/as_options:true`)
             .then((response) => {
                 return response.text()
             })

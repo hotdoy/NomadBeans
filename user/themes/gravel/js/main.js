@@ -48,17 +48,30 @@ document.addEventListener("alpine:init", () => {
 
   Alpine.data("megaSearchComponent", () => ({
     keywords: '',
-    city: 'Cities',
+    city: 'All Cities',
     amenities: [],
+    loading: false,
+    amenitiesExpanded: true,
     init() {
-      console.log('im the megaSearchComponent initted')
-    },
-    get query () {
-      let cityQuery = `${ this.city && this.city !== 'Cities' ? 'city:' + this.city + '/' : '' }`
-      let keywordsQuery = `${ this.keywords ? 'search:' + this.keywords + '/' : '' }`
-      let amenitiesQuery = `${ this.amenities.length ? 'amenities:' + this.amenities.join('%2C') + '/' : '' }`
+      let deviceWidthChecker = (x) => {
+        if (x.matches) {
+          this.amenitiesExpanded = false
+        } else {
+          this.amenitiesExpanded = true
+        }
+      }
 
-      return `/locations/${cityQuery}${keywordsQuery}${amenitiesQuery}`
+      var x = window.matchMedia("(max-width: 639px)")
+      deviceWidthChecker(x)
+
+      x.addEventListener("change", deviceWidthChecker)
+    },
+    get query() {
+      let cityQuery = `${this.city && this.city !== 'All Cities' ? 'city:' + this.city + '/' : ''}`
+      let keywordsQuery = `${this.keywords ? 'search:' + encodeURI(this.keywords) + '/' : ''}`
+      let amenitiesQuery = `${this.amenities.length ? 'amenities:' + this.amenities.join('%2C') + '/' : ''}`
+
+      return `/locations/results/${cityQuery}${keywordsQuery}${amenitiesQuery}`
     },
     amenitiesChangeHandler(e) {
       const v = e.target.value
@@ -72,8 +85,27 @@ document.addEventListener("alpine:init", () => {
         this.amenities = this.amenities.filter(element => element !== v)
       }
     },
-    keywordsChangeHandler() {
+    replaceResults() {
+      this.loading = true
 
+      fetch(this.query)
+        .then((response) => {
+          return response.text()
+        })
+        .then((responseText) => {
+          this.loading = false
+
+          const html = new DOMParser().parseFromString(responseText, 'text/html')
+          const resultsSource = html.getElementById('results-grid')
+          const resultsDestination = document.getElementById('results-grid')
+
+          if (resultsSource && resultsDestination) resultsDestination.innerHTML = resultsSource.innerHTML;
+        })
+        .catch((error) => {
+          this.loading = false
+
+          console.error('Error:', error);
+        });
     }
   }))
 })

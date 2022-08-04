@@ -25,6 +25,7 @@
 {% endif %}
 
 {% block javascripts %}
+	{% do assets.addJs('theme://js/alpinejs-collapse.min.js', {'loading': 'defer', 'priority': 99}) %}
 	{% do assets.addJs('https://maps.googleapis.com/maps/api/js?key=AIzaSyAryZvmZHDUIxifP2P2j3-GOMl2w9VwNQY&callback=initMap&v=weekly', {'loading': 'defer', 'priority': 97}) %}
 	{{ parent() }}
 {% endblock %}
@@ -67,16 +68,19 @@ window.initMap = initMap;
 
 {% block content %}
 	<div x-data="megaSearchComponent" class="container mx-auto py-10 md:py-20">
-    {{ drop(amenities) }}
-    <div x-text="query">
-    </div>
 		<div class="px-4">
 			<div class="flex flex-col-reverse sm:flex-col">
 				<div class="mb-8 sm:mb-0" id="sort-by-amenities">
-					<h2 class="text-2xl sm:text-3xl text-accent mb-6">
+					<h2 class="text-2xl sm:text-3xl text-accent relative cursor-pointer" @click="amenitiesExpanded = !amenitiesExpanded">
 						Sort by Amenities
+						<button>
+							<svg x-bind:class="amenitiesExpanded && 'rotate-180'" class="absolute right-0 top-1/2 -translate-y-1/2 transition-all" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+								<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+							</svg>
+						</button>
 					</h2>
-					<div class="flex flex-wrap" x-init="{% if amenities %}amenities = '{{ amenities|join(',') }}'.split(','){% endif %}">
+					<div class="flex flex-wrap" x-init="{% if amenities %}amenities = '{{ amenities|join(',') }}'.split(','){% endif %}" x-show="amenitiesExpanded" x-collapse>
+						<div class="h-6 w-full"></div>
 						{% for key,value in gravel_utils.getAmenitiesList %}
 							<div class="form-control mr-6">
 								<label class="cursor-pointer label flex flex-row-reverse">
@@ -92,10 +96,10 @@ window.initMap = initMap;
 						Search
 					</h2>
 					<div class="flex flex-col sm:flex-row justify-between mb-8 sm:my-8">
-						<input type="text" placeholder="What are you looking for?" class="input input-bordered w-full mb-4 sm:mr-4 md:mr-8 flex-1" x-model="keywords" x-init="{% if search %}keywords = '{{ search }}'{% endif %}"/>
-						<select class="select select-bordered w-full flex-1 mb-4 sm:mr-4 md:mr-8" x-model="city">
-							<option disabled selected>Cities</option>
+						<input type="text" placeholder="What are you looking for?" class="input input-bordered w-full mb-4 sm:mr-4 md:mr-8 flex-1 min-h-12" x-model="keywords" x-init="{% if search %}keywords = '{{ search }}'{% endif %}" @keyup.enter="$refs.searchBtn.click()" />
+						<select class="select select-bordered w-full flex-1 mb-4 sm:mr-4 md:mr-8" x-model="city" x-init="{% if city %}city = '{{ city }}'{% endif %}">
 							{% if citiesCol is not empty %}
+								<option {% if not city %}selected{% endif %}>All Cities</option>
 								{% for c in citiesCol %}
 									<option value="{{ c.slug }}" {% if city == c.slug %} selected {% endif %}>{{ c.name }}</option>
 								{% endfor %}
@@ -103,11 +107,10 @@ window.initMap = initMap;
 								<option value="" disabled selected>No cities found.</option>
 							{% endif %}
 						</select>
-						<a x-bind:href="query" class="btn btn-primary">Search</a>
+						<button x-bind:data-href="query" @click="replaceResults" class="btn btn-primary min-w-[90px] before:!mr-0" x-bind:class="loading && 'loading'" x-ref="searchBtn" x-text="loading ? '' : 'Search'"></button>
 					</div>
 				</div>
 			</div>
-
 			<ul id="results-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 lg:gap-x-8 gap-y-8">
 				{% for obj in collection %}
 					{% set cityObj = gravel_utils.getCityObjectByKey(obj.city) %}

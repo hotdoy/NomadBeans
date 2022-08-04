@@ -431,10 +431,17 @@ class Utils {
 
   public static function filterLocationCollectionByAmenities($collection, $amenities) {
     return $collection->filter(function ($object) use ($amenities) {
+      $missingAmenitiy = false;
       foreach($amenities as $amenity) {
-        if (in_array($amenity, $object->getProperty('amenities'))) {
-          return true;
+        if (!in_array($amenity, $object->getProperty('amenities'))) {
+          $missingAmenitiy = true;
         }
+      }
+
+      if ($missingAmenitiy) {
+        return false;
+      } else {
+        return true;
       }
     });
   }
