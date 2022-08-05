@@ -14,7 +14,7 @@
 
 {% if amenities %}
 	{% set amenities = amenities|split(',') %}
-	{% set collection = gravel_utils.filterLocationCollectionByAmenities(collection, amenities) %}
+  {% set collection = collection.inArray('amenities', amenities) %}
 {% endif %}
 
 {% if city %}
@@ -22,12 +22,16 @@
 {% endif %}
 
 <ul id="results-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 lg:gap-x-8 gap-y-8">
-  {% for obj in collection %}
-    {% set cityObj = gravel_utils.getCityObjectByKey(obj.city) %}
-    {% do obj.setProperty('city_name', cityObj.name) %}
-    {% do obj.setProperty('country_long', cityObj.country_long) %}
-    {% render obj layout: 'grid-item' %}
-  {% endfor %}
+  {% if collection|length %}
+    {% for obj in collection %}
+      {% set cityObj = gravel_utils.getCityObjectByKey(obj.city) %}
+      {% do obj.setProperty('city_name', cityObj.name) %}
+      {% do obj.setProperty('country_long', cityObj.country_long) %}
+      {% render obj layout: 'grid-item' %}
+    {% endfor %}
+  {% else %}
+    <div class="font-bold text-xl col-span-4 mt-4 sm:mt-0">Sorry. No cafes found for your search.</div>
+  {% endif %}
 </ul>
 
 {% endspaceless %}

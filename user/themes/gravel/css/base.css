@@ -35,4 +35,8 @@
   [x-cloak] {
     display: none !important;
   }
+  
+  .template-home .site-main {
+    @apply pb-12 sm:pb-20;
+  }
 }

@@ -19,6 +19,21 @@
   {{ parent() }}
 {% endblock %}
 
+{% set alpine %}
+document.addEventListener('alpine:init', () => {
+  Alpine.data('visitCounter', () => ({
+    init() {
+      Alpine.store('gravel').fetchPost('/task:visit.add/type:location/location_slug:{{object.slug}}', {}, (data) => {
+        if (data.success) {
+          console.log('Visit recorded')
+        }
+      })
+    }
+  }))  
+})
+{% endset %}
+{% do assets.addInlineJs(alpine, {id: 'alpine-js-has-user', group: 'bottom'}) %}
+
 {% if grav.user.username %}
   {% set alpine %}
   document.addEventListener('alpine:init', () => {
@@ -32,6 +47,7 @@
           })
         }
       }))
+
       Alpine.data('favoriteButton', () => ({
         active: '{{ grav.user.favorites[object.slug] ? 'true' }}',
         submit() {
@@ -46,7 +62,7 @@
       }))
     })
   {% endset %}
-  {% do assets.addInlineJs(alpine, {id: 'alpine-js', group: 'bottom'}) %}
+  {% do assets.addInlineJs(alpine, {id: 'alpine-js-has-user', group: 'bottom'}) %}
 {% endif %}
 
 {% block hero %}
@@ -58,10 +74,6 @@
               slidesPerView: 1,
               spaceBetween: 10,
               centeredSlides: false,
-              autoplay: {
-                delay: 5000,
-                disableOnInteraction: true
-              },
               pagination: {
                 el: '.swiper-pagination',
               },
@@ -72,14 +84,20 @@
               breakpoints: {
                 640: {
                   slidesPerView: 2,
-                  centeredSlides: true
+                  centeredSlides: true,
+                  preventClicks: true,
+                  preventClicksPropagation: true,
+                  allowTouchMove: false
                 },
                 1024: {
                   slidesPerView: 3,
-                  centeredSlides: false
+                  centeredSlides: false,
+                  preventClicks: true,
+                  preventClicksPropagation: true,
+                  allowTouchMove: false
                 }
               }
-            });
+            })
   {% endset %}
   {% do assets.addInlineJs(swiper, {id: 'swiper-js', group: 'bottom'}) %}
 
@@ -89,6 +107,7 @@
           	    const lightbox = new PhotoSwipeLightbox({
           	      gallery: '#my-gallery',
           	      children: 'a',
+                    doubleTapAction: false,
           	      pswpModule: () => import('https://unpkg.com/photoswipe'),
           	    });
           	
@@ -98,10 +117,10 @@
 
   <!-- Slider main container -->
   <div id="location-carousel" class="swiper h-[64vw] sm:h-[30vw] lg:h-[22vw]" style="--swiper-pagination-color: hsl(var(--p));">
-    <div class="swiper-wrapper" id="my-gallery">
+    <div class="swiper-wrapper pswp-gallery" id="my-gallery" x-data @mousedown="console.log($event)">
       {% for image in object.media.images %}
-        <a href="{{ image.url|e }}" class="swiper-slide relative" target="_blank" data-pswp-width="{{ image.width }}" data-pswp-height="{{ image.height }}">
-          {{ image.derivatives(800,2000,300).sizes('(max-width: 639px) 100vw, 33vw').html(image.name, image.name, 'absolute top-0 left-0 right-0 bottom-0 object-cover w-full h-full')|raw }}
+        <a data-pswp-src="{{ image.url|e }}" class="swiper-slide relative cursor-pointer" target="_blank" data-pswp-width="{{ image.width }}" data-pswp-height="{{ image.height }}" data-cropped="true">
+          {{ image.derivatives(800,2000,300).sizes('(max-width: 639px) 100vw, 33vw').loading('lazy').html('', '', 'absolute top-0 left-0 right-0 bottom-0 object-cover w-full h-full')|raw }}
         </a>
       {% endfor %}
     </div>
@@ -117,7 +136,7 @@
 
 {% block content %}
   {# Page title #}
-  <div class="container mx-auto my-8 sm:my-12">
+  <div class="container mx-auto my-8 sm:my-12" x-data="">
     <div class="px-4">
       <header class="flex items-center mb-4 sm:mb-7">
         <h1 class="text-3xl md:text-5xl">
@@ -192,7 +211,7 @@
     </div>
   </div>
 
-  <div class="divider hidden sm:flex"></div>
+  <div class="divider hidden sm:flex" x-data="visitCounter"></div>
 
   {# Start Ratings #}
   <div id="location-ratings" class="container mx-auto mb-6 mt-12 sm:my-12">
@@ -356,7 +375,7 @@
     {% do assets.addInlineJs(map, {id: 'google-map', group: 'bottom'}) %}
   {% endif %}
 
-  <div class="bg-base-100 lg:bg-gray-50 pt-4 pb-8 lg:py-12 mb-8 sm:mb-12">
+  <div class="bg-base-100 lg:bg-gray-50 pt-4 pb-8 lg:pt-12 mb-8 sm:mb-0 sm:pb-16">
     <div class="container mx-auto">
       <div class="px-4">
         <div class="flex flex-col-reverse lg:flex-row lg:gap-8 items-start">

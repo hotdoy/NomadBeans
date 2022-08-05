@@ -50,6 +50,8 @@ config:
         rating_overall:
           width: 8
         amenities:
+        visits:
+          width: 8
 
     # Edit View
     edit:
@@ -92,7 +94,7 @@ config:
     # Object class to be used, allowing custom methods for the object
     object: 'Grav\Plugin\Gravel\Flex\Types\Locations\LocationsObject'
     # Collection class to be used, allowing custom methods for the collections
-    collection: 'Grav\Common\Flex\Types\Generic\GenericCollection'
+    collection: 'Grav\Plugin\Gravel\Flex\Types\Locations\LocationsCollection'
     # Index class to be used, works as a quick database-like lookup index
     index: 'Grav\Common\Flex\Types\Generic\GenericIndex'
     storage:
@@ -104,6 +106,8 @@ config:
           class: 'Grav\Framework\File\Formatter\JsonFormatter'
         # JSON file where all the objects will be stored
         folder: user-data://locations
+    ordering:
+      visits: DESC
     search:
       # Search options
       options:
@@ -293,3 +297,8 @@ form:
       validate:
         min: 0
         max: 10
+
+    visits:
+      type: number
+      label: Visits
+      default: 0

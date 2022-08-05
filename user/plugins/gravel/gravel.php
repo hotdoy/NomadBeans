@@ -40,8 +40,66 @@ class GravelPlugin extends Plugin {
     return [
       'onPluginsInitialized' => ['onPluginsInitialized', 0],
       'onTwigSiteVariables' => ['onTwigSiteVariables', 0],
-      'onTask.login.login'  => ['gravelLoginController', 1],
+      'onTask.login.login'  => ['gravelLoginController', 1]
     ];
+  }
+
+  public function recordLocationVisit() {
+    $key = $this->grav['uri']->param('location_slug');
+    $locations = $this->grav['flex']->getDirectory('locations');
+    $cities = $this->grav['flex']->getDirectory('cities');
+
+    if ($locations && $cities) {
+      /** @var FlexObjectInterface|null $object */
+      $locObj = $locations->getObject($key);
+      $cityObj = $cities->getObject($locObj->getProperty('city'));
+
+      if ($locObj && $cityObj) {
+        $curCount = $locObj->getProperty('visits');
+
+        $newCount = $curCount ? $curCount + 1 : 1;
+
+        $locObj->setProperty('visits', $newCount);
+        $locObj->save();
+
+        $curCount = $cityObj->getProperty('visits');
+
+        $newCount = $curCount ? $curCount + 1 : 1;
+
+        $cityObj->setProperty('visits', $newCount);
+        $cityObj->save();
+      }
+    }
+
+    $directory = $this->grav['flex']->getDirectory('cities');
+
+    if ($directory) {
+      /** @var FlexObjectInterface|null $object */
+      $object = $directory->getObject($key);
+      if ($object) {
+        $curCount = $object->getProperty('visits');
+
+        $newCount = $curCount ? $curCount + 1 : 1;
+
+        $object->setProperty('visits', $newCount);
+        $object->save();
+      }
+    }
+
+    $this->json([
+      'success' => true,
+      'slug' => json_encode($key)
+    ]);
+  }
+
+  public function onTaskVisit(Event $event): void {
+    $type = $this->grav['uri']->param('type');
+
+    switch ($type) {
+      case 'location':
+        $this->recordLocationVisit();
+        break;
+    }
   }
 
   /**
@@ -60,6 +118,7 @@ class GravelPlugin extends Plugin {
     // Enable the main events we are interested in
     $this->enable([
       'onTask.report.submit' => ['onReportSubmit', 0],
+      'onTask.visit.add'  => ['onTaskVisit', 0],
       'onTask.favorite.submit' => ['onFavoriteSubmit', 0],
       'onFormProcessed' => ['onFormProcessed', 0]
     ]);
@@ -107,10 +166,10 @@ class GravelPlugin extends Plugin {
     if ($data['favorites'] ?? null) {
       $favorites = $data['favorites'];
       $user->set('favorites', false);
-  
-      foreach($favorites as $key => $val) {
+
+      foreach ($favorites as $key => $val) {
         $user->set('favorites.' . $key, true);
-      } 
+      }
     } else {
       $user->set('favorites', false);
     }
@@ -161,7 +220,7 @@ class GravelPlugin extends Plugin {
       $this->grav->close($response);
     }
   }
-  
+
   public function onFavoriteSubmit() {
     /** @var User $user */
     $slug = $this->grav['uri']->param('location_slug');
