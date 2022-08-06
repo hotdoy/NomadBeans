@@ -17,5 +17,6 @@ use Grav\Common\Flex\FlexObject;
  * Class GenericObject
  * @package Grav\Common\Flex\Generic
  */
-class GenericObject extends FlexObject {
+class GenericObject extends FlexObject
+{
 }

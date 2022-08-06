@@ -185,12 +185,25 @@ class GravelPlugin extends Plugin {
     /** @var array $data */
     $data = $form->getData()->toArray();
 
-    $data['submitted_at'] = date("d-m-Y H:i");
+    $user = $this->grav['user'];
 
-    $dir = $this->grav['flex']->getDirectory('reviews');
-    $obj = $dir->createObject($data);
+    if ($data['reviewer_username'] === $user->username && $user->authorize('site.review')) {
 
-    $obj->save();
+      $data['submitted_at'] = date("d-m-Y H:i");
+      $cafe_key = $data['cafe_key'];
+
+      $dir = $this->grav['flex']->getDirectory('reviews');
+      $obj = $dir->createObject($data);
+
+      $obj->save();
+
+      $user->set('access.site.reviewed.' . $cafe_key, true);
+      $user->save();
+
+    } else {
+      $response = new Response(403);
+      $this->grav->close($response);
+    }
   }
 
   public function onReportSubmit() {
@@ -206,10 +219,10 @@ class GravelPlugin extends Plugin {
         'username' => $username
       ]);
 
+      $obj->save();
+      
       $user->set('reported.' . $slug, true);
       $user->save();
-
-      $obj->save();
 
       $this->json([
         'success' => true,

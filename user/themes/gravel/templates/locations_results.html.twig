@@ -14,7 +14,7 @@
 
 {% if amenities %}
 	{% set amenities = amenities|split(',') %}
-  {% set collection = collection.inArray('amenities', amenities) %}
+  {% set collection = collection.filterByAmenities(amenities) %}
 {% endif %}
 
 {% if city %}

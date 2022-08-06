@@ -1,0 +1,10 @@
+: james
+: gb-london-johns-coffee-house
+How is the cafe overall?: 5
+How is the coffee?: 5
+How is the Wi-Fi?: 5
+How is the price?: 5
+How is the seating?: 5
+How are the power outlets?: 5
+How is the location?: 5
+

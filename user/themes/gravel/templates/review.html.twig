@@ -21,7 +21,11 @@
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" class="stroke-info flex-shrink-0 w-6 h-6">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 					</svg>
-					<span>Reviews are carefully reviewed by humans and often take several days before being published.</span>
+            {% if not (authorize('site.reviewed.' ~ uri.param('location'))) %}
+              <span>Reviews are carefully reviewed by humans and often take several days before being published.</span>
+            {% else %}
+              <span>You have already reviewed this cafe. If you believe this to be an error or need help feel free to reach out to us at <a href="mailto:help@nomadbeans.com">help@NomadBeans.com</a></span>
+            {% endif %}
 				</div>
 			</div>
 		</div>
@@ -31,7 +35,10 @@
 		<div class="px-4">
 
 			{{ page.content|raw }}
-			{% include "forms/form.html.twig" %}
+
+      {% if not (authorize('site.reviewed.' ~ uri.param('location'))) %}
+        {% include "forms/form.html.twig" %}
+      {% endif %}
 
 		</div>
 	</div>

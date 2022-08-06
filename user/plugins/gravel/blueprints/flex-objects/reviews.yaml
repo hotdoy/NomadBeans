@@ -35,7 +35,7 @@ config:
     list:
       title: name
       fields:
-        accepted:
+        approved:
           type: toggle
           width: 8
         processed:
@@ -117,9 +117,9 @@ form:
   validation: loose
 
   fields:
-    accepted:
+    approved:
       type: toggle
-      label: Accepted
+      label: Approved
       highlight: 0
       options:
           1: PLUGIN_ADMIN.YES
@@ -137,19 +137,9 @@ form:
       validate:
           type: bool
 
-    reviewer_name:
-      type: text
-      label: 'Reviewer Name'
-
     reviewer_username:
       type: text
       label: 'Reviewer Username'
-
-    reviewer_email:
-      type: email
-      label: 'Reviewer Email'
-      validate:
-        type: email
 
     reviewer_message:
       label: 'Reviewer Message'
@@ -177,9 +167,11 @@ form:
       random_name: false
       avoid_overwriting: true
       filesize: 3
-      limit: 10
+      limit: 3
       accept:
         - "image/*"
+      validate:
+        type: file
 
     cafe_rating_overall:
       type: range

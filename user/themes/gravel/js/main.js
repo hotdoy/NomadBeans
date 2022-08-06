@@ -49,10 +49,37 @@ document.addEventListener("alpine:init", () => {
   Alpine.data("megaSearchComponent", () => ({
     keywords: '',
     city: 'All Cities',
+    cityInput: '',
+    citiesExpanded: false,
+    cities: {},
     amenities: [],
     loading: false,
     amenitiesExpanded: true,
     init() {
+      this.initAmenities()
+      this.initCity()
+    },
+    initCity() {
+      fetch('/cities.json')
+        .then((response) => {
+          return response.json()
+        })
+        .then((data) => {
+          this.cities = data
+
+          if (this.city !== 'All Cities') {
+            Object.entries(this.cities).forEach((element) => {
+              if (element[0] === this.city) {
+                this.cityInput = element[1].ascii_name + ', ' + element[1].country_long
+              }
+            })
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    },
+    initAmenities() {
       let deviceWidthChecker = (x) => {
         if (x.matches) {
           this.amenitiesExpanded = false
@@ -73,6 +100,13 @@ document.addEventListener("alpine:init", () => {
 
       return `/locations/results/${cityQuery}${keywordsQuery}${amenitiesQuery}`
     },
+    get queryWithoutResults() {
+      let cityQuery = `${this.city && this.city !== 'All Cities' ? 'city:' + this.city + '/' : ''}`
+      let keywordsQuery = `${this.keywords ? 'search:' + encodeURI(this.keywords) + '/' : ''}`
+      let amenitiesQuery = `${this.amenities.length ? 'amenities:' + this.amenities.join('%2C') + '/' : ''}`
+
+      return `/locations/${cityQuery}${keywordsQuery}${amenitiesQuery}`
+    },
     amenitiesChangeHandler(e) {
       const v = e.target.value
       const c = e.target.checked
@@ -83,6 +117,20 @@ document.addEventListener("alpine:init", () => {
         }
       } else {
         this.amenities = this.amenities.filter(element => element !== v)
+      }
+    },
+    get matchedCities() {
+      if (this.cityInput == '') {
+        return this.cities
+      } else {
+        const citiesArray = Object.entries(this.cities)
+  
+        const filtered = citiesArray.filter(([key, value]) => {
+          const name = value.ascii_name.toLowerCase()
+          return name.includes(this.cityInput.toLowerCase())
+        })
+  
+        return Object.fromEntries(filtered)
       }
     },
     replaceResults() {
@@ -100,6 +148,8 @@ document.addEventListener("alpine:init", () => {
           const resultsDestination = document.getElementById('results-grid')
 
           if (resultsSource && resultsDestination) resultsDestination.innerHTML = resultsSource.innerHTML;
+
+          window.history.pushState(null, 'Locations', this.queryWithoutResults);
         })
         .catch((error) => {
           this.loading = false

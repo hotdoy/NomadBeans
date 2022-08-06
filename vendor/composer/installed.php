@@ -3,7 +3,7 @@
         'name' => 'getgrav/grav',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'cf38cccda1e2147cf35271c11b38cc458742f894',
+        'reference' => '186eb8ae6c40cba68d868bf32d5c117561f31957',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'composer/ca-bundle' => array(
-            'pretty_version' => '1.3.2',
-            'version' => '1.3.2.0',
-            'reference' => 'fd5dd441932a7e10ca6e5b490e272d34c8430640',
+            'pretty_version' => '1.3.3',
+            'version' => '1.3.3.0',
+            'reference' => '30897edbfb15e784fe55587b4f73ceefd3c4d98c',
             'type' => 'library',
             'install_path' => __DIR__ . '/./ca-bundle',
             'aliases' => array(),
@@ -103,7 +103,7 @@
         'getgrav/grav' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'cf38cccda1e2147cf35271c11b38cc458742f894',
+            'reference' => '186eb8ae6c40cba68d868bf32d5c117561f31957',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -119,9 +119,9 @@
             'dev_requirement' => false,
         ),
         'guzzlehttp/psr7' => array(
-            'pretty_version' => '1.8.5',
-            'version' => '1.8.5.0',
-            'reference' => '337e3ad8e5716c15f9657bd214d16cc5e69df268',
+            'pretty_version' => '1.9.0',
+            'version' => '1.9.0.0',
+            'reference' => 'e98e3e6d4f86621a9b75f623996e6bbdeb4b9318',
             'type' => 'library',
             'install_path' => __DIR__ . '/../guzzlehttp/psr7',
             'aliases' => array(),
@@ -137,9 +137,9 @@
             'dev_requirement' => false,
         ),
         'league/climate' => array(
-            'pretty_version' => '3.8.1',
-            'version' => '3.8.1.0',
-            'reference' => '22243322c6f049240e0fa6ad6c3873343b6f6055',
+            'pretty_version' => '3.8.2',
+            'version' => '3.8.2.0',
+            'reference' => 'a785a3ac8f584eed4abd45e4e16fe64c46659a28',
             'type' => 'library',
             'install_path' => __DIR__ . '/../league/climate',
             'aliases' => array(),
@@ -200,9 +200,9 @@
             'dev_requirement' => false,
         ),
         'nyholm/psr7' => array(
-            'pretty_version' => '1.5.0',
-            'version' => '1.5.0.0',
-            'reference' => '1461e07a0f2a975a52082ca3b769ca912b816226',
+            'pretty_version' => '1.5.1',
+            'version' => '1.5.1.0',
+            'reference' => 'f734364e38a876a23be4d906a2a089e1315be18a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nyholm/psr7',
             'aliases' => array(),
@@ -389,22 +389,22 @@
         'symfony/cache-contracts' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v1.1.12',
+                0 => 'v1.1.13',
             ),
         ),
         'symfony/console' => array(
-            'pretty_version' => 'v4.4.42',
-            'version' => '4.4.42.0',
-            'reference' => 'cce7a9f99e22937a71a16b23afa762558808d587',
+            'pretty_version' => 'v4.4.43',
+            'version' => '4.4.43.0',
+            'reference' => '8a2628d2d5639f35113dc1b833ecd91e1ed1cf46',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/console',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'symfony/contracts' => array(
-            'pretty_version' => 'v1.1.12',
-            'version' => '1.1.12.0',
-            'reference' => '5236c15b24aeeecee4b9c6ad4b22f6331f2cbdcb',
+            'pretty_version' => 'v1.1.13',
+            'version' => '1.1.13.0',
+            'reference' => '9e27f5c175ecbd6fff554d839ff4a432da797168',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/contracts',
             'aliases' => array(),
@@ -422,7 +422,7 @@
         'symfony/event-dispatcher-contracts' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v1.1.12',
+                0 => 'v1.1.13',
             ),
         ),
         'symfony/event-dispatcher-implementation' => array(
@@ -443,7 +443,7 @@
         'symfony/http-client-contracts' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v1.1.12',
+                0 => 'v1.1.13',
             ),
         ),
         'symfony/http-client-implementation' => array(
@@ -530,13 +530,13 @@
         'symfony/service-contracts' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v1.1.12',
+                0 => 'v1.1.13',
             ),
         ),
         'symfony/translation-contracts' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v1.1.12',
+                0 => 'v1.1.13',
             ),
         ),
         'symfony/var-dumper' => array(
@@ -549,9 +549,9 @@
             'dev_requirement' => false,
         ),
         'symfony/yaml' => array(
-            'pretty_version' => 'v4.4.37',
-            'version' => '4.4.37.0',
-            'reference' => 'd7f637cc0f0cc14beb0984f2bb50da560b271311',
+            'pretty_version' => 'v4.4.43',
+            'version' => '4.4.43.0',
+            'reference' => '07e392f0ef78376d080d5353c081a5e5704835bd',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/yaml',
             'aliases' => array(),

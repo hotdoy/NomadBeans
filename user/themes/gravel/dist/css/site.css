@@ -9407,6 +9407,10 @@ body[dir="rtl"] .template-profile .checkboxes label::before:checked,
   padding-left: 0px;
 }
 
+.text-left {
+  text-align: left;
+}
+
 .text-center {
   text-align: center;
 }
@@ -9437,6 +9441,11 @@ body[dir="rtl"] .template-profile .checkboxes label::before:checked,
   line-height: 1.75rem;
 }
 
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -9445,11 +9454,6 @@ body[dir="rtl"] .template-profile .checkboxes label::before:checked,
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 .text-xl {
@@ -9662,6 +9666,11 @@ body[dir="rtl"] .template-profile .checkboxes label::before:checked,
   left: 0px;
 }
 
+.pin-x {
+  left: 0px;
+  right: 0px;
+}
+
 .before\:absolute::before {
   content: var(--tw-content);
   position: absolute;
@@ -9748,9 +9757,19 @@ body[dir="rtl"] .template-profile .checkboxes label::before:checked,
   background-color: transparent;
 }
 
+.hover\:bg-primary:hover {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--p) / var(--tw-bg-opacity));
+}
+
 .hover\:text-gray-200:hover {
   --tw-text-opacity: 1;
   color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {

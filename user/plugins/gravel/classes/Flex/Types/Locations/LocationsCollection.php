@@ -30,4 +30,17 @@ class LocationsCollection extends GenericCollection {
 
     return $this->createFrom(array_values($array_with_falsy_elements_removed));
   }
+
+  public function filterByAmenities($amenities) {
+    return $this->filter(function ($object) use ($amenities) {
+      $missingAmenitiy = false;
+      foreach($amenities as $amenity) {
+        if (!in_array($amenity, $object->getProperty('amenities'))) {
+          $missingAmenitiy = true;
+        }
+      }
+
+      return !$missingAmenitiy;
+    });
+  }
 }

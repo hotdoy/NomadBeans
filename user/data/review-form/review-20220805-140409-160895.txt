@@ -1,0 +1,13 @@
+: james
+Message (Optional): Very cool place
+: cr-san-jose-wanna-coffee
+Images: {&quot;image:\/\/reviews\/james_cabo_rojo.jpeg&quot;:{&quot;name&quot;:&quot;james_cabo_rojo.jpeg&quot;,&quot;type&quot;:&quot;image\/jpeg&quot;,&quot;size&quot;:127862,&quot;path&quot;:&quot;image:\/\/reviews\/james_cabo_rojo.jpeg&quot;}}
+How is the cafe overall?: 9
+How is the coffee?: 7
+How is the Wi-Fi?: 8
+How is the price?: 7
+How is the seating?: 8
+How are the power outlets?: 7
+How is the location?: 3
+Amenities: [&quot;natural-light&quot;,&quot;outdoor-seating&quot;,&quot;artistic-decorations&quot;]
+

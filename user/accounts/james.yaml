@@ -13,11 +13,8 @@ groups:
 access:
   site:
     login: true
+    reviewed:
+      gb-london-johns-coffee-house: true
   admin:
     login: true
     super: true
-favorites: false
-reported:
-  gb-london-johns-coffee-house: true
-  es-madrid-carlos-coffee: true
-  cr-san-jose-wanna-coffee: true
