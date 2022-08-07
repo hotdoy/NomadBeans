@@ -72,7 +72,7 @@ window.initMap = initMap;
 			<div class="flex flex-col-reverse sm:flex-col">
 				<div class="mb-6 sm:mb-0" id="sort-by-amenities">
 					<h2 class="text-2xl sm:text-3xl text-accent relative cursor-pointer" @click="amenitiesExpanded = !amenitiesExpanded">
-						Sort by Amenities
+						Search by Amenities
 						<button>
 							<svg x-bind:class="amenitiesExpanded && 'rotate-180'" class="absolute right-0 top-1/2 -translate-y-1/2 transition-all" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
 								<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
@@ -97,9 +97,9 @@ window.initMap = initMap;
 					</h2>
 					<div class="flex flex-col sm:flex-row justify-between mb-8 sm:my-8">
 						<input type="text" placeholder="What are you looking for?" class="input input-bordered w-full mb-4 sm:mr-4 md:mr-8 flex-1 min-h-12" x-model="keywords" x-init="{% if search %}keywords = '{{ search }}'{% endif %}" @keyup.enter="$refs.searchBtn.click()" />
-						<div id="city-input-wrapper" class="relative w-full mb-4 sm:mr-4 md:mr-8 flex-1 z-10">
-							<input @input="citiesExpanded = true" id="city-input" x-model="cityInput" type="text" placeholder="All Cities" class="input input-bordered min-h-12 w-full" />
-							<ul x-show="citiesExpanded" @click.outside="citiesExpanded = false, cityInput = '', city = ''" id="cities-list" class="absolute pin-x w-full bg-base-100 rounded-lg border shadow-lg" style="border-color: #e5e7eb;">
+						<div @click.outside="cityWrapperClickOutsideHandler" id="city-input-wrapper" class="relative w-full mb-4 sm:mr-4 md:mr-8 flex-1 z-10">
+							<input @focus="citiesExpanded = true" @input="citiesExpanded = true" id="city-input" x-model="cityInput" type="text" placeholder="All Cities" class="input input-bordered min-h-12 w-full" />
+							<ul x-show="citiesExpanded" id="cities-list" class="absolute pin-x w-full bg-base-100 rounded-lg border shadow-lg" style="border-color: #e5e7eb;">
 								<template x-for="c in matchedCities">
 										<li>
 											<button 

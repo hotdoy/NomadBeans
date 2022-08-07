@@ -282,11 +282,11 @@
   }
 
   .template-profile .buttons {
-    @apply flex justify-between flex-row-reverse mt-8;
+    @apply flex flex-col items-center mt-8;
   }
   
   .template-profile button[type="submit"] {
-    @apply btn btn-primary;
+    @apply btn btn-primary w-full;
   }
 
   .template-profile button[type="reset"] {

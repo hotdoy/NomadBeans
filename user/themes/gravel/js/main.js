@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", (event) => {
-  console.log("DOM fully loaded and parsed")
+  console.log('NomadBeans Frontend Scripts Loaded')
 })
 
 document.addEventListener("alpine:init", () => {
@@ -124,13 +124,26 @@ document.addEventListener("alpine:init", () => {
         return this.cities
       } else {
         const citiesArray = Object.entries(this.cities)
-  
+
         const filtered = citiesArray.filter(([key, value]) => {
           const name = value.ascii_name.toLowerCase()
           return name.includes(this.cityInput.toLowerCase())
         })
-  
+
         return Object.fromEntries(filtered)
+      }
+    },
+    cityWrapperClickOutsideHandler() {
+      this.citiesExpanded = false
+
+      if (this.city === 'All Cities') {
+        this.cityInput = ''
+      } else {
+        Object.entries(this.cities).forEach((element) => {
+          if (element[0] === this.city) {
+            this.cityInput = element[1].ascii_name + ', ' + element[1].country_long
+          }
+        })
       }
     },
     replaceResults() {

@@ -150,7 +150,26 @@ class GravelPlugin extends Plugin {
       case 'update_user_favorites':
         $this->processUserFavorites($form, $event);
         break;
+      case 'cafe_submit':
+        $this->processCafeSubmit($form, $event);
+        break;
     }
+  }
+
+  private function processCafeSubmit(mixed $form, Event $event) {
+    /** @var \Grav\Plugin\Form\Form $form */
+    $form->validate();
+
+    /** @var array $data */
+    $data = $form->getData()->toArray();
+
+    $newDir = 'user/data/submissions/' . $data['submission_username'] . '/' . $data['uid'];
+
+    mkdir($newDir, 0755, true);
+
+    $myFile = fopen($newDir . '/data.txt', "w");
+
+    fwrite($myFile, $form->getData());
   }
 
   private function processUserFavorites(mixed $form, Event $event) {
@@ -199,7 +218,6 @@ class GravelPlugin extends Plugin {
 
       $user->set('access.site.reviewed.' . $cafe_key, true);
       $user->save();
-
     } else {
       $response = new Response(403);
       $this->grav->close($response);
@@ -220,7 +238,7 @@ class GravelPlugin extends Plugin {
       ]);
 
       $obj->save();
-      
+
       $user->set('reported.' . $slug, true);
       $user->save();
 

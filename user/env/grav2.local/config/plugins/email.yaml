@@ -1,6 +1,6 @@
 enabled: true
-from: no-reply@madbeans.com
-from_name: 'MadBeans Mailer'
+from: no-reply@nomadbeans.com
+from_name: 'NomadBeans Mailer'
 to: james.auble@gmail.com
 to_name: 'James Auble'
 queue:
@@ -20,7 +20,7 @@ mailer:
   sendmail:
     bin: '/usr/sbin/sendmail -bs'
 content_type: text/html
-debug: false
+debug: true
 charset: null
 cc: null
 cc_name: null

@@ -14,3 +14,15 @@
     {% include 'forms/form.html.twig' %}
   </div>
 {% endblock %}
+
+{% set profileInlineJs %}
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const checkboxesContainer = document.querySelector('[data-grav-field="checkboxes_html"]')
+    const checkboxes = checkboxesContainer.querySelector('.checkboxes')
+    
+    if (!checkboxes) {
+      document.querySelector('.checkboxes-html-label-wrapper').style.display = 'none'
+    }
+  });
+{% endset %}
+{% do assets.addInlineJS(profileInlineJs, { id: 'profile-inline-js', group: 'bottom' }) %}

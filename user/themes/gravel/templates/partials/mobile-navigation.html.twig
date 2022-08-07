@@ -3,9 +3,6 @@
     <a href="/" class="btn btn-ghost normal-case text-2xl font-shadows-light hover:bg-transparent justify-start mb-2">NomadBeans</a>
   </li>
   <li>
-    <a href="/locations" class="nav-link">Cafes</a>
-  </li>
-  <li>
     <a href="/searc" class="nav-link">Search</a>
   </li>
   <li>
@@ -13,6 +10,9 @@
   </li>
   {% if config.plugins.login.enabled and grav.user.username %}
     {% if grav.user.authenticated %}
+      <li>
+        <a href="/account/profile" class="nav-link">Profile</a>
+      </li>
       <li>
         <a href="/submit" class="nav-link">Submit a Cafe</a>
       </li>

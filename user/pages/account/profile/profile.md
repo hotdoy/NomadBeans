@@ -2,13 +2,13 @@
 title: Profile
 cache_control: private, no-cache, must-revalidate
 access:
-    site.login: true
+  site.login: true
 
 form:
   fields:
     avatar_img:
       type: avatar
-      classes: 'test'
+      classes: "test"
 
     username:
       type: text
@@ -38,8 +38,10 @@ form:
     favorites:
       type: checkboxes_html
       label: Favorite Cafes
-      help: 'To remove a cafe from your favorites, uncheck the cafe and then click save at the bottom of the page.'
+      help: "To remove a cafe from your favorites, uncheck the cafe and then click save at the bottom of the page."
       data-options@: '\Grav\Plugin\Gravel\Utils::getUserFavoritesWithNameAsLink'
+      outerclasses: "mt-2"
+      label_classes: "checkboxes-html-label-wrapper"
       use: keys
       validate:
         type: checkboxes
@@ -49,7 +51,6 @@ form:
       condition: config.plugins.login.twofa_enabled
 
       fields:
-
         twofa:
           title: PLUGIN_LOGIN.2FA_TITLE
           type: section
@@ -68,22 +69,22 @@ form:
             type: bool
 
         twofa_secret:
-            type: 2fa_secret
-            outerclasses: 'twofa-secret'
-            markdown: true
-            label: PLUGIN_LOGIN.2FA_SECRET
-            sublabel: PLUGIN_LOGIN.2FA_SECRET_HELP
+          type: 2fa_secret
+          outerclasses: "twofa-secret"
+          markdown: true
+          label: PLUGIN_LOGIN.2FA_SECRET
+          sublabel: PLUGIN_LOGIN.2FA_SECRET_HELP
 
   buttons:
-      -
-          type: submit
-          value: Save
-      -
-          type: reset
-          value: PLUGIN_LOGIN.BTN_RESET
+    - type: submit
+      value: Save
+    - type: reset
+      value: PLUGIN_LOGIN.BTN_RESET
 
   process:
-      update_user_favorites: true
-      update_user: true
-      message: PLUGIN_LOGIN.PROFILE_UPDATED
+    update_user_favorites: true
+    update_user: true
+    message: PLUGIN_LOGIN.PROFILE_UPDATED
+    reset: true
+    cache_enabled: false
 ---

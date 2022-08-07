@@ -1,0 +1,13 @@
+: james
+Message (Optional): dfsf
+I am working for or are affiliated with this cafe.: 1
+: gb-london-johns-coffee-house
+Images: {&quot;image:\/\/reviews\/mihai-moisa-Djtc1T38-GY-unsplash.jpeg&quot;:{&quot;name&quot;:&quot;mihai-moisa-Djtc1T38-GY-unsplash.jpeg&quot;,&quot;type&quot;:&quot;image\/jpeg&quot;,&quot;size&quot;:1195862,&quot;path&quot;:&quot;image:\/\/reviews\/mihai-moisa-Djtc1T38-GY-unsplash.jpeg&quot;}}
+How is the cafe overall?: 5
+How is the coffee?: 5
+How is the Wi-Fi?: 5
+How is the price?: 5
+How is the seating?: 5
+How are the power outlets?: 5
+How is the location?: 5
+

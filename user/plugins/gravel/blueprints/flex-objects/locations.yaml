@@ -176,8 +176,6 @@ form:
       minlength: 0
       maxlength: 500
 
-    city_state:
-
     tel:
       type: tel
       label: Phone
@@ -236,6 +234,19 @@ form:
       classes: fancy
       validate:
           type: commalist
+
+    submitted_at:
+      type: datetime
+      label: Submitted At
+    
+    submission_username:
+      type: text
+      label: Submission Username
+
+    visits:
+      type: number
+      label: Visits
+      default: 0
 
     ratings-spacer:
       type: spacer
@@ -297,8 +308,3 @@ form:
       validate:
         min: 0
         max: 10
-
-    visits:
-      type: number
-      label: Visits
-      default: 0
