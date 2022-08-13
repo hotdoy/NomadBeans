@@ -1,0 +1,6 @@
+{% set object = directory.getObject(id) %}
+{% if object %}
+    {%- render object layout: 'json' with {x: x, y: y} -%}
+{% else %}
+    {% include 'flex-objects/views/404.json.twig' %}
+{% endif %}

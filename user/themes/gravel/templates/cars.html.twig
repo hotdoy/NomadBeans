@@ -1,9 +1,9 @@
 {% set flex = grav.get('flex_objects') %}
 {% set cities = flex.directory('cars') %}  
 {% set collection = cities.getCollection() %}
+{% set collection = collection.filterBy({ 'class': uri.param('class') }) %}
 
 {% if uri.param('class') %}
-  {% set collection = collection.filterBy({ 'class': uri.param('class') }) %}
 {% endif %}
 
 <ul>
@@ -15,3 +15,17 @@
   </li>
 {% endfor %}
 </ul>
+
+{% set cars = grav.get('flex').collection('cars') %}
+{% set car = cars.filterBy({ 'class': 'suv'}) %}
+
+{{ car|first.model }}
+{# <ul>
+{% for car in cars %}
+  <li>
+    Make: {{ car.make }} <br>
+    Model: {{ car.model }} <br>
+    Class: {{ car.class }} <br>
+  </li>
+{% endfor %}
+</ul> #}

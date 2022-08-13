@@ -1,0 +1,14 @@
+{% spaceless %}
+
+{% set thumbnails = {} %}
+
+{% for image in object.images %}
+  {% set name = image.name %}
+  {% set thumbnails = thumbnails|merge({(name): { 'url': object.media.all[(name)].cropZoom(x,y).url }}) %}
+{% endfor %}
+
+{% set object = object.setProperty('thumbnails', thumbnails) %}
+
+{{- json_encode(object)|raw -}}
+
+{% endspaceless %}

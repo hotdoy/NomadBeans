@@ -1,28 +1,4 @@
-{# <ul class="list-reset flex justify-between flex-1 md:flex-none items-center max-w-min">
-		{% for p in pages.children.published %}
-      {% if p.visible %}
-        <li class="mr-2">
-          <a href="{{ p.url|e }}" 
-            class="inline-block py-2 px-2 no-underline hover:underline {% if p.active %}text-white{% else %}text-gray-300 hover:text-gray-200{% endif %}">
-            {{ p.title|e }}
-          </a>
-        </li> 
-      {% endif %}
-		{% endfor %}
-	</ul> #}
-
 <ul class="menu menu-horizontal p-0 hidden lg:flex font-medium items-center">
-  {# <li tabindex="0" class="dropdown dropdown-hover dropdown-end">
-    <label tabindex="0" class="">Listings</label>
-    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-primary text-white rounded-box w-52">
-      <li>
-        <a>Item 1</a>
-      </li>
-      <li>
-        <a>Item 2</a>
-      </li>
-    </ul>
-  </li> #}
   <li>
     <a href="/locations/" class="nav-link !active:bg-blue-500">Search</a>
   </li>

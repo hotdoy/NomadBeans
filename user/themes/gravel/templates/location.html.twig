@@ -24,8 +24,8 @@ document.addEventListener('alpine:init', () => {
   Alpine.data('visitCounter', () => ({
     init() {
       Alpine.store('gravel').fetchPost('/task:visit.add/type:location/location_slug:{{object.slug}}', {}, (data) => {
-        if (data.success) {
-          console.log('Visit recorded')
+        if (!data.success) {
+					console.error('Visit not recorded.')
         }
       })
     }
@@ -68,6 +68,7 @@ document.addEventListener('alpine:init', () => {
 {% block hero %}
 	{# Location Carousel #}
 	{% set swiper %}
+	{% if object.media.images|length > 1 %}
 	const swiper = new Swiper('#location-carousel', {
 	              direction: 'horizontal',
 	              loop: true,
@@ -90,7 +91,13 @@ document.addEventListener('alpine:init', () => {
 	                  allowTouchMove: false
 	                },
 	                1024: {
+										{% if object.media.images|length == 1 %}
+	                  slidesPerView: 1,
+										{% elseif object.media.images|length == 2 %}
+	                  slidesPerView: 2,
+										{% else %}
 	                  slidesPerView: 3,
+										{% endif %}
 	                  centeredSlides: false,
 	                  preventClicks: true,
 	                  preventClicksPropagation: true,
@@ -98,26 +105,27 @@ document.addEventListener('alpine:init', () => {
 	                }
 	              }
 	            })
+		{% endif %}
 	{% endset %}
 	{% do assets.addInlineJs(swiper, {id: 'swiper-js', group: 'bottom'}) %}
 
 	{% set photoSwipe %}
 	import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe/dist/photoswipe-lightbox.esm.js';
 	          	
-	          	    const lightbox = new PhotoSwipeLightbox({
-	          	      gallery: '#my-gallery',
-	          	      children: 'a',
-	                    doubleTapAction: false,
-	          	      pswpModule: () => import('https://unpkg.com/photoswipe'),
-	          	    });
-	          	
-	          	    lightbox.init();
+	const lightbox = new PhotoSwipeLightbox({
+		gallery: '#my-gallery',
+		children: 'a',
+			doubleTapAction: false,
+		pswpModule: () => import('https://unpkg.com/photoswipe'),
+	});
+
+	lightbox.init();
 	{% endset %}
 	{% do assets.addInlineJsModule(photoSwipe, {id: 'photoswipe', group: 'bottom'}) %}
 
 	<!-- Slider main container -->
 	<div id="location-carousel" class="swiper h-[64vw] sm:h-[30vw] lg:h-[22vw]" style="--swiper-pagination-color: hsl(var(--p));">
-		<div class="swiper-wrapper pswp-gallery" id="my-gallery" x-data @mousedown="console.log($event)">
+		<div class="swiper-wrapper pswp-gallery" id="my-gallery">
 			{% for image in object.media.images %}
 				<a data-pswp-src="{{ image.url|e }}" class="swiper-slide relative cursor-pointer" target="_blank" data-pswp-width="{{ image.width }}" data-pswp-height="{{ image.height }}" data-cropped="true">
 					{{ image.derivatives(800,2000,300).sizes('(max-width: 639px) 100vw, 33vw').loading('lazy').html('', '', 'absolute top-0 left-0 right-0 bottom-0 object-cover w-full h-full')|raw }}
@@ -125,9 +133,11 @@ document.addEventListener('alpine:init', () => {
 			{% endfor %}
 		</div>
 
+		{% if object.media.images|length > 1 %}
 		<!-- If we need navigation buttons -->
 		<div class="swiper-button-prev btn btn-primary btn-circle after:content-none hidden sm:flex">❮</div>
 		<div class="swiper-button-next btn btn-primary btn-circle after:content-none hidden sm:flex">❯</div>
+		{% endif %}
 
 		<!-- If we need pagination -->
 		<div class="swiper-pagination sm:hidden"></div>

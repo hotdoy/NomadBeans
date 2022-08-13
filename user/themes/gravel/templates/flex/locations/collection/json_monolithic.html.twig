@@ -1,0 +1,10 @@
+{% spaceless %}
+{
+    "counter": {{- count -}},
+    "objects": [
+        {% for obj in collection %}
+            {%- render obj layout: 'json_monolithic' with {x: x, y: y} -%}{{- loop.last ? '': ',' -}}
+        {% endfor %}
+    ]
+}
+{% endspaceless %}

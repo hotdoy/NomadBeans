@@ -1,0 +1,33 @@
+{% set collection = directory.getCollection() %}
+
+{% set search = uri.param('search') %}
+{% set sort = uri.param('sort') %}
+
+{% if type is same as 'locations' %}
+  {% set city = uri.param('city') %}
+  {% set amenities = uri.param('amenities') %}
+  
+  {% if amenities %}
+    {% set amenities = amenities|split(',') %}
+    {% set collection = collection.filterByAmenities(amenities) %}
+  {% endif %}
+
+  {% if city %}
+    {% set collection = collection.filterBy({ 'city': city }) %}
+  {% endif %}
+{% endif %}
+
+{# GENERIC SETTINGS #}
+{# {% set page = uri.param('page')|default(1)|int %}
+{% set limit = uri.param('per_page')|default(9)|int %}
+{% set start = (page - 1) * limit %} #}
+
+{% set collection = collection.filterBy({'published': true}) %}
+
+{% if search %}
+    {% set collection = collection.search(search) %}
+{% endif %}
+
+{% set count = collection|length  %}
+
+{% render collection layout: 'json_monolithic' with {x: x, y: y, count: count} %}

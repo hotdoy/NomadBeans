@@ -14,8 +14,8 @@
 
 {% block content %}
 	{% set flex = grav.get('flex') %}
-	{% set locations = flex.collection('locations') %}
-	{% set cities = flex.collection('cities') %}
+	{% set locations = flex.collection('locations').filterBy({ 'published': true }) %}
+	{% set cities = flex.collection('cities').filterBy({ 'published': true }) %}
 	{% set locationsPopular = locations.sort({ 'visits': 'DESC' }).limit(0, 6) %}
 	{% set citiesPopular = cities.sort({ 'visits': 'DESC' }).limit(0, 6) %}
 
@@ -70,7 +70,11 @@
 					{% do location.setProperty('country_long', cityObj.country_long) %}
 					<li class="relative bg-cover rounded-md bg-center overflow-hidden pt-[70%] sm:pt-[100%]">
 						<a href="/locations/{{ location.slug }}" class="absolute top-0 bottom-0 left-0 right-0">
-							<img class="absolute top-0 bottom-0 left-0 right-0 hover:scale-110 transition-transform duration-300 hover:rotate-2" src="{{ location.media.all[location.images|first.name].cropZoom(700,700).url() }}" alt="{{ location.name }}">
+							{% if location.images|first.path starts with 'image:' %}
+								<img class="absolute top-0 bottom-0 left-0 right-0 hover:scale-110 transition-transform duration-300 hover:rotate-2" src="{{ media[location.images|first.path].cropZoom(700,700).url() }}" alt="{{ location.name }}">
+							{% else %}
+								<img class="absolute top-0 bottom-0 left-0 right-0 hover:scale-110 transition-transform duration-300 hover:rotate-2" src="{{ location.media.all[location.images|first.path].cropZoom(700,700).url() }}" alt="{{ location.name }}">
+							{% endif %}
 							<div class="overlay absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b from-transparent via-transparent to-black pointer-events-none"></div>
 							<footer class="flex absolute bottom-0 text-white pl-4 pb-4">
 								<div class="p-2 mr-4 bg-accent rounded-md self-start">

@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", (event) => {
-  console.log('NomadBeans Frontend Scripts Loaded')
+  console.log("NomadBeans Frontend Scripts Loaded")
 })
 
 document.addEventListener("alpine:init", () => {
@@ -28,9 +28,9 @@ document.addEventListener("alpine:init", () => {
       await fetch(url, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -43,13 +43,13 @@ document.addEventListener("alpine:init", () => {
             errorCallback(error)
           }
         })
-    }
+    },
   })
 
   Alpine.data("megaSearchComponent", () => ({
-    keywords: '',
-    city: 'All Cities',
-    cityInput: '',
+    keywords: "",
+    city: "All Cities",
+    cityInput: "",
     citiesExpanded: false,
     cities: {},
     amenities: [],
@@ -60,24 +60,25 @@ document.addEventListener("alpine:init", () => {
       this.initCity()
     },
     initCity() {
-      fetch('/cities.json')
+      fetch("/cities.json")
         .then((response) => {
           return response.json()
         })
         .then((data) => {
           this.cities = data
 
-          if (this.city !== 'All Cities') {
+          if (this.city !== "All Cities") {
             Object.entries(this.cities).forEach((element) => {
               if (element[0] === this.city) {
-                this.cityInput = element[1].ascii_name + ', ' + element[1].country_long
+                this.cityInput =
+                  element[1].ascii_name + ", " + element[1].country_long
               }
             })
           }
         })
         .catch((error) => {
-          console.error('Error:', error);
-        });
+          console.error("Error:", error)
+        })
     },
     initAmenities() {
       let deviceWidthChecker = (x) => {
@@ -94,16 +95,32 @@ document.addEventListener("alpine:init", () => {
       x.addEventListener("change", deviceWidthChecker)
     },
     get query() {
-      let cityQuery = `${this.city && this.city !== 'All Cities' ? 'city:' + this.city + '/' : ''}`
-      let keywordsQuery = `${this.keywords ? 'search:' + encodeURI(this.keywords) + '/' : ''}`
-      let amenitiesQuery = `${this.amenities.length ? 'amenities:' + this.amenities.join('%2C') + '/' : ''}`
+      let cityQuery = `${
+        this.city && this.city !== "All Cities" ? "city:" + this.city + "/" : ""
+      }`
+      let keywordsQuery = `${
+        this.keywords ? "search:" + encodeURI(this.keywords) + "/" : ""
+      }`
+      let amenitiesQuery = `${
+        this.amenities.length
+          ? "amenities:" + this.amenities.join("%2C") + "/"
+          : ""
+      }`
 
       return `/locations/results/${cityQuery}${keywordsQuery}${amenitiesQuery}`
     },
     get queryWithoutResults() {
-      let cityQuery = `${this.city && this.city !== 'All Cities' ? 'city:' + this.city + '/' : ''}`
-      let keywordsQuery = `${this.keywords ? 'search:' + encodeURI(this.keywords) + '/' : ''}`
-      let amenitiesQuery = `${this.amenities.length ? 'amenities:' + this.amenities.join('%2C') + '/' : ''}`
+      let cityQuery = `${
+        this.city && this.city !== "All Cities" ? "city:" + this.city + "/" : ""
+      }`
+      let keywordsQuery = `${
+        this.keywords ? "search:" + encodeURI(this.keywords) + "/" : ""
+      }`
+      let amenitiesQuery = `${
+        this.amenities.length
+          ? "amenities:" + this.amenities.join("%2C") + "/"
+          : ""
+      }`
 
       return `/locations/${cityQuery}${keywordsQuery}${amenitiesQuery}`
     },
@@ -116,11 +133,11 @@ document.addEventListener("alpine:init", () => {
           this.amenities.push(v)
         }
       } else {
-        this.amenities = this.amenities.filter(element => element !== v)
+        this.amenities = this.amenities.filter((element) => element !== v)
       }
     },
     get matchedCities() {
-      if (this.cityInput == '') {
+      if (this.cityInput == "") {
         return this.cities
       } else {
         const citiesArray = Object.entries(this.cities)
@@ -136,14 +153,84 @@ document.addEventListener("alpine:init", () => {
     cityWrapperClickOutsideHandler() {
       this.citiesExpanded = false
 
-      if (this.city === 'All Cities') {
-        this.cityInput = ''
+      if (this.city === "All Cities") {
+        this.cityInput = ""
       } else {
         Object.entries(this.cities).forEach((element) => {
           if (element[0] === this.city) {
-            this.cityInput = element[1].ascii_name + ', ' + element[1].country_long
+            this.cityInput =
+              element[1].ascii_name + ", " + element[1].country_long
           }
         })
+      }
+    },
+    sendAjaxSearch() {
+      this.reInitMap()
+      this.replaceResults()
+    },
+    async reInitMap() {
+      if (this.city && this.city !== "All Cities") {
+        var map
+        var infowindow = new google.maps.InfoWindow();
+
+        await fetch("/cities.json/city:" + this.city)
+          .then((response) => {
+            return response.json()
+          })
+          .then((cityObj) => {
+            const loc = {
+              lat: Number(cityObj.lat),
+              lng: Number(cityObj.lng),
+            }
+
+            map = new google.maps.Map(document.getElementById("map"), {
+              zoom: 11,
+              center: loc,
+            })
+          })
+          .catch((error) => {
+            console.error("Error:", error)
+          })
+
+        await fetch("/locations.json/city:" + this.city)
+          .then((response) => {
+            return response.json()
+          })
+          .then((locations) => {
+            console.log(map)
+            Object.values(locations).forEach((val) => {
+              let marker = new google.maps.Marker({
+                position: new google.maps.LatLng(val["lat"], val["lng"]),
+                map: map,
+              })
+
+              let markup = `
+                  <a href="/locations/${val['slug']}" class="text-center font-poppins leading-tight">
+                    <div class="font-bold leading-tight text-[16px]">${val['name']}</div>
+                    <div class="">
+                      Overall Rating: ${val['rating_overall'] / 2}
+                    </div>
+                    <button class="btn btn-primary btn-xs w-full mt-[4px]">View Cafe</button>
+                  </a>
+              `
+
+              google.maps.event.addListener(marker, 'click', (function(marker) {
+                return function() {
+                  infowindow.setContent(markup);
+                  infowindow.open(map, marker);
+                }
+              })(marker));
+            })
+          })
+          .catch((error) => {
+            console.error("Error:", error)
+          })
+
+        document.getElementById("map").style.display = "block"
+        document.getElementById("no-map-content").style.display = "none"
+      } else {
+        document.getElementById("map").style.display = "none"
+        document.getElementById("no-map-content").style.display = "block"
       }
     },
     replaceResults() {
@@ -156,19 +243,23 @@ document.addEventListener("alpine:init", () => {
         .then((responseText) => {
           this.loading = false
 
-          const html = new DOMParser().parseFromString(responseText, 'text/html')
-          const resultsSource = html.getElementById('results-grid')
-          const resultsDestination = document.getElementById('results-grid')
+          const html = new DOMParser().parseFromString(
+            responseText,
+            "text/html"
+          )
+          const resultsSource = html.getElementById("results-grid")
+          const resultsDestination = document.getElementById("results-grid")
 
-          if (resultsSource && resultsDestination) resultsDestination.innerHTML = resultsSource.innerHTML;
+          if (resultsSource && resultsDestination)
+            resultsDestination.innerHTML = resultsSource.innerHTML
 
-          window.history.pushState(null, 'Locations', this.queryWithoutResults);
+          window.history.pushState(null, "Locations", this.queryWithoutResults)
         })
         .catch((error) => {
           this.loading = false
 
-          console.error('Error:', error);
-        });
-    }
+          console.error("Error:", error)
+        })
+    },
   }))
 })

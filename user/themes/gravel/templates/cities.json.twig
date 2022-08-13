@@ -6,26 +6,31 @@
 
 {% set country_code = uri.param('country_code') %}
 {% set as_options = uri.param('as_options') %}
+{% set city = uri.param('city') %}
 
-{% if country_code %}
-  {% set collection = collection.filterBy({'country': country_code}) %}
-{% endif %}
-
-{% if as_options %}
-  {% set htmlString %}
-    <div id="options-source">
-      {% if collection is not empty %}
-        {% for city in collection %}
-          <option value="{{ city.slug }}">{{ city.name }}</option>
-        {% endfor %}
-      {% else %}
-          <option value="" disabled selected>No cities found for this country.</option>
-      {% endif %}
-    </div>
-  {% endset %}
-    {{ htmlString }}
+{% if city %}
+  {% set cityObj = directory.getObject(city) %}
+  {% render cityObj layout: 'json' %}
 {% else %}
-    {{ collection|json_encode|raw }}
-{% endif %}
+  {% if country_code %}
+    {% set collection = collection.filterBy({'country': country_code}) %}
+  {% endif %}
 
+  {% if as_options %}
+    {% set htmlString %}
+      <div id="options-source">
+        {% if collection is not empty %}
+          {% for city in collection %}
+            <option value="{{ city.slug }}">{{ city.name }}</option>
+          {% endfor %}
+        {% else %}
+            <option value="" disabled selected>No cities found for this country.</option>
+        {% endif %}
+      </div>
+    {% endset %}
+      {{ htmlString }}
+  {% else %}
+      {{ collection|json_encode|raw }}
+  {% endif %}
+{% endif %}
 {% endspaceless %}

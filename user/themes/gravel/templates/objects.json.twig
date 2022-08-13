@@ -1,0 +1,33 @@
+{% spaceless %}
+
+	{% set type = uri.param('type') %}
+	{% set id = uri.param('id') %}
+	{% set cz = uri.param('cz')|default('300,220')|split(',') %}
+	{% set x  = cz[0] %}{% set y  = cz[1] %}
+
+	{% set flex = grav.get('flex_objects') %}
+	{% set list = flex.defaultDirectories()|keys %}
+
+	{% if not type or type not in list %}
+
+		{% include 'flex-objects/views/404.json.twig' %}
+
+	{% else %}
+
+		{% set directory = flex.directory(type) %}
+
+		{% if id %}
+
+			{# Display specified object #}
+			{% include 'flex-objects/views/object.json.twig' %}
+
+		{% else %}
+
+			{# Display specified directory #}
+			{% include 'flex-objects/views/collection.json.twig' %}
+
+		{% endif %}
+
+	{% endif %}
+
+{% endspaceless %}

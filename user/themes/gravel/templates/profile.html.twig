@@ -26,3 +26,10 @@
   });
 {% endset %}
 {% do assets.addInlineJS(profileInlineJs, { id: 'profile-inline-js', group: 'bottom' }) %}
+
+{% set inlineCss %}
+  .template-profile .alert {
+    margin-bottom: 2rem;
+  }
+{% endset %}
+{% do assets.addInlineCss(inlineCss) %}

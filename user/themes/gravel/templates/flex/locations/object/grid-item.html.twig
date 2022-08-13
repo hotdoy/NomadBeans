@@ -4,13 +4,17 @@
       <div class="overflow-hidden">
         {{ object.media.all[object.images|first.name].cropZoom(600,600).html(null, object.name, 'brightness-90 transition-all duration-500 hover:scale-110 hover:brightness-100')|raw }}
       </div>
-      <div class="rating rating-sm absolute bottom-4 left-4"> 
-        <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
-        <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
-        <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
-        <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" checked />
-        <input type="radio" name="rating-6" class="mask mask-star-2 bg-orange-400" />
-      </div>
+			<div class="rating rating-sm rating-half pointer-events-none absolute bottom-4 left-4">
+				<input type="radio" name="rating-10" class="rating-hidden"/>
+				{% set k = 10 %}
+				{% for i in range(1, k) %}
+					{% if i % 2 == 0 %}
+						<input type="radio" name="rating_overall_presentational_{{ object.slug }}" value="{{ i }}" class="bg-primary mask mask-star-2 mask-half-2 {% if object.rating_overall == 0 %}opacity-20{% endif %}" {% if i == object.rating_overall %} checked {% endif %}/>
+					{% else %}
+						<input type="radio" name="rating_overall_presentational_{{ object.slug }}" value="{{ i }}" class="bg-primary mask mask-star-2 mask-half-1 {% if object.rating_overall == 0 %}opacity-20{% endif %}" {% if i == object.rating_overall %} checked {% endif %}/>
+					{% endif %}
+				{% endfor %}
+			</div>
     </div>
     <h3 class="text-xl mt-4 sm:mt-6">
       {{ object.name }}

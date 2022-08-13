@@ -48,7 +48,7 @@
               values.push(selectedObj.value)
             })
 
-            this.selectedString = values.join(' ')
+            this.selectedString = values.join(',')
           })
         },
         addMe(e) {
@@ -132,6 +132,7 @@
                                                     aria-hidden="true" 
                                                     x-bind:aria-expanded="listActive.toString()" 
                                                     aria-haspopup="tag-list"
+                                                    name="data[amenities]"
                                                     hidden>
                                               <div class="input-presentation" @click="listActive = !listActive" @click.away="listActive = false" x-bind:class="{'active': listActive}">
                                                 <span class="placeholder" x-show="selected.length == 0">Select Amenities</span>
@@ -272,6 +273,18 @@
     .msa-wrapper ul li:hover {
       background: hsl(var(--p));
       color: white;
+    }
+
+    .dropzone .dz-preview .dz-error-message {
+      top: 165px !important;
+    }
+
+    .dropzone .dz-preview .dz-success-mark, .dropzone .dz-preview .dz-error-mark {
+      top: calc(50% - 18px) !important;
+    }
+
+    .dropzone .dz-preview .dz-remove {
+      font-size: 24px !important;
     }
   {% endset %}
 
