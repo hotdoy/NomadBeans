@@ -58,6 +58,46 @@ document.addEventListener("alpine:init", () => {
     init() {
       this.initAmenities()
       this.initCity()
+      this.initMobileOnInputFocus()
+
+      window.addEventListener('resize', this.initMobileOnInputFocus)
+    },
+    initMobileOnInputFocus() {
+      const cityInput = document.getElementById("city-input")
+      const keywordsInput = document.getElementById("keywords-input")
+
+      const initialCityInputOffset = cityInput.getBoundingClientRect().top
+      const initialKeywordsInputOffset =
+        keywordsInput.getBoundingClientRect().top
+
+      function onMobileCityInputHandler(event) {
+        if (window.innerWidth < 640) {
+          let drawerContent = document.getElementById("drawer-content")
+          let headerHeightOffset =
+            document.getElementById("site-header").offsetHeight
+          const spacerHeight = 20
+          let distanceToScroll =
+            initialCityInputOffset - headerHeightOffset - spacerHeight
+
+          drawerContent.scroll(0, distanceToScroll)
+        }
+      }
+
+      function onMobileKeywordsInputHandler(event) {
+        if (window.innerWidth < 640) {
+          let drawerContent = document.getElementById("drawer-content")
+          let headerHeightOffset =
+            document.getElementById("site-header").offsetHeight
+          const spacerHeight = 20
+          let distanceToScroll =
+            initialKeywordsInputOffset - headerHeightOffset - spacerHeight
+
+          drawerContent.scroll(0, distanceToScroll)
+        }
+      }
+
+      cityInput.addEventListener("focus", onMobileCityInputHandler)
+      keywordsInput.addEventListener("focus", onMobileKeywordsInputHandler)
     },
     initCity() {
       fetch("/cities.json")
@@ -171,7 +211,7 @@ document.addEventListener("alpine:init", () => {
     async reInitMap() {
       if (this.city && this.city !== "All Cities") {
         var map
-        var infowindow = new google.maps.InfoWindow();
+        var infowindow = new google.maps.InfoWindow()
 
         await fetch("/cities.json/city:" + this.city)
           .then((response) => {
@@ -197,7 +237,6 @@ document.addEventListener("alpine:init", () => {
             return response.json()
           })
           .then((locations) => {
-            console.log(map)
             Object.values(locations).forEach((val) => {
               let marker = new google.maps.Marker({
                 position: new google.maps.LatLng(val["lat"], val["lng"]),
@@ -205,21 +244,29 @@ document.addEventListener("alpine:init", () => {
               })
 
               let markup = `
-                  <a href="/locations/${val['slug']}" class="text-center font-poppins leading-tight">
-                    <div class="font-bold leading-tight text-[16px]">${val['name']}</div>
+                  <a href="/locations/${
+                    val["slug"]
+                  }" class="text-center font-poppins leading-tight">
+                    <div class="font-bold leading-tight text-[16px]">${
+                      val["name"]
+                    }</div>
                     <div class="">
-                      Overall Rating: ${val['rating_overall'] / 2}
+                      Overall Rating: ${val["rating_overall"] / 2}
                     </div>
                     <button class="btn btn-primary btn-xs w-full mt-[4px]">View Cafe</button>
                   </a>
               `
 
-              google.maps.event.addListener(marker, 'click', (function(marker) {
-                return function() {
-                  infowindow.setContent(markup);
-                  infowindow.open(map, marker);
-                }
-              })(marker));
+              google.maps.event.addListener(
+                marker,
+                "click",
+                (function (marker) {
+                  return function () {
+                    infowindow.setContent(markup)
+                    infowindow.open(map, marker)
+                  }
+                })(marker)
+              )
             })
           })
           .catch((error) => {

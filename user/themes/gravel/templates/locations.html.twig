@@ -98,7 +98,7 @@ function initMap() {
 window.initMap = initMap;
 {% else %}
 window.initMap = () => {
-	console.log('No city chosen. Map not initialized.')
+	// No city chosen. Do nothing.
 }
 {% endif %}
 {% endset %}
@@ -149,7 +149,7 @@ window.initMap = () => {
 						Search
 					</h2>
 					<div class="flex flex-col sm:flex-row justify-between mb-8 sm:my-8">
-						<input type="text" placeholder="What are you looking for?" class="input input-bordered w-full mb-4 sm:mr-4 md:mr-8 flex-1 min-h-12" x-model="keywords" x-init="{% if search %}keywords = '{{ search }}'{% endif %}" @keyup.enter="$refs.searchBtn.click()" />
+						<input id="keywords-input" type="text" placeholder="What are you looking for?" class="input input-bordered w-full mb-4 sm:mr-4 md:mr-8 flex-1 min-h-12" x-model="keywords" x-init="{% if search %}keywords = '{{ search }}'{% endif %}" @keyup.enter="$refs.searchBtn.click()" />
 						<div @click.outside="cityWrapperClickOutsideHandler" id="city-input-wrapper" class="relative w-full mb-4 sm:mr-4 md:mr-8 flex-1 z-10">
 							<input @focus="citiesExpanded = true" @input="citiesExpanded = true" id="city-input" x-model="cityInput" type="text" placeholder="All Cities" class="input input-bordered min-h-12 w-full" />
 							<ul x-show="citiesExpanded" id="cities-list" class="absolute pin-x w-full bg-base-100 rounded-lg border shadow-lg" style="border-color: #e5e7eb;">
@@ -194,5 +194,6 @@ window.initMap = () => {
   padding-top: 18px;
   padding-bottom: 6px !important;
 }
+
 {% endset %}
 {% do assets.addInlineCss(inlineCss) %}
