@@ -6,20 +6,18 @@ document.addEventListener("alpine:init", () => {
   Alpine.store("gravel", {
     mobileMenuShowing: false,
     loginModalShowing: false,
+  
     onScrollHandler() {
-      const siteMain = document.getElementById("site-main")
-      if (siteMain) {
-        if (siteMain.getBoundingClientRect().top < 64) {
-          document.body.classList.add("scrolled")
-        } else {
-          document.body.classList.remove("scrolled")
-        }
+      var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+
+      if (scrollTop > 0) {
+        document.body.classList.add("scrolled")
+      } else {
+        document.body.classList.remove("scrolled")
       }
     },
     init() {
-      const drawer = document.getElementById("drawer-content")
-      window.addEventListener("load", this.onScrollHandler)
-      if (drawer) drawer.addEventListener("scroll", this.onScrollHandler)
+      window.addEventListener("scroll", this.onScrollHandler)
     },
     toggle() {
       this.on = !this.on
@@ -55,49 +53,43 @@ document.addEventListener("alpine:init", () => {
     amenities: [],
     loading: false,
     amenitiesExpanded: true,
+    cityInputDistanceFromTop: null,
+    keywordsInputDistanceFromTop: null,
+    deviceIsMobile: null,
+    windowScrollTop: null,
     init() {
       this.initAmenities()
       this.initCity()
       this.initMobileOnInputFocus()
-
-      window.addEventListener('resize', this.initMobileOnInputFocus)
     },
     initMobileOnInputFocus() {
-      const cityInput = document.getElementById("city-input")
-      const keywordsInput = document.getElementById("keywords-input")
+      var cityInput = document.getElementById('city-input');
+      var keywordsInput = document.getElementById('keywords-input');
 
-      const initialCityInputOffset = cityInput.getBoundingClientRect().top
-      const initialKeywordsInputOffset =
-        keywordsInput.getBoundingClientRect().top
-
-      function onMobileCityInputHandler(event) {
-        if (window.innerWidth < 640) {
-          let drawerContent = document.getElementById("drawer-content")
-          let headerHeightOffset =
-            document.getElementById("site-header").offsetHeight
-          const spacerHeight = 20
-          let distanceToScroll =
-            initialCityInputOffset - headerHeightOffset - spacerHeight
-
-          drawerContent.scroll(0, distanceToScroll)
+      const setInputDistances = () => {
+        if (cityInput && keywordsInput) {
+          this.windowScrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+          this.cityInputDistanceFromTop = cityInput.getBoundingClientRect().top;
+          this.keywordsInputDistanceFromTop = keywordsInput.getBoundingClientRect().top;
         }
       }
 
-      function onMobileKeywordsInputHandler(event) {
-        if (window.innerWidth < 640) {
-          let drawerContent = document.getElementById("drawer-content")
-          let headerHeightOffset =
-            document.getElementById("site-header").offsetHeight
-          const spacerHeight = 20
-          let distanceToScroll =
-            initialKeywordsInputOffset - headerHeightOffset - spacerHeight
+      window.addEventListener('resize', setInputDistances)
+      window.addEventListener('scroll', setInputDistances)
+      setInputDistances()
 
-          drawerContent.scroll(0, distanceToScroll)
+      cityInput.addEventListener('focus', () => {
+        console.log(this.deviceIsMobile)
+        if (this.deviceIsMobile) {
+          window.scrollTo(0, this.cityInputDistanceFromTop - 74 + this.windowScrollTop)
         }
-      }
+      })
 
-      cityInput.addEventListener("focus", onMobileCityInputHandler)
-      keywordsInput.addEventListener("focus", onMobileKeywordsInputHandler)
+      keywordsInput.addEventListener('focus', () => {
+        if (this.deviceIsMobile) {
+          window.scrollTo(0, this.keywordsInputDistanceFromTop - 74 + this.windowScrollTop)
+        }
+      })
     },
     initCity() {
       fetch("/cities.json")

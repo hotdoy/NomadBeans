@@ -3,97 +3,96 @@
 
 <!DOCTYPE html>
 <html lang="{{ (grav.language.getActive ?: grav.config.site.default_lang)|e }}" data-theme="bumblebee" class="antialiased">
-  <head>
-    {% block head %}
-      <meta charset="utf-8"/>
-      <title>
-        {% if header.title %}
-          {{ header.title|e }}
-          |
-        {% endif %}
-        {{ site.title|e }}</title>
+	<head>
+		{% block head %}
+			<meta charset="utf-8"/>
+			<title>
+				{% if header.title %}
+					{{ header.title|e }}
+					|
+				{% endif %}
+				{{ site.title|e }}</title>
 
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      {% include 'partials/metadata.html.twig' %}
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			{% include 'partials/metadata.html.twig' %}
 
-      <link rel="canonical" href="{{ page.url(true, true)|e }}"/>
-    {% endblock head %}
+			<link rel="canonical" href="{{ page.url(true, true)|e }}"/>
+		{% endblock head %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Shadows+Into+Light&display=block" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Shadows+Into+Light&display=block" rel="stylesheet">
 
-    {% block stylesheets %}
-      {% do assets.addCss('theme://dist/css/site' ~ extension ~ '.css') %}
-    {% endblock %}
+		{% block stylesheets %}
+			{% do assets.addCss('theme://dist/css/site' ~ extension ~ '.css') %}
+		{% endblock %}
 
-    {% block javascripts %}
-      {% do assets.addJs('theme://js/main.js', 100) %}
-      {% do assets.addJs('theme://js/alpinejs.min.js', {'loading': 'defer', 'priority': 98}) %}
-    {% endblock %}
+		{% block javascripts %}
+			{% do assets.addJs('theme://js/main.js', 100) %}
+			{% do assets.addJs('theme://js/alpinejs.min.js', {'loading': 'defer', 'priority': 98}) %}
+		{% endblock %}
 
-    {% block assets deferred %}
-      {{ assets.css()|raw }}
-      {{ assets.js()|raw }}
-    {% endblock %}
-  </head>
+		{% block assets deferred %}
+			{{ assets.css()|raw }}
+			{{ assets.js()|raw }}
+		{% endblock %}
+	</head>
 
-  {% set body_classes = [] %}
-  {% if page.header.body_classes is not empty %}
-    {% set body_classes = body_classes|merge([page.header.body_classes]) %}
-  {% endif %}
-  {% if body_classes_slot is not empty %}
-    {% set body_classes = body_classes|merge([body_classes_slot]) %}
-  {% endif %}
+	{% set body_classes = [] %}
+	{% if page.header.body_classes is not empty %}
+		{% set body_classes = body_classes|merge([page.header.body_classes]) %}
+	{% endif %}
+	{% if body_classes_slot is not empty %}
+		{% set body_classes = body_classes|merge([body_classes_slot]) %}
+	{% endif %}
 
-  <body id="top" class="{{ body_classes|join(' ')|e }} font-poppins tracking-wide">
+	<body id="top" class="{{ body_classes|join(' ')|e }} font-poppins tracking-wide" x-data :class="$store.gravel.mobileMenuShowing && 'mobile-menu-showing'">
 
-    {% block body %}
-      {% include 'partials/login-modal.html.twig' %}
-      <div class="drawer">
-        <input x-data x-model="$store.gravel.mobileMenuShowing" id="mobile-drawer" type="checkbox" class="drawer-toggle"/>
-        <div
-          id="drawer-content" class="drawer-content relative flex flex-col">
-          <!-- Navbar -->
+		{% block body %}
+			{% include 'partials/login-modal.html.twig' %}
+			{% block header %}
+				{% include 'partials/header.html.twig' %}
+			{% endblock %}
 
-          {% block header %}
-            {% include 'partials/header.html.twig' %}
-          {% endblock %}
+			<!-- Page content here -->
+			{% block main %}
 
-          <!-- Page content here -->
-          {% block main %}
+				<main id="site-main" class="site-main mt-[64px]">
 
-            <main id="site-main" class="site-main">
+					{% block hero %}{% endblock %}
 
-              {% block hero %}{% endblock %}
+					{% block content %}
+						{{ content }}
+					{% endblock %}
 
-              {% block content %}
-                {{ content }}
-              {% endblock %}
+				</main>
 
-            </main>
+			{% endblock %}
 
-          {% endblock %}
+			{% block footer %}
+				{% include 'partials/footer.html.twig' %}
+			{% endblock %}
 
-          {% block footer %}
-            {% include 'partials/footer.html.twig' %}
-          {% endblock %}
+			<div class="drawer-side w-screen h-screen pin fixed z-20" x-show="$store.gravel.mobileMenuShowing">
+				<label for="mobile-drawer" class="drawer-overlay w-screen h-screen pin fixed z-20 bg-black/50"
+                x-show="$store.gravel.mobileMenuShowing"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-300"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"></label>
+				{% include 'partials/mobile-navigation.html.twig' %}
+			</div>
 
-        </div>
-        <div class="drawer-side">
-          <label for="mobile-drawer" class="drawer-overlay"></label>
-          {% include 'partials/mobile-navigation.html.twig' %}
-        </div>
-      </div>
-
-    {% endblock %}
+		{% endblock %}
 
 
-    {% block bottom %}
-      <script id="dsq-count-scr" src="//nomadbeans.disqus.com/count.js" async></script>
-      {{ assets.js('bottom')|raw }}
-    {% endblock %}
+		{% block bottom %}
+			<script id="dsq-count-scr" src="//nomadbeans.disqus.com/count.js" async></script>
+			{{ assets.js('bottom')|raw }}
+		{% endblock %}
 
-  </body>
+	</body>
 </html>

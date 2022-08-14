@@ -43,7 +43,8 @@ module.exports = {
     require('@tailwindcss/typography'),
     require("daisyui"),
     plugin(function ({ addVariant }) {
-      addVariant('scrolled', '.scrolled &')
+      addVariant('scrolled', '.scrolled &'),
+      addVariant('mobileMenuShowing', '.mobile-menu-showing &')
     }),
     require('postcss-import')
   ],

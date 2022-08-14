@@ -120,7 +120,7 @@ window.initMap = () => {
 {% endblock %}
 
 {% block content %}
-	<div x-data="megaSearchComponent" {% if city %}x-init="city = '{{ city }}'"{% endif %} class="container mx-auto pt-8 pb-16 sm:pt-10 sm:pb-16 md:py-20">
+	<div x-data="megaSearchComponent" {% if city %}x-init="city = '{{ city }}'"{% endif %} class="container mx-auto pt-8 pb-16 sm:pt-10 sm:pb-16 md:py-20" @load.window="deviceIsMobile = window.innerWidth < 640" @resize.window="deviceIsMobile = window.innerWidth < 640, initMobileOnInputFocus">
 		<div class="px-4">
 			<div class="flex flex-col-reverse sm:flex-col">
 				<div class="mb-6 sm:mb-0" id="sort-by-amenities">
