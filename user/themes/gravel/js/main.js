@@ -6,9 +6,11 @@ document.addEventListener("alpine:init", () => {
   Alpine.store("gravel", {
     mobileMenuShowing: false,
     loginModalShowing: false,
-  
     onScrollHandler() {
-      var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+      var scrollTop =
+        window.pageYOffset !== undefined
+          ? window.pageYOffset
+          : (document.documentElement || document.body.parentNode || document.body).scrollTop
 
       if (scrollTop > 0) {
         document.body.classList.add("scrolled")
@@ -18,9 +20,6 @@ document.addEventListener("alpine:init", () => {
     },
     init() {
       window.addEventListener("scroll", this.onScrollHandler)
-    },
-    toggle() {
-      this.on = !this.on
     },
     async fetchPost(url, data = {}, successCallback, errorCallback) {
       await fetch(url, {
@@ -63,32 +62,52 @@ document.addEventListener("alpine:init", () => {
       this.initMobileOnInputFocus()
     },
     initMobileOnInputFocus() {
-      var cityInput = document.getElementById('city-input');
-      var keywordsInput = document.getElementById('keywords-input');
+      var cityInput = document.getElementById("city-input")
+      var keywordsInput = document.getElementById("keywords-input")
 
       const setInputDistances = () => {
         if (cityInput && keywordsInput) {
-          this.windowScrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-          this.cityInputDistanceFromTop = cityInput.getBoundingClientRect().top;
-          this.keywordsInputDistanceFromTop = keywordsInput.getBoundingClientRect().top;
+          if (document.readyState !== "complete" && document.readyState !== "loaded") {
+            window.addEventListener("DOMContentLoaded", () => {
+              this.windowScrollTop =
+                window.pageYOffset !== undefined
+                  ? window.pageYOffset
+                  : (document.documentElement || document.body.parentNode || document.body)
+                      .scrollTop
+              this.cityInputDistanceFromTop = cityInput.getBoundingClientRect().top
+              this.keywordsInputDistanceFromTop = keywordsInput.getBoundingClientRect().top
+            })
+          } else {
+            this.windowScrollTop =
+              window.pageYOffset !== undefined
+                ? window.pageYOffset
+                : (document.documentElement || document.body.parentNode || document.body).scrollTop
+            this.cityInputDistanceFromTop = cityInput.getBoundingClientRect().top
+            this.keywordsInputDistanceFromTop = keywordsInput.getBoundingClientRect().top
+          }
         }
       }
 
-      window.addEventListener('resize', setInputDistances)
-      window.addEventListener('scroll', setInputDistances)
+      window.addEventListener("resize", setInputDistances)
+      window.addEventListener("scroll", setInputDistances)
       setInputDistances()
 
-      cityInput.addEventListener('focus', () => {
-        console.log(this.deviceIsMobile)
+      cityInput.addEventListener("focus", () => {
         if (this.deviceIsMobile) {
-          window.scrollTo(0, this.cityInputDistanceFromTop - 74 + this.windowScrollTop)
+          setTimeout(() => {
+            window.scrollTo(0, this.cityInputDistanceFromTop - 74 + this.windowScrollTop)
+          }, 100)
         }
+        this.citiesExpanded = true
       })
 
-      keywordsInput.addEventListener('focus', () => {
+      keywordsInput.addEventListener("focus", () => {
         if (this.deviceIsMobile) {
-          window.scrollTo(0, this.keywordsInputDistanceFromTop - 74 + this.windowScrollTop)
+          setTimeout(() => {
+            window.scrollTo(0, this.keywordsInputDistanceFromTop - 74 + this.windowScrollTop)
+          }, 100)
         }
+        this.citiesExpanded = true
       })
     },
     initCity() {
@@ -102,8 +121,7 @@ document.addEventListener("alpine:init", () => {
           if (this.city !== "All Cities") {
             Object.entries(this.cities).forEach((element) => {
               if (element[0] === this.city) {
-                this.cityInput =
-                  element[1].ascii_name + ", " + element[1].country_long
+                this.cityInput = element[1].ascii_name + ", " + element[1].country_long
               }
             })
           }
@@ -127,31 +145,19 @@ document.addEventListener("alpine:init", () => {
       x.addEventListener("change", deviceWidthChecker)
     },
     get query() {
-      let cityQuery = `${
-        this.city && this.city !== "All Cities" ? "city:" + this.city + "/" : ""
-      }`
-      let keywordsQuery = `${
-        this.keywords ? "search:" + encodeURI(this.keywords) + "/" : ""
-      }`
+      let cityQuery = `${this.city && this.city !== "All Cities" ? "city:" + this.city + "/" : ""}`
+      let keywordsQuery = `${this.keywords ? "search:" + encodeURI(this.keywords) + "/" : ""}`
       let amenitiesQuery = `${
-        this.amenities.length
-          ? "amenities:" + this.amenities.join("%2C") + "/"
-          : ""
+        this.amenities.length ? "amenities:" + this.amenities.join("%2C") + "/" : ""
       }`
 
       return `/locations/results/${cityQuery}${keywordsQuery}${amenitiesQuery}`
     },
     get queryWithoutResults() {
-      let cityQuery = `${
-        this.city && this.city !== "All Cities" ? "city:" + this.city + "/" : ""
-      }`
-      let keywordsQuery = `${
-        this.keywords ? "search:" + encodeURI(this.keywords) + "/" : ""
-      }`
+      let cityQuery = `${this.city && this.city !== "All Cities" ? "city:" + this.city + "/" : ""}`
+      let keywordsQuery = `${this.keywords ? "search:" + encodeURI(this.keywords) + "/" : ""}`
       let amenitiesQuery = `${
-        this.amenities.length
-          ? "amenities:" + this.amenities.join("%2C") + "/"
-          : ""
+        this.amenities.length ? "amenities:" + this.amenities.join("%2C") + "/" : ""
       }`
 
       return `/locations/${cityQuery}${keywordsQuery}${amenitiesQuery}`
@@ -190,8 +196,7 @@ document.addEventListener("alpine:init", () => {
       } else {
         Object.entries(this.cities).forEach((element) => {
           if (element[0] === this.city) {
-            this.cityInput =
-              element[1].ascii_name + ", " + element[1].country_long
+            this.cityInput = element[1].ascii_name + ", " + element[1].country_long
           }
         })
       }
@@ -239,9 +244,7 @@ document.addEventListener("alpine:init", () => {
                   <a href="/locations/${
                     val["slug"]
                   }" class="text-center font-poppins leading-tight">
-                    <div class="font-bold leading-tight text-[16px]">${
-                      val["name"]
-                    }</div>
+                    <div class="font-bold leading-tight text-[16px]">${val["name"]}</div>
                     <div class="">
                       Overall Rating: ${val["rating_overall"] / 2}
                     </div>
@@ -282,10 +285,7 @@ document.addEventListener("alpine:init", () => {
         .then((responseText) => {
           this.loading = false
 
-          const html = new DOMParser().parseFromString(
-            responseText,
-            "text/html"
-          )
+          const html = new DOMParser().parseFromString(responseText, "text/html")
           const resultsSource = html.getElementById("results-grid")
           const resultsDestination = document.getElementById("results-grid")
 

@@ -17,7 +17,7 @@
 
 {% if amenities %}
 	{% set amenities = amenities|split(',') %}
-  {% set collection = collection.filterByAmenities(amenities) %}
+	{% set collection = collection.filterByAmenities(amenities) %}
 {% endif %}
 
 {% if city %}
@@ -43,91 +43,93 @@ let long = '{{ header.map_default_long ?? null }}'
 }); #}
 
 {% if filteredCityObj %}
-function initMap() {
-  let loc = { 
-    lat: Number(lat), 
-    lng: Number(long)
-  };
-
-	loc = {
-		lat: {{- filteredCityObj.lat -}},
-		lng: {{- filteredCityObj.lng -}}
-	}
-
-  const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 11,
-    center: loc,
-  });
-
-	var infowindow = new google.maps.InfoWindow();
-
-	fetch('/locations.json/city:{{filteredCityObj.slug}}')
-		.then((response) => {
-			return response.json()
-		})
-		.then((locations) => {
-			Object.values(locations).forEach(val => {
-				let marker = new google.maps.Marker({
-					position: new google.maps.LatLng(val['lat'], val['lng']),
-					map: map
-				})
-
-        let markup = `
-            <a href="/locations/${val['slug']}" class="text-center font-poppins leading-tight">
-							<div class="font-bold leading-tight text-[16px]">${val['name']}</div>
-              <div class="">
-                Overall Rating: ${val['rating_overall'] / 2}
-              </div>
-              <button class="btn btn-primary btn-xs w-full mt-[4px]">View Cafe</button>
-						</a>
-        `
-
-				google.maps.event.addListener(marker, 'click', (function(marker) {
-					return function() {
-						infowindow.setContent(markup);
-						infowindow.open(map, marker);
-					}
-				})(marker));
+	function initMap() {
+	  let loc = { 
+	    lat: Number(lat), 
+	    lng: Number(long)
+	  };
+	
+		loc = {
+        lat:
+    {{- filteredCityObj.lat -}},
+        lng:
+    {{- filteredCityObj.lng -}}
+    }
+	
+	  const map = new google.maps.Map(document.getElementById("map"), {
+	    zoom: 11,
+	    center: loc,
+	  });
+	
+		var infowindow = new google.maps.InfoWindow();
+	
+		fetch('/locations.json/city:{{filteredCityObj.slug}}')
+			.then((response) => {
+				return response.json()
+			})
+			.then((locations) => {
+				Object.values(locations).forEach(val => {
+					let marker = new google.maps.Marker({
+						position: new google.maps.LatLng(val['lat'], val['lng']),
+						map: map
+					})
+	
+	        let markup = `
+          <a href="/locations/${val['slug']}" class="text-center font-poppins leading-tight">
+            <div class="font-bold leading-tight text-[16px]">${val['name']}</div>
+            <div class="">
+              Overall Rating: ${val['rating_overall'] / 2}
+            </div>
+            <button class="btn btn-primary btn-xs w-full mt-[4px]">View Cafe</button>
+          </a>
+          `
+	
+					google.maps.event.addListener(marker, 'click', (function(marker) {
+						return function() {
+							infowindow.setContent(markup);
+							infowindow.open(map, marker);
+						}
+					})(marker));
+				});
+			})
+			.catch((error) => {
+				console.error('Error:', error);
 			});
-		})
-		.catch((error) => {
-			console.error('Error:', error);
-		});
-}
-                    
-window.initMap = initMap;
+	}
+	                    
+	window.initMap = initMap;
 {% else %}
-window.initMap = () => {
-	// No city chosen. Do nothing.
-}
+	window.initMap = () => {
+		// No city chosen. Do nothing.
+	}
 {% endif %}
 {% endset %}
 {% do assets.addInlineJs(map, {id: 'google-map', group: 'bottom'}) %}
 
 {% block hero %}
 	<div class="flex items-center py-20 px-4 bg-center relative min-h-[16rem] sm:min-h-[20rem] lg:min-h-[24rem] bg-gray-100">
-		<div id="map" class="h-full w-full absolute pin" {% if not city %}style="display: none;"{% endif %}></div>
-		<div id="no-map-content" class="h-full w-full absolute pin" {% if city %}style="display: none;"{% endif %}>
-			<div  class="hero-overlay absolute pin bg-black opacity-30 z-10"></div>
-				{{ page.media.images|first.cropZoom(2000, 680).html('', 'background map image', 'object-cover h-full w-full')|raw }}
-				<div class="absolute top-1/2 left-1/2 z-20">
-					<div class="text-xl sm:text-2xl font-bold px-4 tracking-wider text-white -translate-x-1/2 -translate-y-1/2 text-center">
-						Select a city to see a map of locations.
-					</div>
+		<div id="map" class="h-full w-full absolute pin" {% if not city %} style="display: none;" {% endif %}></div>
+		<div id="no-map-content" class="h-full w-full absolute pin" {% if city %} style="display: none;" {% endif %}>
+			<div class="hero-overlay absolute pin bg-black opacity-30 z-10"></div>
+			{{ page.media.images|first.cropZoom(2000, 680).html('', 'background map image', 'object-cover h-full w-full')|raw }}
+			<div class="absolute top-1/2 left-1/2 z-20">
+				<div class="text-xl sm:text-2xl font-bold px-4 tracking-wider text-white -translate-x-1/2 -translate-y-1/2 text-center">
+					Select a city to see a map of locations.
 				</div>
+			</div>
 		</div>
 	</div>
 {% endblock %}
 
 {% block content %}
-	<div x-data="megaSearchComponent" {% if city %}x-init="city = '{{ city }}'"{% endif %} class="container mx-auto pt-8 pb-16 sm:pt-10 sm:pb-16 md:py-20" @load.window="deviceIsMobile = window.innerWidth < 640" @resize.window="deviceIsMobile = window.innerWidth < 640, initMobileOnInputFocus">
+	<div x-data="megaSearchComponent" {% if city %} x-init="city = '{{ city }}'" {% endif %} class="container mx-auto pt-8 pb-16 sm:pt-10 sm:pb-16 md:py-20" @load.window="deviceIsMobile = window.innerWidth < 640" @resize.window="deviceIsMobile = window.innerWidth < 640, initMobileOnInputFocus">
 		<div class="px-4">
 			<div class="flex flex-col-reverse sm:flex-col">
 				<div class="mb-6 sm:mb-0" id="sort-by-amenities">
 					<h2 class="text-2xl sm:text-3xl text-accent relative cursor-pointer" @click="amenitiesExpanded = !amenitiesExpanded">
 						Search by Amenities
 						<button>
-							<svg x-bind:class="amenitiesExpanded && 'rotate-180'" class="absolute right-0 top-1/2 -translate-y-1/2 transition-all" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+							<svg x-bind:class="amenitiesExpanded && 'rotate-180'" class="absolute right-0 top-1/2 -translate-y-1/2 transition-all" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewbox="0 0 16 16">
 								<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
 							</svg>
 						</button>
@@ -151,28 +153,21 @@ window.initMap = () => {
 					<div class="flex flex-col sm:flex-row justify-between mb-8 sm:my-8">
 						<input id="keywords-input" type="text" placeholder="What are you looking for?" class="input input-bordered w-full mb-4 sm:mr-4 md:mr-8 flex-1 min-h-12" x-model="keywords" x-init="{% if search %}keywords = '{{ search }}'{% endif %}" @keyup.enter="$refs.searchBtn.click()" />
 						<div @click.outside="cityWrapperClickOutsideHandler" id="city-input-wrapper" class="relative w-full mb-4 sm:mr-4 md:mr-8 flex-1 z-10">
-							<input @focus="citiesExpanded = true" @input="citiesExpanded = true" id="city-input" x-model="cityInput" type="text" placeholder="All Cities" class="input input-bordered min-h-12 w-full" />
+							<input @input="citiesExpanded = true" id="city-input" x-model="cityInput" type="text" placeholder="All Cities" class="input input-bordered min-h-12 w-full"/>
 							<ul x-show="citiesExpanded" id="cities-list" class="absolute pin-x w-full bg-base-100 rounded-lg border shadow-lg" style="border-color: #e5e7eb;">
 								<li>
-									<button 
-										class="py-2 px-4 hover:bg-primary hover:text-white w-full text-left"
-										@click="$nextTick(() => { city = '', cityInput = '' })">
+									<button class="py-2 px-4 hover:bg-primary hover:text-white w-full text-left" @click="$nextTick(() => { city = '', cityInput = '', citiesExpanded = false })">
 										All Cities
 									</button>
 								</li>
 								<template x-for="c in matchedCities">
-										<li>
-											<button 
-												x-bind:data-city-slug="c.slug" 
-												x-text="c.ascii_name + ', ' + c.country_long"
-												class="py-2 px-4 hover:bg-primary hover:text-white w-full text-left"
-												@click="$nextTick(() => { city = c.slug, cityInput = c.ascii_name + ', ' + c.country_long, citiesExpanded = false })">
-											</button>
-										</li>
+									<li>
+										<button x-bind:data-city-slug="c.slug" x-text="c.ascii_name + ', ' + c.country_long" class="py-2 px-4 hover:bg-primary hover:text-white w-full text-left" @click="$nextTick(() => { city = c.slug, cityInput = c.ascii_name + ', ' + c.country_long, citiesExpanded = false })"></button>
+									</li>
 								</template>
 							</ul>
 						</div>
-						<button x-bind:data-href="query" @click="sendAjaxSearch" class="btn btn-primary min-w-[90px] before:!mr-0" x-bind:class="loading && 'loading'" x-ref="searchBtn" x-text="loading ? '' : 'Search'"></button>
+						<a x-bind:href="queryWithoutResults" class="btn btn-primary min-w-[90px] before:!mr-0" x-bind:class="loading && 'loading'" x-ref="searchBtn" x-text="loading ? '' : 'Search'"></a>
 					</div>
 				</div>
 			</div>

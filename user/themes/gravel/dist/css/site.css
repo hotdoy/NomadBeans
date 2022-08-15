@@ -1529,22 +1529,6 @@ h3 {
   width: 100%;
 }
 
-.drawer {
-  display: grid;
-  width: 100%;
-  overflow: hidden;
-  height: 100vh;
-  height: 100dvh;
-}
-
-.drawer.drawer-end {
-  direction: rtl;
-}
-
-.drawer.drawer-end > * {
-  direction: ltr;
-}
-
 .drawer.drawer-end > .drawer-toggle ~ .drawer-side > .drawer-overlay + * {
   --tw-translate-x: 100%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1554,20 +1538,6 @@ h3 {
 .drawer.drawer-end > .drawer-toggle:checked ~ .drawer-side > .drawer-overlay + * {
   --tw-translate-x: 0px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-:where(.drawer-toggle ~ .drawer-content) {
-  height: inherit;
-}
-
-.drawer-toggle ~ .drawer-content {
-  z-index: 0;
-  grid-column-start: 1;
-  grid-row-start: 1;
-  overflow-y: auto;
-  transition-property: all;
-  transition-duration: 300ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .drawer-toggle ~ .drawer-side {
@@ -1684,11 +1654,6 @@ h3 {
 
   .drawer-mobile.drawer-end > .drawer-toggle ~ .drawer-side {
     overflow-y: auto;
-  }
-
-  .drawer-mobile > .drawer-toggle:checked ~ .drawer-content {
-    --tw-translate-x: 0px;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   }
 }
 
@@ -2810,21 +2775,6 @@ body[dir="rtl"] .checkbox:checked,
   gap: 1rem;
 }
 
-.drawer.drawer-end > .drawer-toggle:checked ~ .drawer-content {
-  --tw-translate-x: -0.5rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.drawer-toggle:checked ~ .drawer-content {
-  --tw-translate-x: 0.5rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.drawer-toggle:focus-visible ~ .drawer-content .drawer-button {
-  outline: 2px solid hsl(var(--nf));
-  outline-offset: 2px;
-}
-
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-primary {
   outline: 2px solid hsl(var(--p));
 }
@@ -2835,26 +2785,6 @@ body[dir="rtl"] .checkbox:checked,
 
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-accent {
   outline: 2px solid hsl(var(--a));
-}
-
-.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-info {
-  outline: 2px solid hsl(var(--in));
-}
-
-.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-success {
-  outline: 2px solid hsl(var(--su));
-}
-
-.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-warning {
-  outline: 2px solid hsl(var(--wa));
-}
-
-.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-error {
-  outline: 2px solid hsl(var(--er));
-}
-
-.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.glass {
-  outline: 2px solid currentColor;
 }
 
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-ghost {
@@ -8681,20 +8611,12 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   left: 1rem;
 }
 
-.right-full {
-  right: 100%;
-}
-
 .z-10 {
   z-index: 10;
 }
 
 .z-20 {
   z-index: 20;
-}
-
-.z-50 {
-  z-index: 50;
 }
 
 .z-40 {
@@ -8928,16 +8850,16 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   width: 2rem;
 }
 
+.w-screen {
+  width: 100vw;
+}
+
 .w-2\/5 {
   width: 40%;
 }
 
 .w-1\/5 {
   width: 20%;
-}
-
-.w-screen {
-  width: 100vw;
 }
 
 .w-80 {
@@ -9013,34 +8935,6 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 
 .rotate-180 {
   --tw-rotate: 180deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.scale-90 {
-  --tw-scale-x: .9;
-  --tw-scale-y: .9;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.scale-100 {
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.scale-0 {
-  --tw-scale-x: 0;
-  --tw-scale-y: 0;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.scale-x-0 {
-  --tw-scale-x: 0;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.scale-x-100 {
-  --tw-scale-x: 1;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -9286,12 +9180,12 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
-.bg-black\/30 {
-  background-color: rgb(0 0 0 / 0.3);
-}
-
 .bg-black\/50 {
   background-color: rgb(0 0 0 / 0.5);
+}
+
+.bg-black\/30 {
+  background-color: rgb(0 0 0 / 0.3);
 }
 
 .bg-gradient-to-b {
@@ -9636,16 +9530,16 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   opacity: 0.3;
 }
 
-.opacity-50 {
-  opacity: 0.5;
-}
-
 .opacity-0 {
   opacity: 0;
 }
 
 .opacity-100 {
   opacity: 1;
+}
+
+.opacity-50 {
+  opacity: 0.5;
 }
 
 .shadow-lg {
@@ -9714,10 +9608,6 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 
 .duration-500 {
   transition-duration: 500ms;
-}
-
-.duration-1000 {
-  transition-duration: 1000ms;
 }
 
 .ease-out {

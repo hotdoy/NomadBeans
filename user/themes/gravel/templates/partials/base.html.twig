@@ -28,6 +28,12 @@
 			{% do assets.addCss('theme://dist/css/site' ~ extension ~ '.css') %}
 		{% endblock %}
 
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
+
 		{% block javascripts %}
 			{% do assets.addJs('theme://js/main.js', 100) %}
 			{% do assets.addJs('theme://js/alpinejs.min.js', {'loading': 'defer', 'priority': 98}) %}
@@ -74,7 +80,7 @@
 				{% include 'partials/footer.html.twig' %}
 			{% endblock %}
 
-			<div class="drawer-side w-screen h-screen pin fixed z-20" x-show="$store.gravel.mobileMenuShowing">
+			<div class="drawer-side w-screen h-screen pin fixed z-20" x-show="$store.gravel.mobileMenuShowing" x-cloak>
 				<label for="mobile-drawer" class="drawer-overlay w-screen h-screen pin fixed z-20 bg-black/50"
                 x-show="$store.gravel.mobileMenuShowing"
                 x-transition:enter="transition ease-out duration-300"
