@@ -1,0 +1,21 @@
+form: submit-form
+id: 'tmp://forms/session/kzxseyq6d0wah7ndbpmr'
+unique_id: kzxseyq6d0wah7ndbpmr
+url: 'https://grav2.local/submit'
+user:
+  username: james
+  email: james.auble@gmail.com
+timestamps:
+  created: 1659908202
+  updated: 1659908202
+data: null
+files:
+  images:
+    xNO6q5uRhiP2CpV.jpeg:
+      name: xNO6q5uRhiP2CpV.jpeg
+      type: image/jpeg
+      tmp_name: phpymrts1
+      size: 2680203
+      path: 'image://locations/xNO6q5uRhiP2CpV.jpeg'
+  images/original:
+    xNO6q5uRhiP2CpV.jpeg: null

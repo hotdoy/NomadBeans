@@ -36,6 +36,9 @@ config:
       title: name
       fields:
         location:
+          field:
+            type: location_frontend_link
+            label: 'Location'
         username:
         datetime:
 
@@ -92,6 +95,9 @@ config:
           class: 'Grav\Framework\File\Formatter\JsonFormatter'
         # JSON file where all the objects will be stored
         folder: user-data://reported
+    ordering:
+      datetime: ASC
+
     search:
       # Search options
       options:
@@ -113,7 +119,7 @@ form:
 
     datetime:
       type: text
-      label: Datetime
+      label: Submitted At
 
     username:
       type: text

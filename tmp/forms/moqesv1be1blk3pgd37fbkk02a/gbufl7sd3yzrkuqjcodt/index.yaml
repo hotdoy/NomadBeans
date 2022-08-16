@@ -1,0 +1,23 @@
+form: submit-form
+id: 'tmp://forms/session/gbufl7sd3yzrkuqjcodt'
+unique_id: gbufl7sd3yzrkuqjcodt
+url: 'https://grav2.local/submit'
+user:
+  username: james
+  email: james.auble@gmail.com
+timestamps:
+  created: 1659908393
+  updated: 1659908402
+data: null
+files:
+  images:
+    U4tSZ1KqJGcjlNx.jpeg:
+      name: U4tSZ1KqJGcjlNx.jpeg
+      type: image/jpeg
+      tmp_name: phpHn6vkA
+      size: 2680203
+      path: 'image://locations/U4tSZ1KqJGcjlNx.jpeg'
+    keghan-crossland-ZZxmc66SjfM-unsplash.jpeg: null
+  images/original:
+    U4tSZ1KqJGcjlNx.jpeg: null
+    keghan-crossland-ZZxmc66SjfM-unsplash.jpeg: null

@@ -81,7 +81,7 @@ class Utils {
     'FK' => 'Falkland Islands (Malvinas)',
     'FJ' => 'Fiji the Fiji Islands',
     'FI' => 'Finland',
-    'FR' => 'France, French Republic',
+    'FR' => 'France',
     'GF' => 'French Guiana',
     'PF' => 'French Polynesia',
     'TF' => 'French Southern Territories',

@@ -1,4 +1,4 @@
 enabled: true
-production: false
+production: true
 dropdown:
   enabled: true

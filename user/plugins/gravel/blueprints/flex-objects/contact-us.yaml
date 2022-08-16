@@ -1,0 +1,160 @@
+title: Contact Us
+description: Contact Us Submissions.
+type: flex-objects
+
+# Flex Configuration
+config:
+  # Administration Configuration
+  admin:
+    # Admin router (optional)
+    router:
+      path: "/contact-us"
+
+    # Admin menu (optional)
+    menu:
+      list:
+        route: "/contact-us"
+        title: Contact Us
+        icon: fa-envelope
+        # Authorization to collection admin
+        authorize: ["admin.contact-us.list", "admin.super"]
+        # Priority -10 .. 10 (highesgitt goes up)
+        priority: 0
+
+    # Admin template type / folder
+    template: default
+
+    # Permissions
+    permissions:
+      # Primary permissions
+      admin.contact-us:
+        type: crudpl
+        label: Contact Us
+
+    # List view
+    list:
+      first_name:
+      last_name:
+      category:
+      message:
+        link: edit
+      submitted_at:
+
+    # Edit View
+    edit:
+      title:
+        template: "{{ object.location ?? 'Reported Location' }}"
+
+    # Preview View
+    preview:
+      enabled: false
+      route:
+        #template: '/plugins/flex-objects/directory:contact-us'
+
+    # Data Export
+    export:
+      enabled: true
+      method: "jsonSerialize"
+      formatter:
+        class: 'Grav\Framework\File\Formatter\YamlFormatter'
+      filename: "contact-us"
+
+  # Site Configuration
+  site:
+    templates:
+      collection:
+        # Lookup for the template layout files for collections of objects
+        paths:
+          - "flex/{TYPE}/collection/{LAYOUT}{EXT}"
+      object:
+        # Lookup for the template layout files for objects
+        paths:
+          - "flex/{TYPE}/object/{LAYOUT}{EXT}"
+      defaults:
+        # Default template {TYPE}; overridden by filename of this blueprint if template folder exists
+        type: reported
+        # Default template {LAYOUT}; can be overridden in render calls (usually Twig in templates)
+        layout: default
+
+  # Data Configuration
+  data:
+    # Object class to be used, allowing custom methods for the object
+    object: 'Grav\Common\Flex\Types\Generic\GenericObject'
+    # Collection class to be used, allowing custom methods for the collections
+    collection: 'Grav\Common\Flex\Types\Generic\GenericCollection'
+    # Index class to be used, works as a quick database-like lookup index
+    index: 'Grav\Common\Flex\Types\Generic\GenericIndex'
+    storage:
+      # Storage class, use single file storage (does not support images and assets)
+      class: 'Grav\Framework\Flex\Storage\FolderStorage'
+      options:
+        formatter:
+          # File formatter class, in this case the file is stored in markdown
+          class: 'Grav\Framework\File\Formatter\JsonFormatter'
+        # JSON file where all the objects will be stored
+        folder: user-data://contact-us
+    search:
+      # Search options
+      options:
+        contains: 1
+      # Fields to be searched
+      fields:
+        - name
+
+
+form:
+  validation: loose
+
+  fields:
+    first_name:
+      type: text
+      label: 'First Name (Given Name)'
+      validate:
+        required: true
+        type: text
+
+    last_name:
+      type: text
+      label: 'Last Name (Surname)'
+      validate:
+        required: true
+        type: text
+    
+    email:
+      type: email
+      label: 'Email'
+      validate:
+        required: true
+        type: email
+
+    category:
+      type: select
+      size: long
+      classes: fancy
+      label: 'Category'
+      options:
+        feedback: 'Feedback'
+        claim: 'Claim a cafe'
+        help: 'Help'
+        press: 'Press'
+
+    claim_conditional:
+      type: conditional
+      condition: "category == 'claim'"
+      fields: 
+        claim_url:
+          type: url
+          label: 'NomadBeans Cafe Link'
+
+    message:
+      type: textarea
+      autofocus: false
+      label: 'Message'
+      minlength: 10
+      maxlength: 500
+          
+    submitted_at:
+      type: hidden
+      evaluate: true
+      label: 'Submitted At'
+      default: 'default'

@@ -1,6 +1,6 @@
-<div x-cloak x-data x-transition.opacity.duration.500ms x-show="$store.gravel.loginModalShowing" class="login-modal-wrapper w-screen h-screen flex justify-center items-center fixed z-40 bg-black/30">
+<div x-cloak x-data x-transition.opacity.duration.500ms x-show="$store.gravel.loginModalShowing" class="login-modal-wrapper px-4 w-full h-screen flex justify-center items-center fixed z-40 bg-black/30">
   <div class="login-modal max-w-md rounded-lg bg-base-100 shadow-lg w-full">
-    <div class="px-12 py-12 relative">
+    <div class="px-8 sm:px-12 py-12 relative">
       <button @click="$store.gravel.loginModalShowing = false" class="absolute top-4 right-4">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewbox="0 0 16 16">
           <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>

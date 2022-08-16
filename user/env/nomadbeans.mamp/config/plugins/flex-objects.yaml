@@ -1,0 +1,18 @@
+enabled: true
+built_in_css: true
+extra_admin_twig_path: 'theme://admin/templates'
+admin_list:
+  per_page: 15
+  order:
+    by: updated_timestamp
+    dir: desc
+directories:
+  1: 'blueprints://flex-objects/cities.yaml'
+  2: 'blueprints://flex-objects/contact-us.yaml'
+  3: 'blueprints://flex-objects/locations.yaml'
+  4: 'blueprints://flex-objects/pages.yaml'
+  5: 'blueprints://flex-objects/reported.yaml'
+  6: 'blueprints://flex-objects/reviews.yaml'
+  7: 'blueprints://flex-objects/taxonomies.yaml'
+  8: 'blueprints://flex-objects/user-accounts.yaml'
+  9: 'blueprints://flex-objects/user-groups.yaml'

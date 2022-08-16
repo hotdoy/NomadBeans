@@ -441,7 +441,7 @@ class FlexCollection extends ObjectCollection implements FlexCollectionInterface
             );
 
             if ($debugger->enabled()) {
-                $output = "\n<!–– START {$type} collection ––>\n{$output}\n<!–– END {$type} collection ––>\n";
+                // $output = "\n<!–– START {$type} collection ––>\n{$output}\n<!–– END {$type} collection ––>\n";
             }
 
             $block->setContent($output);

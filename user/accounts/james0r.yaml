@@ -18,3 +18,6 @@ avatar:
 access:
   site:
     login: true
+  admin:
+    login: true
+    pages: true

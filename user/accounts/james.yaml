@@ -2,7 +2,7 @@ state: enabled
 email: james.auble@gmail.com
 fullname: 'James Auble'
 title: 'Web Developer'
-hashed_password: $2y$10$cJPwxiuW27vMl41RysfO5.yoDabfROTwbgJFHTnAjsG4z8GQhdDZ6
+hashed_password: $2y$10$DkJLTQiUSr/j7Fc05mmr5uOwluPo7tCzlYZ2CbPc8pyd1MJShPDKO
 language: en
 content_editor: default
 twofa_enabled: false
@@ -19,3 +19,6 @@ access:
     login: true
     super: true
 favorites: false
+reported:
+  es-madrid-carlos-coffee: true
+  es-madrid-paulas-coffee: true

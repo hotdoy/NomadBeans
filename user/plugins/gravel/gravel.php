@@ -14,6 +14,8 @@ use Composer\Autoload\ClassLoader;
 use RocketTheme\Toolbox\File\File;
 use RocketTheme\Toolbox\Event\Event;
 use Grav\Plugin\Gravel\Utils as GravelUtils;
+use Grav\Framework\Flex\Interfaces\FlexObjectInterface;
+use Grav\Framework\Flex\Interfaces\FlexDirectoryInterface;
 use Grav\Plugin\Gravel\GravelLoginController as Controller;
 
 /**
@@ -163,13 +165,41 @@ class GravelPlugin extends Plugin {
     /** @var array $data */
     $data = $form->getData()->toArray();
 
-    $newDir = 'user/data/submissions/' . $data['submission_username'] . '/' . $data['uid'];
+    $user = $this->grav['user'];
 
-    mkdir($newDir, 0755, true);
+    if ($data['submission_username'] === $user->username && $user->authorize('site.submit')) {
 
-    $myFile = fopen($newDir . '/data.txt', "w");
+      $data['submitted_at'] = date("d-m-Y H:i");
 
-    fwrite($myFile, $form->getData());
+      unset($data['cafe_country']);
+      unset($data['is_affiliated']);
+      unset($data['email']);
+      unset($data['user_fullname']);
+      unset($data['message']);
+      unset($data['images']);
+
+      /** @var FlexObjectInterface $obj */
+      /** @var FlexDirectoryInterface $dir */
+      $dir = $this->grav['flex']->getDirectory('locations');
+      $obj = $dir->createObject($data);
+
+      $obj->setProperty('published', 0);
+
+
+      /** @var FormFlash $flash */
+      $flash = $form->getFlash();
+      $obj->update($data, $flash->getFilesByFields(true));
+      $obj->save();
+
+      if ($obj instanceof FlexObjectInterface) {
+        $flash->clearFiles();
+        $flash->save();
+      }
+
+    } else {
+      $response = new Response(403);
+      $this->grav->close($response);
+    }
   }
 
   private function processUserFavorites(mixed $form, Event $event) {

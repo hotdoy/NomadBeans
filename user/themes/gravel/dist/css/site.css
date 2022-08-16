@@ -8666,6 +8666,11 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   margin-bottom: 1rem;
 }
 
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -9039,6 +9044,10 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   align-self: flex-start;
 }
 
+.overflow-auto {
+  overflow: auto;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -9306,6 +9315,11 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 .py-12 {
   padding-top: 3rem;
   padding-bottom: 3rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .pt-4 {
@@ -9846,6 +9860,11 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 
   .sm\:p-12 {
     padding: 3rem;
+  }
+
+  .sm\:px-12 {
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 
   .sm\:pt-\[100\%\] {

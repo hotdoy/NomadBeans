@@ -107,7 +107,8 @@ config:
         # JSON file where all the objects will be stored
         folder: user-data://locations
     ordering:
-      visits: DESC
+      published: ASC
+      submitted_at: DESC
     search:
       # Search options
       options:

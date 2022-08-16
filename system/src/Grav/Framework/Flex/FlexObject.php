@@ -629,7 +629,7 @@ class FlexObject implements FlexObjectInterface, FlexAuthorizeInterface
 
             if ($debugger->enabled()) {
                 $name = $this->getKey() . ' (' . $type . ')';
-                $output = "\n<!–– START {$name} object ––>\n{$output}\n<!–– END {$name} object ––>\n";
+                // $output = "\n<!–– START {$name} object ––>\n{$output}\n<!–– END {$name} object ––>\n";
             }
 
             $block->setContent($output);

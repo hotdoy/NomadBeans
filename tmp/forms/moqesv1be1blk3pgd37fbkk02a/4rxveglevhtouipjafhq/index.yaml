@@ -1,0 +1,28 @@
+form: submit-form
+id: 'tmp://forms/session/4rxveglevhtouipjafhq'
+unique_id: 4rxveglevhtouipjafhq
+url: 'https://grav2.local/submit'
+user:
+  username: james
+  email: james.auble@gmail.com
+timestamps:
+  created: 1659903767
+  updated: 1659903770
+data: null
+files:
+  images:
+    nZ2iFGaP6oxNTqh.jpeg:
+      name: nZ2iFGaP6oxNTqh.jpeg
+      type: image/jpeg
+      tmp_name: phpVZnLH0
+      size: 1195862
+      path: 'image://locations/nZ2iFGaP6oxNTqh.jpeg'
+    LRmdbC36sFqxB9g.jpeg:
+      name: LRmdbC36sFqxB9g.jpeg
+      type: image/jpeg
+      tmp_name: phpTFoRoC
+      size: 293462
+      path: 'image://locations/LRmdbC36sFqxB9g.jpeg'
+  images/original:
+    nZ2iFGaP6oxNTqh.jpeg: null
+    LRmdbC36sFqxB9g.jpeg: null

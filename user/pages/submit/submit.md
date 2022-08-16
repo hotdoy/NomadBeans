@@ -88,7 +88,7 @@ form:
       outer_label_classes: test
       multiple: true
       classes: "!mb-0"
-      destination: 'image://submissions-tmp'
+      destination: "image://locations"
       random_name: true
       avoid_overwriting: false
       outerclasses: "form-control mb-4"
@@ -129,6 +129,8 @@ form:
       label_element_classes: label-text
       classes: "input input-bordered w-full"
       outerclasses: "mb-4 form-control w-full"
+      validate:
+        required: true
     lng:
       type: text
       id: cafe-lng
@@ -138,6 +140,8 @@ form:
       label_element_classes: label-text
       classes: "input input-bordered w-full"
       outerclasses: "mb-4 form-control w-full"
+      validate:
+        required: true
     rating_overall:
       type: range
       id: cafe-rating-overall
@@ -226,12 +230,12 @@ form:
       help: PLUGIN_ADMIN.TAXONOMY_TYPES_HELP
       validate:
         type: commalist
-    # g-recaptcha-response:
-    #   label: Captcha
-    #   type: captcha
-    #   recaptcha_not_validated: "Captcha not valid!"
-    #   classes: "mx-auto max-w-max"
-    #   outerclasses: "mx-auto max-w-max my-8"
+    g-recaptcha-response:
+      label: Captcha
+      type: captcha
+      recaptcha_not_validated: "Captcha not valid!"
+      classes: "mx-auto max-w-max"
+      outerclasses: "mx-auto max-w-max my-8"
   buttons:
     reset:
       type: reset
