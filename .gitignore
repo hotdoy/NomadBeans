@@ -8,6 +8,9 @@ images/*
 backup
 user/data/feed
 user/data/notifications
+user/images/submissions-tmp/*
+user/images/reviews/*
+node_modules
 
 # OS Generated
 .DS_Store*
