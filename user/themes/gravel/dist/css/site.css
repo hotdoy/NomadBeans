@@ -633,6 +633,12 @@ h3 {
   }
 }
 
+.template-login {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -4813,6 +4819,12 @@ form[name="comments"] button[type="submit"] {
   width: 0.75rem;
 }
 
+ 
+    .btn.loading.login-modal .button.secondary:before {
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
 .login-modal .button.secondary-group > input[type="radio"]:checked.btn,  
   .login-modal .button.secondary-group > .btn-active {
   --tw-border-opacity: 1;
@@ -4851,6 +4863,42 @@ form[name="comments"] button[type="submit"] {
 
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.login-modal .button.secondary {
   outline: 2px solid currentColor;
+}
+
+.login-modal .button.secondary {
+  height: 1.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  min-height: 1.5rem;
+  font-size: 0.75rem;
+}
+
+.btn-square:where(.login-modal .button.secondary) {
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: 0px;
+}
+
+.btn-circle:where(.login-modal .button.secondary) {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 9999px;
+  padding: 0px;
+}
+
+@media (min-width: 640px) {
+  .btn.loading.login-modal .button.secondary:before {
+    height: 0.75rem;
+    width: 0.75rem;
+  }
+
+  .login-modal .button.secondary {
+    height: 2rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    min-height: 2rem;
+    font-size: 0.875rem;
+  }
 }
 
 .login-modal .form-actions {
@@ -5560,6 +5608,12 @@ body[dir="rtl"] .login-modal .rememberme input[type="checkbox"]:checked,
   width: 0.75rem;
 }
 
+ 
+    .btn.loading.template-login .button.secondary:before {
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
 .template-login .button.secondary-group > input[type="radio"]:checked.btn,  
   .template-login .button.secondary-group > .btn-active {
   --tw-border-opacity: 1;
@@ -5598,6 +5652,42 @@ body[dir="rtl"] .login-modal .rememberme input[type="checkbox"]:checked,
 
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.template-login .button.secondary {
   outline: 2px solid currentColor;
+}
+
+.template-login .button.secondary {
+  height: 1.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  min-height: 1.5rem;
+  font-size: 0.75rem;
+}
+
+.btn-square:where(.template-login .button.secondary) {
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: 0px;
+}
+
+.btn-circle:where(.template-login .button.secondary) {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 9999px;
+  padding: 0px;
+}
+
+@media (min-width: 640px) {
+  .btn.loading.template-login .button.secondary:before {
+    height: 0.75rem;
+    width: 0.75rem;
+  }
+
+  .template-login .button.secondary {
+    height: 2rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    min-height: 2rem;
+    font-size: 0.875rem;
+  }
 }
 
 .template-login .form-actions {
@@ -6219,6 +6309,11 @@ body[dir="rtl"] .template-login .rememberme input[type="checkbox"]:checked,
   outline: 2px solid hsl(var(--p));
 }
 
+.template-register .button.primary {
+  width: 100%;
+  min-width: 100%;
+}
+
 .template-register .button.secondary {
   display: inline-flex;
   flex-shrink: 0;
@@ -6565,7 +6660,7 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
 .template-register .buttons {
   margin-top: 1rem;
   display: flex;
-  flex-direction: row-reverse;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
@@ -6818,6 +6913,10 @@ body[dir="rtl"] .template-register .rememberme input[type="checkbox"]:checked,
 
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.template-register button[type="submit"] {
   outline: 2px solid hsl(var(--p));
+}
+
+.template-register button[type="submit"] {
+  width: 100%;
 }
 
 .template-register button[type="reset"] {
@@ -8627,6 +8726,14 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   z-index: 30;
 }
 
+.order-3 {
+  order: 3;
+}
+
+.order-2 {
+  order: 2;
+}
+
 .col-span-4 {
   grid-column: span 4 / span 4;
 }
@@ -8664,11 +8771,6 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
-}
-
-.mx-4 {
-  margin-left: 1rem;
-  margin-right: 1rem;
 }
 
 .mb-4 {
@@ -8745,10 +8847,6 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 
 .mr-3 {
   margin-right: 0.75rem;
-}
-
-.mt-\[64px\] {
-  margin-top: 64px;
 }
 
 .-ml-4 {
@@ -9307,19 +9405,14 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   padding-bottom: 1rem;
 }
 
-.px-12 {
-  padding-left: 3rem;
-  padding-right: 3rem;
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .py-12 {
   padding-top: 3rem;
   padding-bottom: 3rem;
-}
-
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 
 .pt-4 {
@@ -9356,6 +9449,10 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 
 .pr-8 {
   padding-right: 2rem;
+}
+
+.pt-\[64px\] {
+  padding-top: 64px;
 }
 
 .pl-8 {
@@ -9760,6 +9857,26 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 }
 
 @media (min-width: 640px) {
+  .btn.loading.sm\:btn-sm:before {
+    height: 0.75rem;
+    width: 0.75rem;
+  }
+
+  .sm\:btn-sm {
+    height: 2rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    min-height: 2rem;
+    font-size: 0.875rem;
+  }
+
+   {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 9999px;
+    padding: 0px;
+  }
+
   .sm\:my-12 {
     margin-top: 3rem;
     margin-bottom: 3rem;

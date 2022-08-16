@@ -39,4 +39,8 @@
   .template-home .site-main {
     @apply pb-12 sm:pb-20;
   }
+
+  .template-login {
+    @apply min-h-screen flex flex-col;
+  }
 }
