@@ -30,24 +30,4 @@ form:
               show_all: false
               show_modular: false
               show_root: false
-
-            tags:
-              type: selectize
-              selectize:
-                data-options@: ['\Grav\Plugin\Gravel\Utils::getTaxonomiesForSelectizeByType', 'article_tag']
-              size: large
-              label: Article Tags
-              classes: fancy
-              validate:
-                  type: commalist
-
-            categories:
-              type: selectize
-              selectize:
-                data-options@: ['\Grav\Plugin\Gravel\Utils::getTaxonomiesForSelectizeByType', 'article_category']
-              size: large
-              label: Article Categories
-              classes: fancy
-              validate:
-                  type: commalist
             

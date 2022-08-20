@@ -2,7 +2,7 @@
 {% set page_title_bg_image = page.media.images|first %}
 
 <!DOCTYPE html>
-<html lang="{{ (grav.language.getActive ?: grav.config.site.default_lang)|e }}" data-theme="bumblebee" class="antialiased">
+<html lang="{{ (grav.language.getActive ?: grav.config.site.default_lang)|e }}" data-theme="bumblebee" class="antialiased font-poppins tracking-wide">
 	<head>
 		{% block head %}
 			<meta charset="utf-8"/>
@@ -19,6 +19,14 @@
 
 			<link rel="canonical" href="{{ page.url(true, true)|e }}"/>
 		{% endblock head %}
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-55F5GPM');</script>
+    <!-- End Google Tag Manager -->
 
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,7 +61,11 @@
 		{% set body_classes = body_classes|merge([body_classes_slot]) %}
 	{% endif %}
 
-	<body id="top" class="{{ body_classes|join(' ')|e }} font-poppins tracking-wide" x-data :class="$store.gravel.mobileMenuShowing && 'mobile-menu-showing'">
+	<body id="top" class="{{ body_classes|join(' ')|e }}" x-data :class="$store.gravel.mobileMenuShowing && 'mobile-menu-showing'">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-55F5GPM"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
 		{% block body %}
 			{% include 'partials/login-modal.html.twig' %}
@@ -64,7 +76,7 @@
 			<!-- Page content here -->
 			{% block main %}
 
-				<main id="site-main" class="site-main pt-[64px] overflow-auto">
+				<main id="site-main" class="site-main pt-[64px]">
 
 					{% block hero %}{% endblock %}
 

@@ -155,7 +155,35 @@ class GravelPlugin extends Plugin {
       case 'cafe_submit':
         $this->processCafeSubmit($form, $event);
         break;
+
+      case 'contact_us':
+        $this->processContactUs($form, $event);
+        break;
     }
+  }
+
+  private function processContactUs(mixed $form, Event $event) {
+    /** @var \Grav\Plugin\Form\Form $form */
+    // $form->validate();
+
+    /** @var array $data */
+    $data = $form->getData()->toArray();
+
+    // if ($data['category'] !== 'claim') {
+    //   unset($data['claim_url']);
+    //   unset($data['claim_phone']);
+    // }
+
+    // $form->validateData($data);
+
+    $data['submitted_at'] = date('m/d/Y h:i:s a', time());
+
+    /** @var FlexObjectInterface $obj */
+    /** @var FlexDirectoryInterface $dir */
+    $dir = $this->grav['flex']->getDirectory('contact-us');
+    $obj = $dir->createObject($data);
+
+    $obj->save();
   }
 
   private function processCafeSubmit(mixed $form, Event $event) {
@@ -195,7 +223,6 @@ class GravelPlugin extends Plugin {
         $flash->clearFiles();
         $flash->save();
       }
-
     } else {
       $response = new Response(403);
       $this->grav->close($response);

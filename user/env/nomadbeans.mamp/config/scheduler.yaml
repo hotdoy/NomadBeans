@@ -1,0 +1,21 @@
+status:
+  create-report: enabled
+  cache-purge: disabled
+  cache-clear: disabled
+  default-site-backup: disabled
+  ls-job: disabled
+custom_jobs:
+  ls-job:
+    command: ls
+    args: '-lah'
+    at: '* * * * *'
+    output: logs/cron-ls.out
+    output_mode: overwrite
+    email: user@email.com
+  create-report:
+    command: ls
+    args: null
+    at: '* * * * *'
+    output: logs/create-report.txt
+    output_mode: overwrite
+    email: null

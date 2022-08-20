@@ -3,14 +3,16 @@ default_lang: en
 author:
   name: 'James Auble'
   email: james.auble@gmail.com
-taxonomies: null
+taxonomies:
+  - category
+  - tag
 metadata:
   description: 'NomadBeans is a cafe finder for Digital Nomads.'
   robots: noindex
 summary:
   enabled: true
   format: short
-  size: 300
+  size: 200
   delimiter: '==='
 redirects: null
 routes: null

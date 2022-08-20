@@ -120,8 +120,8 @@ cache:
     server: null
     port: null
 twig:
-  cache: true
-  debug: false
+  cache: false
+  debug: true
   auto_reload: true
   autoescape: true
   undefined_functions: true
@@ -186,7 +186,7 @@ media:
   unsupported_inline_types: null
   allowed_fallback_types: null
   auto_metadata_exif: false
-  upload_limit: 8388608
+  upload_limit: 67108864
 session:
   enabled: true
   initialize: true

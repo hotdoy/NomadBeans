@@ -26,7 +26,8 @@ module.exports = {
     extend: {
       fontFamily: {
         'shadows-light': ['"Shadows Into Light"', 'cursive'],
-        'poppins': ['"Poppins"', 'sans-serif']
+        'poppins': ['"Poppins"', 'sans-serif'],
+        'sans': ['"Poppins"', 'sans-serif']
       },
     },
     container: {

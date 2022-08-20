@@ -12,7 +12,6 @@ form:
       validate:
         required: true
 
-
     username:
       type: text
       validate:
@@ -49,10 +48,11 @@ form:
       -
           type: button
           value: Login
-          classes: 'btn btn-secondary ml-auto mr-2'
+          classes: 'btn btn-link ml-auto order-3'
           id: login-link
       -
           type: reset
+          classes: 'order-2'
           value: PLUGIN_LOGIN.BTN_RESET
 
   process:

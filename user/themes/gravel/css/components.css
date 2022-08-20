@@ -325,4 +325,21 @@
   .template-contact-us form .buttons {
     @apply flex justify-center;
   }
+
+  /* Template Blog */
+  .template-blog .pagination {
+    @apply flex mt-16 mx-auto max-w-max rounded overflow-hidden;
+  }
+
+  .template-blog .pagination li a {
+    @apply block px-4 py-2 bg-accent text-white;
+  }
+
+  .template-blog .pagination li a:hover {
+    @apply block px-4 py-2 bg-secondary text-base-content;
+  }
+
+  .template-blog .pagination li span {
+    @apply block px-4 py-2 bg-primary;
+  }
 }

@@ -152,9 +152,9 @@ let long = '{{ header.map_default_long ?? null }}'
 					</h2>
 					<div class="flex flex-col sm:flex-row justify-between mb-8 sm:my-8">
 						<input id="keywords-input" type="text" placeholder="What are you looking for?" class="input input-bordered w-full mb-4 sm:mr-4 md:mr-8 flex-1 min-h-12" x-model="keywords" x-init="{% if search %}keywords = '{{ search }}'{% endif %}" @keyup.enter="$refs.searchBtn.click()" />
-						<div @click.outside="cityWrapperClickOutsideHandler" id="city-input-wrapper" class="relative w-full mb-4 sm:mr-4 md:mr-8 flex-1 z-10">
+						<div @click.outside="cityWrapperClickOutsideHandler" id="city-input-wrapper" class="relative w-full mb-4 sm:mr-4 md:mr-8 flex-1">
 							<input @input="citiesExpanded = true" id="city-input" x-model="cityInput" type="text" placeholder="All Cities" class="input input-bordered min-h-12 w-full"/>
-							<ul x-show="citiesExpanded" id="cities-list" class="absolute pin-x w-full bg-base-100 rounded-lg border shadow-lg" style="border-color: #e5e7eb;">
+							<ul x-show="citiesExpanded" id="cities-list" class="absolute z-10 pin-x w-full bg-base-100 rounded-lg border shadow-lg max-h-[220px] sm:max-h-[300px] overflow-y-auto" style="border-color: #e5e7eb;">
 								<li>
 									<button class="py-2 px-4 hover:bg-primary hover:text-white w-full text-left" @click="$nextTick(() => { city = '', cityInput = '', citiesExpanded = false })">
 										All Cities

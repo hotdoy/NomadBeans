@@ -39,6 +39,7 @@
 	
 	          claimOnlyInputs.forEach((el) => {
 	            el.style.display = 'none'
+              el.querySelector('input').removeAttribute('required')
 	          })
 
             claimInfo.style.display = 'none'
@@ -49,12 +50,14 @@
 	            if (val == 'claim') {
 	              claimOnlyInputs.forEach((el) => {
 	                el.style.display = 'block'
+                  el.querySelector('input').setAttribute('required', 'required')
 	              })
 
                 claimInfo.style.display = 'block'
 	            } else {
 	              claimOnlyInputs.forEach((el) => {
 	                el.style.display = 'none'
+                  el.querySelector('input').removeAttribute('required')
 	              })
                 claimInfo.style.display = 'none'
 	            }
