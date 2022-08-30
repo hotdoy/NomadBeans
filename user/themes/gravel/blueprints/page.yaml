@@ -15,9 +15,6 @@ form:
           title: Content
 
           fields:
-            header.page_media_alt_desc:
-              type: text
-              label: Page Media Alt Description
             header.page_title:
               type: text
               label: Page Title

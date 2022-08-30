@@ -22,12 +22,12 @@
             {# Featured Post #}
             {% if taxonomy.findTaxonomy({'tag': 'featured'})|length > 0 %}
               {% set featured_post = taxonomy.findTaxonomy({'tag': 'featured'})|first %}
-              <li>
-                <article class="">
+              <li class="flex flex-col">
+                <article class="flex flex-col flex-1">
                   <a href="{{ featured_post.url }}" class="block rounded overflow-hidden">
                     <img src="{{ featured_post.media.images|first.cropZoom(1500, 918).url }}" alt="{{ featured_post.header.featured_image_alt_description }}">
                   </a>
-                  <div class="">
+                  <div class="flex-1 flex flex-col">
                     <a href="{{ featured_post.url }}">
                       <h2 class="mt-4 sm:mt-6 text-2xl mb-0">
                         {{ featured_post.title }}
@@ -35,7 +35,7 @@
                     </a>
                     <ul class="tags flex flex-wrap -m-1 mt-1">
                       <li class="m-1">
-                        <div class="badge badge-md badge-primary flex">FEATURED POST</div>
+                        <div class="badge badge-md badge-primary flex">FEATURED</div>
                       </li>
                       {% if featured_post.header.taxonomy.tag|length > 1 %}
                         {% for tag in featured_post.header.taxonomy.tag %}
@@ -71,10 +71,10 @@
                         </div>
                       {% endif %}
                     </div>
-                    <div class="prose">
+                    <div class="prose mb-4">
                       {{ featured_post.summary|raw }}
                     </div>
-                    <a class="btn btn-primary mt-4" href="{{ featured_post.url }}">
+                    <a class="btn btn-primary mt-auto self-start" href="{{ featured_post.url }}">
                       Read More
                     </a>
                   </div>

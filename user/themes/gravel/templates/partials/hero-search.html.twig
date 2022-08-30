@@ -1,15 +1,29 @@
-<form class="bg-glass rounded w-full px-4 text-base-content">
-	<div class="flex gap-0 items-end max-w-lg mx-auto">
-		<div class="w-2/5">
-			<label class="sr-only" for="grid-password">Keywords</label>
-			<input type="text" placeholder="Type here" class="input input-bordered input-primary input-md w-full max-w-xs rounded-r-none border-r-0 focus:border-r-2 focus:outline-offset-0"/>
-		</div>
-		<div class="w-2/5">
-			<label class="sr-only" for="grid-city">City</label>
-			<input type="text" placeholder="Type here" class="input input-bordered input-primary input-md w-full max-w-xs rounded-r-none rounded-l-none border-l-0 focus:outline-offset-0"/>
-		</div>
-		<div class="w-1/5 mt-4 md:mt-0">
-			<button class="btn btn-primary w-full rounded-l-none">Search</button>
-		</div>
-	</div>
+<form x-data="heroSearchComponent" class="bg-glass rounded w-full px-4 text-base-content">
+  <div class="flex flex-col sm:flex-row gap-0 items-center sm:items-end w-full max-w-xs sm:max-w-3xl mx-auto">
+    <div class="w-full sm:w-2/5">
+      <label class="sr-only" for="grid-password">Keywords</label>
+      <input type="text" id="keywords-input" x-model="keywords" placeholder="What are you looking for?" class="input input-bordered input-primary input-md w-full max-w-xs sm:rounded-r-none sm:border-r-0 focus:border-r-2 focus:outline-offset-0"/>
+    </div>
+    <div class="w-full sm:w-2/5 mt-4 sm:mt-0">
+      <label class="sr-only" for="grid-city">City</label>
+      <div @click.outside="cityWrapperClickOutsideHandler" id="city-input-wrapper" class="relative w-full sm:mr-4 md:mr-8 flex-1">
+        <input @input="citiesExpanded = true" id="city-input" x-model="cityInput" type="text" placeholder="All Cities" class="input input-bordered input-primary input-md w-full max-w-xs sm:rounded-r-none sm:rounded-l-none sm:border-l-0 focus:outline-offset-0"/>
+        <ul x-show="citiesExpanded" id="cities-list" class="absolute z-10 pin-x w-full bg-base-100 rounded-lg border shadow-lg max-h-[220px] sm:max-h-[300px] overflow-y-auto" style="border-color: #e5e7eb;">
+          <li>
+            <button type="button" class="py-2 px-4 hover:bg-primary hover:text-white w-full text-left" @click="$nextTick(() => { city = '', cityInput = '', citiesExpanded = false })">
+              All Cities
+            </button>
+          </li>
+          <template x-for="c in matchedCities">
+            <li>
+              <button type="button" x-bind:data-city-slug="c.slug" x-text="c.ascii_name + ', ' + c.country_long" class="py-2 px-4 hover:bg-primary hover:text-white w-full text-left" @click="$nextTick(() => { city = c.slug, cityInput = c.ascii_name + ', ' + c.country_long, citiesExpanded = false })"></button>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </div>
+    <div class="w-full sm:w-1/5 mt-4 sm:mt-0">
+      <a x-bind:href="queryWithoutResults" class="btn btn-primary w-full sm:rounded-l-none">Search</a>
+    </div>
+  </div>
 </form>
