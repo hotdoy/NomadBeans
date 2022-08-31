@@ -1,4 +1,17 @@
 @layer components {
+  .dot-before {
+    background-color: currentColor;
+    border-radius: 2px;
+    content: "";
+    display: block;
+    height: 4px;
+    width: 4px;
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    transform: translateY(-50%);
+  }
+
   /* Nav Link */
 
   .nav-link:active {
@@ -336,7 +349,7 @@
   }
 
   .template-blog .pagination li a:hover {
-    @apply block px-4 py-2 bg-secondary text-base-content;
+    @apply block px-4 py-2 bg-primary text-base-content;
   }
 
   .template-blog .pagination li span {

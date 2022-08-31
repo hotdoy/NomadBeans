@@ -8694,7 +8694,7 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 .template-blog .pagination li a:hover {
   display: block;
   --tw-bg-opacity: 1;
-  background-color: hsl(var(--s) / var(--tw-bg-opacity));
+  background-color: hsl(var(--p) / var(--tw-bg-opacity));
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.5rem;
@@ -8843,9 +8843,9 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   margin-bottom: 2rem;
 }
 
-.my-4 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .my-auto {
@@ -8866,6 +8866,11 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .mb-4 {
@@ -8912,16 +8917,16 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   margin-top: 0.25rem;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .ml-2 {
   margin-left: 0.5rem;
 }
 
 .ml-4 {
   margin-left: 1rem;
-}
-
-.mb-auto {
-  margin-bottom: auto;
 }
 
 .mt-12 {
@@ -8974,10 +8979,6 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 
 .ml-1 {
   margin-left: 0.25rem;
-}
-
-.mt-auto {
-  margin-top: auto;
 }
 
 .block {
@@ -9050,12 +9051,6 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 
 .min-h-screen {
   min-height: 100vh;
-}
-
-.min-h-min {
-  min-height: -webkit-min-content;
-  min-height: -moz-min-content;
-  min-height: min-content;
 }
 
 .w-full {
@@ -9542,16 +9537,16 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   padding-bottom: 3rem;
 }
 
+.pl-4 {
+  padding-left: 1rem;
+}
+
 .pt-4 {
   padding-top: 1rem;
 }
 
 .pt-\[70\%\] {
   padding-top: 70%;
-}
-
-.pl-4 {
-  padding-left: 1rem;
 }
 
 .pb-4 {
@@ -9623,9 +9618,9 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   line-height: 2.25rem;
 }
 
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .text-sm {
@@ -9633,9 +9628,19 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   line-height: 1.25rem;
 }
 
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .text-base {
@@ -9643,19 +9648,9 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   line-height: 1.5rem;
 }
 
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
-}
-
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
 }
 
 .font-bold {
@@ -9674,6 +9669,10 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   font-weight: 500;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 .capitalize {
   text-transform: capitalize;
 }
@@ -9688,6 +9687,10 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 
 .leading-tight {
   line-height: 1.25;
+}
+
+.leading-relaxed {
+  line-height: 1.625;
 }
 
 .leading-normal {
@@ -9718,6 +9721,11 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .text-gray-800 {
@@ -9868,6 +9876,19 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
   right: 0px;
 }
 
+.before\:dot-before::before {
+  background-color: currentColor;
+  border-radius: 2px;
+  content: "";
+  display: block;
+  height: 4px;
+  width: 4px;
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  transform: translateY(-50%);
+}
+
 .before\:absolute::before {
   content: var(--tw-content);
   position: absolute;
@@ -9975,6 +9996,11 @@ body[dir="rtl"] .template-profile .\!checkboxes label::before:checked,
 
 .focus\:outline-offset-0:focus {
   outline-offset: 0px;
+}
+
+.group:hover .group-hover\:text-primary {
+  --tw-text-opacity: 1;
+  color: hsl(var(--p) / var(--tw-text-opacity));
 }
 
 .scrolled .scrolled\:shadow-lg {

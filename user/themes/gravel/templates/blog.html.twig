@@ -1,7 +1,6 @@
 {% set body_classes_slot = "template-blog" %}
 {% extends 'partials/base.html.twig' %}
-{% set pageNum = uri.param('page') %}
-{% set limit = uri.param('limit')|default(3) %}
+{% set limit = uri.param('limit')|default(4) %}
 
 {% block hero %}
   <div class="flex items-center py-20 px-4 bg-center relative min-h-[16rem] sm:min-h-[20rem] lg:min-h-[24rem] bg-cover" style="background-image: url({{ page.media.images|first.url }});">
@@ -19,97 +18,32 @@
         <main class="w-full lg:w-2/3">
           <ul
             class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-10 sm:gap-y-14">
-            {# Featured Post #}
-            {% if taxonomy.findTaxonomy({'tag': 'featured'})|length > 0 %}
-              {% set featured_post = taxonomy.findTaxonomy({'tag': 'featured'})|first %}
-              <li class="flex flex-col">
-                <article class="flex flex-col flex-1">
-                  <a href="{{ featured_post.url }}" class="block rounded overflow-hidden">
-                    <img src="{{ featured_post.media.images|first.cropZoom(1500, 918).url }}" alt="{{ featured_post.header.featured_image_alt_description }}">
-                  </a>
-                  <div class="flex-1 flex flex-col">
-                    <a href="{{ featured_post.url }}">
-                      <h2 class="mt-4 sm:mt-6 text-2xl mb-0">
-                        {{ featured_post.title }}
-                      </h2>
-                    </a>
-                    <ul class="tags flex flex-wrap -m-1 mt-1">
-                      <li class="m-1">
-                        <div class="badge badge-md badge-primary flex">FEATURED</div>
-                      </li>
-                      {% if featured_post.header.taxonomy.tag|length > 1 %}
-                        {% for tag in featured_post.header.taxonomy.tag %}
-                          {% if loop.index0 is not same as (0) %}
-                            <li class="m-1">
-                              <div class="badge badge-accent badge-md flex">{{ tag|upper }}</div>
-                            </li>
-                          {% endif %}
-                        {% endfor %}
-                      {% endif %}
-                    </ul>
-                    <div class="cat-n-author flex items-center text-gray-400 text-sm my-4">
-                      {% if featured_post.header.taxonomy.category|length > 0 %}
-                        <div class="flex items-center">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-tag -scale-x-100" viewbox="0 0 16 16">
-                            <path d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0z"/>
-                            <path d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1zm0 5.586 7 7L13.586 9l-7-7H2v4.586z"/>
-                          </svg>
-                          <span class="ml-2">
-                            {{ featured_post.header.taxonomy.category|first }}
-                          </span>
-                        </div>
-                      {% endif %}
-                      {% if featured_post.header.author and featured_post.header.author is not same as '/author/' %}
-                        {% set author_page = pages.find(featured_post.header.author) %}
-                        <div class="flex items-center{% if featured_post.header.taxonomy.category|length > 0 %} ml-4{% endif %}">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-person" viewbox="0 0 16 16">
-                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                          </svg>
-                          <a href="{{ author_page.url }}" class="ml-2">
-                            {{ author_page.title }}
-                          </a>
-                        </div>
-                      {% endif %}
-                    </div>
-                    <div class="prose mb-4">
-                      {{ featured_post.summary|raw }}
-                    </div>
-                    <a class="btn btn-primary mt-auto self-start" href="{{ featured_post.url }}">
-                      Read More
-                    </a>
-                  </div>
-                </article>
-              </li>
-            {% endif %}
             {% set options = { items: {'@page.children': '/blog'}, 'order': {'by': 'date', 'dir': 'desc'} } %}
             {% set my_collection = page.collection(options).published() %}
-            {% set totalPages = (my_collection|length / limit)|round %}
             {% do paginate(my_collection, limit) %}
             {% for page in my_collection %}
               {% if page is not same as featured_post %}
-                <li class="flex flex-col">
-                  <article class="h-full flex flex-col">
+                <li class="flex flex-col group">
+                  <article class="h-full flex flex-col flex-1">
                     <a href="{{ page.url }}" class="block rounded overflow-hidden shrink-0">
                       <img src="{{ page.media.images|first.cropZoom(1500, 918).url }}" alt="{{ page.header.featured_image_alt_description }}">
                     </a>
-                    <div class="flex flex-col h-full items-start">
+                    <div class="flex-1 flex flex-col">
                       <a href="{{ page.url }}">
-                        <h2 class="mt-4 sm:mt-6 mb-0 text-2xl">
+                        <h2 class="mt-4 sm:mt-6 mb-0 text-xl group-hover:text-primary">
                           {{ page.title }}
                         </h2>
                       </a>
                       {% if page.header.taxonomy.tag|length > 0 %}
-                        <ul class="tags flex flex-wrap -m-1 mt-1">
+                        <ul class="tags flex flex-wrap -m-1 mt-1 mb-1">
                           {% for tag in page.header.taxonomy.tag %}
-                            {% if tag|upper is not same as 'FEATURED' %}
-                              <li class="m-1">
-                                <div class="badge badge-accent badge-md flex">{{ tag|upper }}</div>
-                              </li>
-                            {% endif %}
+                            <li class="m-1">
+                              <div class="badge badge-accent badge-md flex">{{ tag|upper }}</div>
+                            </li>
                           {% endfor %}
                         </ul>
                       {% endif %}
-                      <div class="cat-n-author flex items-center text-gray-400 text-sm my-4">
+                      <div class="cat-n-author flex items-center text-gray-400 text-sm my-2">
                         {% if page.header.taxonomy.category|length > 0 %}
                           <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-tag -scale-x-100" viewbox="0 0 16 16">
@@ -133,12 +67,19 @@
                           </div>
                         {% endif %}
                       </div>
-                      <div class="prose mb-auto">
+                      <div class="prose leading-relaxed mb-4">
                         {{ page.summary|raw }}
                       </div>
-                      <a class="btn btn-primary mt-4" href="{{ page.url }}">
-                        Read More
-                      </a>
+                      <div class="text-xs text-gray-500 uppercase flex items-center">
+                        <div>
+                          <span class="sr-only">Reading time</span>
+                          {{ gravel_utils.site_estimated_reading_time(page.content) }} MIN READ
+                        </div>
+                        <div class="before:dot-before pl-4 relative">
+                          <span class="sr-only">Published Date</span>
+                          {{ page.date|date('F d, Y') }}
+                        </div>
+                      </div>
                     </div>
                   </article>
                 </li>
